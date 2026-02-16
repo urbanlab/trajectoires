@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",  
+    "paths": {
+      "@Commons/*": ["src/_commons/*"],
+      "@Components/*": ["src/_components/*"],
+      "@Domains/*": ["src/_domains/*"],
+      "@Hooks/*": ["src/_hooks/*"],
+      "@PagesProtected/*": ["src/_pages/[protected]/*"],
+      "@PagesPublic/*": ["src/_pages/[public]/*"],
+      "@Providers/*": ["src/_providers/*"],
+      "@Router/*": ["src/_router/*"],
+      "@Styles": ["src/_styles/*"],
+      "@Types/*": ["src/_types/*"],
+      "@Package": ["package.json"],
+    }
+  },
+  "include": [
+    "src",
+    "src/_types"
+  ],
+}

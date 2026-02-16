@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+
+:root {
+  --bg: #ffffff;
+  --light-bg: #e4e1f8;
+  --secondary-bg: #585858;
+
+  --text-primary: #000;
+  --text-secondary: #4d4d44;
+
+  --color-accent: #e60028;
+
+  --card-bg: #fff;
+  --svg-filter-black-to-white: invert(1);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  min-height: 100vh;
+  background-color:#fff
+  
+
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 180px;
+  padding-left: 3em;
+  padding-right: 3em
+
+}
+
+.card-accent {
+  border: 1px solid;
+  background: var(--color-accent);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.svg-black-to-white {
+  filter: var(--svg-filter-black-to-white);
+}

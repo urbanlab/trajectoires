@@ -1,0 +1,37 @@
+worker_processes 1;
+
+events { 
+    worker_connections 1024; 
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    keepalive_timeout 65;
+
+    server {
+        listen 80;
+
+        # ------------------------------
+        # SERVE REACT BUILD
+        # ------------------------------
+
+        root /usr/share/nginx/html;
+        index index.html;
+
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+
+        # ------------------------------
+        # PROXY GRIST
+        # ------------------------------
+        location /api/grist/ {
+            proxy_pass $VITE_API_GRIST_URL/;
+            proxy_set_header Authorization "Bearer $VITE_API_GRIST_TOKEN";
+            proxy_set_header Content-Type "application/json";
+        }
+
+    }
+}

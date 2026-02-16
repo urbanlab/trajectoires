@@ -1,0 +1,12 @@
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_GRIST_URL: ${VITE_API_GRIST_URL}
+        VITE_API_GRIST_TOKEN: ${VITE_API_GRIST_TOKEN}
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
