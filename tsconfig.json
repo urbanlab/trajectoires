@@ -11,6 +11,7 @@
     "resolveJsonModule": true,
     "baseUrl": ".",  
     "paths": {
+      "@/*": ["src/*"],
       "@Commons/*": ["src/_commons/*"],
       "@Components/*": ["src/_components/*"],
       "@Domains/*": ["src/_domains/*"],

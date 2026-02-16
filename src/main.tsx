@@ -3,6 +3,12 @@ import '@Styles/app.css';
 import React from 'react';
 import '@Styles/antd/typography.css';
 import 'antd/dist/reset.css';
+import {theme } from 'antd';
+
+const { useToken } = theme;
+
+
+
 
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';

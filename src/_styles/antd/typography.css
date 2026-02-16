@@ -19,6 +19,7 @@ label,
 .ant-select-selection-placeholder,
 .ant-input,
 .ant-input-affix-wrapper,
+.ant-btn,
 .ant-typography {
   font-size: 0.875rem; /* 14px */
 }
@@ -54,6 +55,7 @@ h1 {
   .ant-select-selection-placeholder,
   .ant-input,
   .ant-input-affix-wrapper,
+  .ant-btn,
   .ant-typography {
     font-size: 1rem; /* 16px */
   }
@@ -90,8 +92,9 @@ h1 {
   .ant-select-selection-placeholder,
   .ant-input,
   .ant-input-affix-wrapper,
+  .ant-btn,
   .ant-typography {
-    font-size: 1.125rem; /* 18px */
+    font-size: 1.3rem; /* 18px */
   }
 
   h5 {
