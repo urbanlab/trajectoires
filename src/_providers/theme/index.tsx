@@ -15,14 +15,18 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       colorPrimary: '#e60028',
       colorText: primaryColor,
       colorLinkHover: primaryColor,
-
       colorTextSecondary: secondaryColor,
       colorTextDescription: secondaryColor,
       colorLink: secondaryColor,
 
-      fontFamily: 'Montserrat, sans-serif',
+      fontFamily: 'Jost, sans-serif',
     },
     components: {
+      Form: {
+        labelFontSize: 18,        // Taille de la police du label
+        labelColor: '#333333',    // Couleur du label
+        labelHeight: 32,          // Hauteur de la ligne
+      },
       Typography: {
         margin: 0,
         padding: 0,

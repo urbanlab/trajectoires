@@ -6,5 +6,11 @@
         "text": "Complétez les informations relatives à vos salariés. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros."
 
     },
-    "Step3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros."
+    "Step3": {
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros."
+    }, 
+    "Modale": {
+        "demarche":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros.",
+        "ressource": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros."
+    } 
 }

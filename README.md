@@ -1,4 +1,4 @@
-# 📘 Projet P-38
+# 📘 Projet Trajectoires
 A React application using Vite, Ant Design, React Router, and a domain-based architecture.
 The project interacts with the Grist API via a reverse proxy, both locally (Vite) and in production (Nginx in Docker).
 

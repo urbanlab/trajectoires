@@ -1,19 +1,41 @@
-
-import { Typography } from 'antd';
+import {useState, useEffect} from 'react'
 import {CardStep} from '@Components/cardStep'
-import content from '../../../../../content.json'
+import content from '@/content.json'
+import { mdiLockOutline } from '@mdi/js';
+import ModuleCompletion from '@Components/ModuleCompletion'
+import Modale from '@Components/modale'
+
+
 
 
 
 export function PageMenu() {
+
+  const [open, setOpen] = useState(false)
+
+  const onClose = () => {
+    setOpen(false)
+    console.log("fermeé")
+  }
+  useEffect(() => {
+    setOpen(true)
+  }, [])
+
   const onClick = () => {
     console.log("boutonc cliqué")
   }
   return (
-    <div className="grid grid-cols-3 gap-10">
-      <CardStep title="Etape 1" subtitle="Fiche entreprise" text="Bonjour Bonjour Bonjour Bonjour Bonjour Bonjour Bonjour Bonjour" disabled={false} onClick={onClick}></CardStep>
-      <CardStep title="Etape 2" subtitle="Informations salariés" text="Bonjour Bonjour Bonjour Bonjour Bonjour Bonjour Bonjour Bonjour" disabled={false} onClick={onClick}></CardStep>
-      <CardStep title="Etape 3" subtitle="Enquête" text="Bonjour Bonjour Bonjour Bonjour Bonjour Bonjour Bonjour Bonjour" disabled={true} buttonText={"Lancer l'enquête"} onClick={onClick}></CardStep>
+    <div className="">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-15 ">
+        <CardStep title="Etape 1" subtitle="Fiche entreprise" text={content.Step1.text} buttonConfig={{onPress: onClick, bgColor: "red", title:"Compléter"}} >
+          <ModuleCompletion></ModuleCompletion>
+        </CardStep>
+        <CardStep title="Etape 2" subtitle="Informations salariés" text={content.Step2.text } buttonConfig={{onPress: onClick, bgColor: "red",  title:"Compléter"}} >
+          <ModuleCompletion></ModuleCompletion>
+        </CardStep>
+        <CardStep title="Etape 3" subtitle="Enquête" text={content.Step3.text} buttonConfig={{onPress: onClick, bgColor: "red", disabled: true, title:"Lancer l'enquête", iconPath: mdiLockOutline}}></CardStep>
+      </div>
+      <Modale isOpen={open} onClose={onClose}/>
     </div>
   );
 }
