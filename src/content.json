@@ -12,5 +12,8 @@
     "Modale": {
         "demarche":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros.",
         "ressource": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros."
-    } 
+    },
+    "Salaries": {
+        "download": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros."
+    }
 }

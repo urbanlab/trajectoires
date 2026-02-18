@@ -23,7 +23,7 @@ export function Header() {
     <div className=" bg-white h-20 w-full shadow-lg flex justify-between p-4 fixed z-100 ">
       <Modale isOpen={isOpen} onClose={()=> setIsOpen(false)}/>
       <div className=" flex items-center">
-        <Image src={TrajectoiresLogo} preview={false} width={250} className='' /> 
+        <Image src={TrajectoiresLogo} preview={false} height="100%" className='' /> 
       </div>
       {user && (
         <div className="flex py-4 gap-5  items-center">

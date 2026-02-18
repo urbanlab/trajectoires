@@ -27,9 +27,11 @@ export default function Button({iconPath, title, bgColor, onPress, disabled, isL
                 <Icon path={mdiLoading} color="grey"/>
             </div>
             :
-            disabled && iconPath? 
+            disabled && iconPath ? 
             <Icon path={iconPath} color={disabled ? "black" : iconColor} size={1}></Icon>
-            : null }
+            : iconPath ?
+            <Icon path={iconPath} color={iconColor} size={1}></Icon>
+            : null}
             <span className={`${disabled ? "text-black" : fontColor} font-bold text-[1.4em]`}>{title}</span>
         </button>
     )

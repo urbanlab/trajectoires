@@ -18,7 +18,9 @@
     "antd": "^6.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^15.0.0",
     "react-router-dom": "^7.9.6",
+    "read-excel-file": "^6.0.3",
     "recharts": "^3.5.1",
     "tailwindcss": "^4.1.18"
   },
