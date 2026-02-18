@@ -35,7 +35,7 @@ export function PageLogin() {
           <div className=" flex px-10">
             <Image src={Logo} className="object-fit" preview={false}/>
           </div>
-          <div className=" bg-[#EDEDED] shadow-lg flex flex-col gap-5 p-8 " >
+          <div className=" bg-(--select-grey) shadow-lg flex flex-col gap-5 p-8 " >
             <Typography.Title level={3}>Connexion</Typography.Title>
             <Form onFinish={handleSubmit} layout="vertical">
               <Form.Item
@@ -55,7 +55,7 @@ export function PageLogin() {
                 rules={[{ required: true, message: "Veuillez saisir votre mot de passe." }]}
               >
                 <Input.Password
-                  placeholder={"Mot de Passe"}
+                  placeholder={"Mot de passe"}
                   onPressEnter={() => {}}
                 />
               </Form.Item>
@@ -70,7 +70,7 @@ export function PageLogin() {
               </div>
               <div className='mt-5 flex gap-5  justify-center'>
                 <span className="text-[1.1em] italic">Pototype - {pkg.version}</span>
-                <span className ="rounded-full bg-[#FCBA5B] px-1 text-[1.1em] italic">Alpha</span>
+                <span className ="rounded-full bg-(--light-orange) px-2 text-[1.1em] italic">Alpha</span>
               </div>
             </Form>
           </div>

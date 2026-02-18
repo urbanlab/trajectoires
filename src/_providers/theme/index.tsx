@@ -8,7 +8,7 @@ export const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const primaryColor = '#000';
-  const secondaryColor = '#4d4d44';
+  const secondaryColor = '#4d4d4';
 
   const themeConfig: ThemeConfig = {
     token: {
@@ -18,6 +18,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       colorTextSecondary: secondaryColor,
       colorTextDescription: secondaryColor,
       colorLink: secondaryColor,
+      colorBgLayout: 'var(--bg)',
 
       fontFamily: 'Jost, sans-serif',
     },

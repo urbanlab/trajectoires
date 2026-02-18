@@ -1,32 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
 
 
 :root {
   --bg: #ffffff;
-  --light-bg: #e4e1f8;
-  --secondary-bg: #585858;
-
-  --text-primary: #000;
-  --text-secondary: #4d4d44;
-
-  --color-accent: #e60028;
-
-  --card-bg: #fff;
-  --svg-filter-black-to-white: invert(1);
+  --red: #E60027;
+  --light-grey: #F7F7F7;
+  --select-grey: #EDEDED;
+  --dark-grey: #DBDBDB;
+  --disabled-grey: #B3B3B3;
+  --blue: #048BA8;
+  --orange: #F18F01;
+  --light-orange: #FCBA5B;
+  --green: #99C24D
+  
 }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
   font-family: 'Jost'
 }
 
 .app {
-  min-height: 100vh;
-  background-color:#fff
   
-
+  min-height: 100vh;
 }
 
 .content {
@@ -38,13 +35,3 @@ body {
 
 }
 
-.card-accent {
-  border: 1px solid;
-  background: var(--color-accent);
-  padding: 1rem;
-  border-radius: 0.5rem;
-}
-
-.svg-black-to-white {
-  filter: var(--svg-filter-black-to-white);
-}

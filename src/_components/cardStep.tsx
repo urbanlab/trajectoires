@@ -16,7 +16,8 @@ export function CardStep({children, title, subtitle, text, buttonConfig}: CardPr
     const {token} = useToken()
 
     return (
-        <div className='flex flex-col justify-between gap-10 bg-[#F7F7F7] hover:bg-[#EDEDED] hover:border-t-10 p-12' style={{borderTopColor: token.colorPrimary}}>
+        <div className='group relative flex flex-col justify-between gap-10 bg-(--light-grey) hover:bg-(--select-grey) p-12' style={{borderTopColor: token.colorPrimary}}>
+            <div style={{backgroundColor: token.colorPrimary}} className="absolute h-4 top-0 left-0 right-0 w-full opacity-0 group-hover:opacity-100"></div>
             <div className='flex flex-col gap-5'>
                 <Typography.Title level={1}>{title}</Typography.Title>
                 <Typography.Title style={{color: token.colorPrimary, fontWeight:'bold'}} level={2} >{subtitle}</Typography.Title>
