@@ -15,10 +15,14 @@ export function InfoSalaries(){
     const content = Content.Salaries.download
     const navigate = useNavigate();
     const [headers, setHeaders] = useState<any[]>([])
-    console.log('array', headers)
+    const [rows, setRows] = useState<any[]>([])
+    console.log('headers', headers)
 
-    const settingArray = (parsedXlsx) => {
-        setHeaders(parsedXlsx[0])
+    const settingArray = (parsedXlsx: any[]) => {
+        const [firstRow, ...otherRows] = parsedXlsx
+        setHeaders(firstRow)
+        setRows(otherRows)
+        console.log('otherrows', otherRows)
     }
 
     return(
@@ -48,11 +52,27 @@ export function InfoSalaries(){
                 {headers.length === 0 ?
                     <DropZone settingArray={settingArray}></DropZone>
                     : 
-                    <div className="flex">
+                    <div className="grid grid-cols-6 bg-(--dark-grey)">
                         {headers.map((row, index) => (
-                            <p>{row}</p>
+                            <div key={index}>
+                                <p className='text-[1.5em]'>{row}</p>
+                            </div>
                         ))}
+                        
                     </div>
+                }
+                {rows.length > 0 ?
+                    rows.map((row, index: number) => (
+                        <div className="grid grid-cols-6">
+                            {row.map((r: string[], i: number) => (
+                                <div key={i}>
+                                    <p className='text-[1.5em]'>{r}</p>
+                                </div>
+                            ))}
+                            
+                        </div>
+                    )) : null
+                
                 }
                 
                 

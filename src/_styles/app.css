@@ -16,6 +16,10 @@
   
 }
 
+p{
+  margin-bottom: 0 !important
+}
+
 body {
   margin: 0;
   font-family: 'Jost'

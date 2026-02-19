@@ -37,6 +37,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         paddingMD: 0,
         paddingLG: 0,
         paddingXL: 0,
+        
       },
       Collapse: {
         padding: 16,
