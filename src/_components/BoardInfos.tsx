@@ -12,6 +12,7 @@ interface Props {
 }
 
 export default function BoardInfos({save, cancel, qty, children}: Props) {
+    
     return(
         <div className="flex flex-col bg-(--light-grey) p-8 gap-5 ">
             <Typography.Title level={3}>Résultat de l'intégration</Typography.Title>
@@ -24,8 +25,8 @@ export default function BoardInfos({save, cancel, qty, children}: Props) {
                     </div>
                 </div>
                 <div className="flex lg:flex-row  gap-2 items-center justify-end">
-                    <Button title="Annuler" bgColor="white"/>
-                    <Button iconPath={mdiCheckCircleOutline} title="Sauvegarder" bgColor="blue"/>
+                    <Button title="Annuler" bgColor="white" onPress={cancel}/>
+                    <Button iconPath={mdiCheckCircleOutline} title="Sauvegarder" bgColor="blue" onPress={save}/>
                 </div>
             </div>
             <div>

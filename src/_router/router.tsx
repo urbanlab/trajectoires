@@ -2,6 +2,7 @@ import { ProtectedRoute } from '@Components/protectedRoute';
 import { UserRole } from '@Domains/users/type';
 import { PageMenu } from '@PagesProtected/menu';
 import {InfoSalaries} from '@PagesProtected/info-salaries';
+import {Enquete} from '@PagesProtected/enquete' ;
 import { PageLogin } from '@PagesPublic/login';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
@@ -35,6 +36,12 @@ export const router = createBrowserRouter([
       element: (
         <ProtectedRoute>
           <InfoSalaries/>
+        </ProtectedRoute>
+      )},
+      { path: 'enquete',
+      element: (
+        <ProtectedRoute>
+          <Enquete/>
         </ProtectedRoute>
       )},
       // PUBLIC

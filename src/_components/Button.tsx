@@ -13,8 +13,9 @@ export interface ButtonProps {
 }
 export default function Button({iconPath, title, bgColor, onPress, disabled, isLoading}: ButtonProps) {
     const isWhite = bgColor.includes('white')
-    const fontColor = isWhite  ? "text-(--red)" : "text-white"
-    const iconColor = isWhite  ? "var(--red)" : "white"
+    const isGrey = bgColor.includes('grey')
+    const fontColor = isWhite  ? "text-(--red)" : isGrey ? "text-black" : "text-white"
+    const iconColor = isWhite  ? "var(--red)" : isGrey ? "black" : "white"
 
     return (
         <button

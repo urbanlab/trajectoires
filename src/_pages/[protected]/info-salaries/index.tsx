@@ -8,6 +8,7 @@ import Content from '@/content.json'
 import DropZone from '@Components/DropZone'
 import BoardInfos from '@Components/BoardInfos'
 import {Board} from '@Components/board'
+import {SendEmployeesToGrist} from '@Domains/employees/api'
 
 import { useNavigate } from 'react-router-dom';
 
@@ -24,6 +25,15 @@ export function InfoSalaries(){
         setHeaders(firstRow)
         setRows(otherRows)
         console.log('otherrows', otherRows)
+    }
+
+    const handleCancel = () => {
+        setHeaders([])
+        setRows([])
+    }
+
+    const handleSave = async () => {
+        SendEmployeesToGrist()
     }
 
     return(
@@ -56,7 +66,7 @@ export function InfoSalaries(){
                 {headers.length === 0 ?
                     <DropZone settingArray={settingArray}></DropZone>
                     : 
-                    <BoardInfos qty={rows.length}>
+                    <BoardInfos qty={rows.length} cancel={handleCancel} save={handleSave} >
                         <Board headers={headers} rows={rows}/>
                     </BoardInfos>
                 }

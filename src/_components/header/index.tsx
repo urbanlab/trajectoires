@@ -1,7 +1,6 @@
 import {useState} from 'react'
 import TrajectoiresLogo from '@Commons/img/trajectoires-logo.png';
 import { useAuth } from '@Hooks/auth';
-import { PoweroffOutlined, UserOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import Icon from '@mdi/react';
 import { mdiAccountCircleOutline, mdiInformationVariantCircleOutline, mdiPowerStandby} from '@mdi/js';
 
