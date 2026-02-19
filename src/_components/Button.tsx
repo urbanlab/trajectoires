@@ -12,15 +12,14 @@ export interface ButtonProps {
     disabled?: boolean
 }
 export default function Button({iconPath, title, bgColor, onPress, disabled, isLoading}: ButtonProps) {
-    const isRed = bgColor.includes('red')
-    const backgroundColor = isRed ? "bg-(--red)" : "bg-white"
-    const fontColor = isRed  ? "text-white" : "text-(--red)"
-    const iconColor = isRed  ? "white" : "#e60028"
+    const isWhite = bgColor.includes('white')
+    const fontColor = isWhite  ? "text-(--red)" : "text-white"
+    const iconColor = isWhite  ? "var(--red)" : "white"
 
     return (
         <button
         disabled={disabled}
-        className={`cursor-pointer px-4 py-3 text-[2em] flex rounded-lg items-center justify-center flex-row gap-2 ${disabled ? " pointer-events-none border-none bg-(--disabled-grey)" : isRed ? `${backgroundColor}` : ` border-4 border-(--red) ${backgroundColor}` }  ` }
+        className={`cursor-pointer px-4 py-3 text-[2em] flex rounded-lg items-center justify-center flex-row gap-2 ${disabled ? " pointer-events-none border-none bg-(--disabled-grey)" : isWhite ? ` border-4 border-(--red) bg-(--${bgColor})` : `bg-(--${bgColor})`}  ` }
         onClick={onPress}>
             { isLoading ?
             <div className="">

@@ -6,16 +6,17 @@ import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiFileExcel } from '@mdi/js';
 import Content from '@/content.json'
 import DropZone from '@Components/DropZone'
+import BoardInfos from '@Components/BoardInfos'
+import {Board} from '@Components/board'
 
 import { useNavigate } from 'react-router-dom';
-import { P } from '@antv/g2plot';
 
 
 export function InfoSalaries(){
     const content = Content.Salaries.download
     const navigate = useNavigate();
     const [headers, setHeaders] = useState<any[]>([])
-    const [rows, setRows] = useState<any[]>([])
+    const [rows, setRows] = useState<any[][]>([])
     console.log('headers', headers)
 
     const settingArray = (parsedXlsx: any[]) => {
@@ -40,10 +41,13 @@ export function InfoSalaries(){
             </div>
             <div className="flex flex-col gap-8">
                 <div className="flex bg-(--light-grey) p-8 rounded-2xl items-center justify-between gap-10">
-                    <Icon path={mdiFileExcel} color="var(--green)" size={4}/>
-                    <div className ="flex flex-col gap-3">
-                        <Typography.Title level={3}>Télécharger le gabarit</Typography.Title>
-                        <p className="text-[1.5em] text-wrap">{content}</p>
+                    <div className="gap-10 flex ">
+                        <Icon path={mdiFileExcel} color="var(--green)" size={4} className="min-w-[30px]"/>
+                        <div className ="flex flex-col gap-3">
+                            <Typography.Title level={3}>Télécharger le gabarit</Typography.Title>
+                            <p className="text-[1.5em] text-wrap">{content}</p>
+                        </div>
+
                     </div>
                     <div>
                         <Button title="Télécharger" bgColor="red"></Button>
@@ -52,29 +56,10 @@ export function InfoSalaries(){
                 {headers.length === 0 ?
                     <DropZone settingArray={settingArray}></DropZone>
                     : 
-                    <div className="grid grid-cols-6 bg-(--dark-grey)">
-                        {headers.map((row, index) => (
-                            <div key={index}>
-                                <p className='text-[1.5em]'>{row}</p>
-                            </div>
-                        ))}
-                        
-                    </div>
+                    <BoardInfos qty={rows.length}>
+                        <Board headers={headers} rows={rows}/>
+                    </BoardInfos>
                 }
-                {rows.length > 0 ?
-                    rows.map((row, index: number) => (
-                        <div className="grid grid-cols-6">
-                            {row.map((r: string[], i: number) => (
-                                <div key={i}>
-                                    <p className='text-[1.5em]'>{r}</p>
-                                </div>
-                            ))}
-                            
-                        </div>
-                    )) : null
-                
-                }
-                
                 
             </div>
         </div>
