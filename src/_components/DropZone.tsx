@@ -33,20 +33,20 @@ export default function MyDropzone({settingArray}: DropZoneProps) {
     }})
 
     return (
-    <div {...getRootProps()} className='dash p-8 cursor-pointer h-[250px]'>
+    <div {...getRootProps()} className='dash  cursor-pointer h-[180px]'>
         <input {...getInputProps()} />
-        <div className="flex flex-col items-center justify-center h-full">
+        <div className="flex flex-col items-center justify-center h-full p-8">
         {isDragActive ?
             <p className="text-[1.6em]">Déposer ici ...</p>
             :
-            <div className="flex flex-col items-center gap-5">
-                <Icon path={mdiDownloadOutline} color="var(--green)" size={3}/>
-                <p className="text-[1.8em] mb-0 ">Déposer le gabarit préalablement complété.</p>
-                <p className="italic text-[1.4em] mb-0 ">Format accepté : xlsx</p>
+            <div className="flex flex-col items-center gap-3">
+                <Icon path={mdiDownloadOutline} color="var(--green)" size={2}/>
+                <p className="text-[1.3em] mb-0 ">Déposer le gabarit préalablement complété.</p>
+                <p className="italic text-[1em] mb-0 ">Format accepté : xlsx</p>
                 {fileRejections.length > 0 ? 
-                    <p className="text-(--red) text-[1.4em] ">Le format de ce document n'est pas pris en charge.</p>
+                    <p className="text-(--red) text-[1.3em] ">Le format de ce document n'est pas pris en charge.</p>
                 : error ? 
-                <p className="text-(--red) text-[1.4em] ">{error}</p>
+                <p className="text-(--red) text-[1.3em] ">{error}</p>
                 : null
                 }
             </div>

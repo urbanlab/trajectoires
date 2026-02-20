@@ -32,7 +32,7 @@ export default function Button({iconPath, title, bgColor, onPress, disabled, isL
             : iconPath ?
             <Icon path={iconPath} color={iconColor} size={1}></Icon>
             : null}
-            <span className={`${disabled ? "text-black" : fontColor} font-bold text-[1.4em]`}>{title}</span>
+            <span className={`${disabled ? "text-black" : fontColor} font-bold text-[1em]`}>{title}</span>
         </button>
     )
 }

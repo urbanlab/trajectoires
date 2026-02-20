@@ -3,11 +3,11 @@
         "text": "Complétez les informations relatives à votre structure. Ces informations concernent des données génériques et des informations relatives aux dispositifs, équipements et solutions de mobilité proposés par la structure."
     },
     "Step2": {
-        "text": "Complétez les informations relatives à vos salariés. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros."
+        "text": "Complétez les informations relatives à vos salariés (adresses mails et lieux d'habitations)."
 
     },
     "Step3": {
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros."
+        "text": "Démarrer l'enquête auprès de vos salariés. Vous pourrez paramétrez et suivre l'avancement de l'enquête. "
     }, 
     "Modale": {
         "demarche":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros.",

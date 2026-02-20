@@ -7,6 +7,8 @@ import { mdiChevronLeft, mdiFileExcel } from '@mdi/js';
 import Content from '@/content.json'
 import DropZone from '@Components/DropZone'
 import BoardInfos from '@Components/BoardInfos'
+import BoardSuccess from '@Components/BoardSuccess'
+
 import {Board} from '@Components/board'
 import {SendEmployeesToGrist} from '@Domains/employees/api'
 
@@ -18,26 +20,41 @@ export function InfoSalaries(){
     const navigate = useNavigate();
     const [headers, setHeaders] = useState<any[]>([])
     const [rows, setRows] = useState<any[][]>([])
-    console.log('headers', headers)
+    const [error, setError] = useState<string | null>(null)
+    const [saved, setSaved] = useState(false)
+    
 
     const settingArray = (parsedXlsx: any[]) => {
         const [firstRow, ...otherRows] = parsedXlsx
         setHeaders(firstRow)
         setRows(otherRows)
-        console.log('otherrows', otherRows)
     }
 
     const handleCancel = () => {
         setHeaders([])
         setRows([])
+        setSaved(false)
     }
 
     const handleSave = async () => {
-        SendEmployeesToGrist()
+        setSaved(false)
+        try{
+            await SendEmployeesToGrist(rows)
+            setSaved(true)
+        } catch (error) {
+            if (error instanceof Error){
+                setError(error.message)
+                setSaved(true)
+            } else {
+                setError("une erreur s'est produite.")
+                setHeaders([])
+                setRows([])
+            }
+        }
     }
 
     return(
-        <div className="">
+        <div className="flex flex-col gap-10">
             <div className="flex justify-between w-full">
                 <div className="flex flex-col gap-8">
                     <Typography.Title className=''>Etapes 2 : Informations salariés</Typography.Title>
@@ -54,8 +71,8 @@ export function InfoSalaries(){
                     <div className="gap-10 flex ">
                         <Icon path={mdiFileExcel} color="var(--green)" size={4} className="min-w-[30px]"/>
                         <div className ="flex flex-col gap-3">
-                            <Typography.Title level={3}>Télécharger le gabarit</Typography.Title>
-                            <p className="text-[1.5em] text-wrap">{content}</p>
+                            <Typography.Title level={4}>Télécharger le gabarit</Typography.Title>
+                            <p className="text-[1.3em] text-wrap">{content}</p>
                         </div>
 
                     </div>
@@ -63,14 +80,19 @@ export function InfoSalaries(){
                         <Button title="Télécharger" bgColor="red"></Button>
                     </div>
                 </div>
-                {headers.length === 0 ?
+                {headers.length === 0  ?
                     <DropZone settingArray={settingArray}></DropZone>
                     : 
+                    saved === true ? 
+                    <BoardSuccess qty={rows.length} cancel={handleCancel}>
+                        <Board headers={headers} rows={rows}/>
+                    </BoardSuccess>
+                    :
                     <BoardInfos qty={rows.length} cancel={handleCancel} save={handleSave} >
                         <Board headers={headers} rows={rows}/>
                     </BoardInfos>
+
                 }
-                
             </div>
         </div>
     )

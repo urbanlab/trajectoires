@@ -31,8 +31,8 @@ export function PageLogin() {
   return (
     <div className='min-h-screen flex flex-col p-5'>
       <div className="flex-1 items-center justify-center flex flex-col">
-        <div className="flex flex-col gap-4 lg:w-120 md:w-120 ">
-          <div className=" flex px-10">
+        <div className="flex flex-col gap-4 lg:w-100 md:w-120 ">
+          <div className=" flex px-10 items-center justify-center">
             <Image src={Logo} className="object-fit" preview={false}/>
           </div>
           <div className=" bg-(--select-grey) shadow-lg flex flex-col gap-5 p-8 " >
@@ -66,7 +66,7 @@ export function PageLogin() {
                 </Typography.Text>
               )}
               <div className="flex justify-end  ">
-                <Button title="Connexion" type="button" bgColor="red"/>
+                <Button title="Connexion" type="button" bgColor="red" />
               </div>
               <div className='mt-5 flex gap-5  justify-center'>
                 <span className="text-[1.1em] italic">Pototype - {pkg.version}</span>
@@ -77,11 +77,11 @@ export function PageLogin() {
         </div>
       </div>
       <footer>
-        <div className=' mt-50 sm:mt-0 flex flex-col sm:flex-row justify-end sm:items-center gap-15'>
+        <div className='h-[60px]   sm:mt-0 flex flex-col sm:flex-row justify-end sm:items-center gap-15'>
           <span className='font-medium text-[1.1em]'>Une expérimentation menée par </span>
-          <div className='flex gap-10'>
-            <Image src={Mobilites} preview={false} height={60} className="object-contain"></Image>
-            <Image src={Metro} preview={false} height={100} className="object-contain"></Image>
+          <div className='flex gap-10 h-full'>
+            <Image src={Mobilites} preview={false} height="100%" className="object-contain"></Image>
+            <Image src={Metro} preview={false} height="100%" className="object-contain"></Image>
           </div>
         </div>
       </footer>
