@@ -1,7 +1,9 @@
+import {useState, useEffect} from 'react'
 import Button from "@/_components/Button";
+import Onglet from "@/_components/Onglet";
 import {Typography} from 'antd'
 import Icon from '@mdi/react';
-import { mdiChevronLeft, mdiPlayCircle , mdiLockOutline,  mdiInformationVariantCircleOutline, mdiWalk , mdiMessageOutline, mdiHeart , mdiTimerOutline, mdiArrowDecision , mdiMapMarkerOutline } from '@mdi/js';
+import { mdiChevronLeft, mdiPlayCircle ,  mdiInformationVariantCircleOutline, mdiWalk , mdiMessageOutline, mdiHeartOutline  , mdiTimerOutline, mdiArrowDecision , mdiMapMarkerOutline } from '@mdi/js';
 import { useNavigate } from 'react-router-dom';
 
 interface EnqueteProps {
@@ -9,8 +11,11 @@ interface EnqueteProps {
 }
 
 export default function EnqueteCloturee({updateState}: EnqueteProps) {
+    const [Active, setActive] = useState(1)
 
     const navigate = useNavigate()
+
+
     return (
         <div className="flex flex-col gap-5">
 
@@ -22,14 +27,15 @@ export default function EnqueteCloturee({updateState}: EnqueteProps) {
                 </div>
             </div>
             <div className='flex  gap-1 py-5 '>
-                <button className="flex flex-col justify-center bg-(--red) p-4 gap-2 items-center rounded-sm w-[50%]"><Icon path={mdiPlayCircle} color={"white"} size={1.5}/><p className="text-[1.3em] text-white font-medium">Participation</p></button>
-                <button className="flex flex-col justify-center bg-(--dark-grey) p-4 gap-2 items-center rounded-sm  w-[50%]"><Icon path={mdiWalk} color={"black"} size={1.5}/><p className="text-[1.3em] font-medium">Déplacement</p></button>
-                <button className="flex flex-col justify-center bg-(--dark-grey) p-4 gap-2 items-center rounded-sm  w-[50%]"><Icon path={mdiHeart } color={"black"} size={1.5}/><p className="text-[1.3em] font-medium">Satisfaction</p></button>
-                <button className="flex flex-col justify-center bg-(--dark-grey) p-4 gap-2 items-center rounded-sm  w-[50%]"><Icon path={mdiTimerOutline } color={"black"} size={1.5}/><p className="text-[1.3em] font-medium">Organisation</p></button>
-                <button className="flex flex-col justify-center bg-(--dark-grey) p-1 gap-2 items-center rounded-sm  w-[50%]"><Icon path={mdiArrowDecision } color={"black"} size={1.5}/><p className="text-[1.3em] font-medium">Report modal</p></button>
-                <button className="flex flex-col justify-center bg-(--dark-grey) p-4 gap-2 items-center rounded-sm  w-[50%]"><Icon path={mdiMapMarkerOutline } color={"black"} size={1.5}/><p className="text-[1.3em] font-medium">Carte</p></button>
+                <Onglet title={"Participation"} iconPath={mdiInformationVariantCircleOutline}  index={1} onSelect={setActive} ActiveTab={Active}/>
+                <Onglet title={"Déplacement"} iconPath={mdiWalk}  index={2} onSelect={setActive} ActiveTab={Active}/>
+                <Onglet title={"Satisfaction"} iconPath={mdiHeartOutline } index={3} onSelect={setActive} ActiveTab={Active}/>
+                <Onglet title={"Organisation"} iconPath={mdiTimerOutline} index={4} onSelect={setActive} ActiveTab={Active}/>
+                <Onglet title={"Report modal"} iconPath={mdiArrowDecision} index={5} onSelect={setActive} ActiveTab={Active}/>
+                <Onglet title={"Carte"} iconPath={mdiMapMarkerOutline} index={6} onSelect={setActive} ActiveTab={Active}/>
+
             </div>
-        </div>
+            </div>
         <div className="flex flex-wrap gap-4">
             <div className="flex flex-col gap-5 w-[500px] ">
                 <Typography.Title level={4}>Actions</Typography.Title>
