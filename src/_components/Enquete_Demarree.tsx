@@ -38,7 +38,7 @@ export default function EnqueteDemaree({updateState}: EnqueteProps) {
                     </div>
                     <div className="flex gap-4 border-(--blue) border-l-3 bg-white p-5 items-center">
                         <Icon path={mdiInformationVariantCircleOutline} color="var(--blue)" size={1.5}/>
-                        <p className="italic text-[1.3em] max-w-[500px]">Le nombre de réponse n’est pas encore suffisant pour clôturer l’enquête, attendez une semaine pour relancer vos salariés</p>
+                        <p className="italic text-[1.3em] flex-1">Le nombre de réponse n’est pas encore suffisant pour clôturer l’enquête, attendez une semaine pour relancer vos salariés</p>
                     </div>
                     <div className="flex justify-center">
                         <div className="flex flex-col gap-4">

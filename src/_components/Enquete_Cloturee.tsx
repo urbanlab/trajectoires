@@ -41,8 +41,8 @@ export default function EnqueteCloturee({updateState}: EnqueteProps) {
                         </button>
                     </div>
                     <div className="flex gap-4 border-(--blue) border-l-3 bg-white p-5 items-center">
-                        <Icon path={mdiInformationVariantCircleOutline} color="var(--blue)" size={1.5}/>
-                        <p className="italic text-[1.3em] max-w-[500px]">L’enquête est désormais clôturée. Cet onglet présente une synthèse complète de la participation, incluant le nombre de réponses reçues, le taux de répondants et les principaux indicateurs liés à la collecte.</p>
+                        <Icon path={mdiInformationVariantCircleOutline} color="var(--blue)" size={1}/>
+                        <p className="italic text-[1.3em] max-w-[500px] flex-1">L’enquête est désormais clôturée. Cet onglet présente une synthèse complète de la participation, incluant le nombre de réponses reçues, le taux de répondants et les principaux indicateurs liés à la collecte.</p>
                     </div>
                 </div>
             </div>

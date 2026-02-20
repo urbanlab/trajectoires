@@ -18,13 +18,17 @@ export default function ModuleCompletion({blocked}: Module) {
         <div className="bg-white rounded-2xl w-full flex flex-col gap-5 p-5">
             <span className="text-[1.2em] font-bold">Avancement du module</span>
             <div className="flex flex-col gap-2">
-                <span className=' bg-(--select-grey) w-full h-5 rounded-full flex gap-2'>
-                    <span className="block bg-(--blue) w-[70%] h-full rounded-full"></span>
-                    <span className="text-(--blue) font-bold">80%</span>
+                <span className=' bg-(--select-grey) w-full h-3 rounded-full '>
+                    <span className='w-[90%] flex gap-2  h-full'>
+
+                        <span className=" relative block bg-(--red) h-full w-[11%]  rounded-full ">
+                            <span className=" absolute -right-10 -top-1 text-(--red) font-bold">11%</span>
+                        </span>
+                    </span>
                 </span>
                 <div className="flex">
-                    <Icon path={mdiChevronRight} color="var(--blue)" size={1}></Icon>
-                    <span  className="text-[1.2em] italic">Vous y êtes presque !</span>
+                    <Icon path={mdiChevronRight} color="var(--red)" size={1}></Icon>
+                    <span  className="text-[1.2em] italic">Ca avance vite, on lâche rien !</span>
                 </div>
             </div>
         </div>
