@@ -28,7 +28,7 @@ export function PageMenu() {
   return (
     <div className="">
       <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-15 ">
-        <CardStep title="Étape 1" subtitle="Fiche entreprise" text={content.Step1.text} buttonConfig={{onPress:() => onClick('url'), bgColor: "red", title:"Compléter"}} >
+        <CardStep title="Étape 1" subtitle="Fiche entreprise" text={content.Step1.text} buttonConfig={{onPress:() => onClick('fiche-entreprise'), bgColor: "red", title:"Compléter"}} >
           <ModuleCompletion></ModuleCompletion>
         </CardStep>
         <CardStep title="Étape 2" subtitle="Informations salariés" text={content.Step2.text } buttonConfig={{onPress:() => onClick('informations-salaries'), bgColor: "red",  title:"Compléter"}} >

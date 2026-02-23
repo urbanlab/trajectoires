@@ -41,7 +41,7 @@ export default function Organisation () {
                 </div>
             </div>
             <div className='bg-(--light-grey) flex flex-col gap-5 p-5'>
-                <Typography.Title level={4}>Autre</Typography.Title>
+                <Typography.Title level={4}>Pause méridienne</Typography.Title>
                 <div>
                     ///GRAPHIQUE
                 </div>

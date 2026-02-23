@@ -42,10 +42,10 @@ export default function Deplacement () {
                         </div>
                     </div>
                 </div>
-                <div className="flex gap-2 bg-(--light-grey) p-5 flex-1">
+                <div className="flex gap-2 bg-(--light-grey) max-h-[500px] border p-5 flex-1">
                     <div className="flex flex-col gap-2 flex-1">
                         <Typography.Title level={5}>Détail des modes de déplacement principaux utilisés</Typography.Title>
-                        <div className="bg-white h-full"><PolarChart/></div>    
+                        <div className="bg-white max-h-full border"><PolarChart/></div>    
                     </div>
                     <div className="flex flex-col gap-2 flex-1">
                         <div className="flex flex-col gap-2">
