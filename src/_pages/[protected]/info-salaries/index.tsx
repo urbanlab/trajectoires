@@ -67,9 +67,9 @@ export function InfoSalaries(){
                 </div>
             </div>
             <div className="flex flex-col gap-8">
-                <div className="flex bg-(--light-grey) p-8 rounded-2xl items-center justify-between gap-10">
-                    <div className="gap-10 flex ">
-                        <Icon path={mdiFileExcel} color="var(--green)" size={4} className="min-w-[30px]"/>
+                <div className="flex lg:flex-row md:flex-row flex-col bg-(--light-grey) p-8 rounded-2xl items-center justify-between gap-10">
+                    <div className="gap-10 flex items-center">
+                        <Icon path={mdiFileExcel} color="var(--green)" size={4} className="min-w-[50px]"/>
                         <div className ="flex flex-col gap-3">
                             <Typography.Title level={4}>Télécharger le gabarit</Typography.Title>
                             <p className="text-[1.3em] text-wrap">{content}</p>

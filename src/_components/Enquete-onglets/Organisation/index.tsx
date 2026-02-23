@@ -2,7 +2,7 @@ import {Typography, Image} from 'antd'
 import Vehicules from '@Commons/img/illustrations.png'
 import { mdiOfficeBuilding, mdiClockTimeEightOutline   } from '@mdi/js';
 import Icon from '@mdi/react';
-import SyntheseMode from "@Components/Enquete-onglets/Synthese-mode"
+import SyntheseMode from "@/_components/Enquete-onglets/Satisfaction/Synthese-mode"
 
 export default function Organisation () {
     return (
