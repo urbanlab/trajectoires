@@ -3,38 +3,43 @@ import {useState} from 'react'
 import {Typography} from 'antd'
 import Button from '@Components/Button'
 import ModuleCompletion from '@Components/ModuleCompletion'
-import Icon from '@mdi/react';
-import { mdiChevronLeft, mdiFileExcel } from '@mdi/js';
-import Content from '@/content.json'
-import DropZone from '@/_components/Infos-Salaries/DropZone'
-import BoardInfos from '@/_components/Infos-Salaries/BoardInfos'
-import BoardSuccess from '@/_components/Infos-Salaries/BoardSuccess'
+import Onglet from '@Components/fiche-entreprise/Onglets'
+import FormGeneraux from '@Components/fiche-entreprise/formGeneraux'
 
-import {Board} from '@/_components/Infos-Salaries/board'
-import {SendEmployeesToGrist} from '@Domains/employees/api'
-
+import { mdiChevronLeft,  mdiChevronRight} from '@mdi/js';
 import { useNavigate } from 'react-router-dom';
 
 export default function FicheEntreprise () {
     const navigate = useNavigate()
+    const [activeTab, setActiveTab] = useState(1)
 
     return(
         <div className="flex flex-col gap-10">
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between  w-full">
                 <div className="flex flex-col gap-8">
                     <Typography.Title className=''>Etapes 1 : Fiche entreprise</Typography.Title>
                     <div className =" flex gap-5">
                         <Button iconPath={mdiChevronLeft} title="Retour à l'acceuil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
-                        <Button iconPath={mdiChevronLeft} title ="Étape 2 : Informations salariés" bgColor="white" onPress={()=> navigate('/informations-salaries')}/>
+                        <Button iconPath={mdiChevronRight} iconRight={true} title ="Étape 2 : Informations salariés" bgColor="white" onPress={()=> navigate('/informations-salaries')}/>
                     </div>
                 </div>
                 <div className=' min-w-[40%]'>
                     <ModuleCompletion></ModuleCompletion>
                 </div>
             </div>
-            <div className="flex gap-5">
-                <div></div>
-                <div className="flex-1"></div>
+            <div className="flex gap-10">
+                <div className="flex flex-col gap-1 w-[300px]">
+                    <Onglet title="Renseignements généraux" index={1} percentage={60} setIndex={setActiveTab} activeTab={activeTab}/>
+                    <Onglet title="Infrastructure" index={2} percentage={100} setIndex={setActiveTab} activeTab={activeTab}/>
+                    <Onglet title="Véhicules" index={3} percentage={60} setIndex={setActiveTab} activeTab={activeTab}/>
+                    <Onglet title="Incitation et accompagnement" index={4} percentage={60} setIndex={setActiveTab} activeTab={activeTab}/>
+                </div>
+                <div className="flex-1">
+                    {activeTab === 1 ?
+                    <FormGeneraux/>
+                :
+                null}
+                </div>
             </div>
         </div>
     )
