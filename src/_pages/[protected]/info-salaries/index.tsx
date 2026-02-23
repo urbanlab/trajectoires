@@ -5,11 +5,11 @@ import ModuleCompletion from '@Components/ModuleCompletion'
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiFileExcel } from '@mdi/js';
 import Content from '@/content.json'
-import DropZone from '@Components/DropZone'
-import BoardInfos from '@Components/BoardInfos'
-import BoardSuccess from '@Components/BoardSuccess'
+import DropZone from '@/_components/Infos-Salaries/DropZone'
+import BoardInfos from '@/_components/Infos-Salaries/BoardInfos'
+import BoardSuccess from '@/_components/Infos-Salaries/BoardSuccess'
 
-import {Board} from '@Components/board'
+import {Board} from '@/_components/Infos-Salaries/board'
 import {SendEmployeesToGrist} from '@Domains/employees/api'
 
 import { useNavigate } from 'react-router-dom';
