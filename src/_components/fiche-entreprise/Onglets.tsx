@@ -7,7 +7,7 @@ interface OngletProps {
     index: number,
     setIndex: (index: number) => void,
     activeTab: number,
-    percentage: number
+    percentage?: number
 }
 
 export default function Onglet ({title, index, setIndex, activeTab, percentage}: OngletProps) {
@@ -19,7 +19,7 @@ export default function Onglet ({title, index, setIndex, activeTab, percentage}:
             {percentage === 100 ? 
             <Icon path={mdiCheckCircleOutline} color="var(--green)" size={1}/>
             :
-            <p className={`${rateColor} font-bold`}>{percentage}%</p>}
+            <p className={`${rateColor} font-bold`}>{percentage ? `${percentage}%` : ""}</p>}
         </button>
     )
 }

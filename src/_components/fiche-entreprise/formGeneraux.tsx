@@ -1,9 +1,12 @@
 import { Form, Input, Radio} from "antd"
+import  Button from '@Components/Button'
+import { mdiCheckCircleOutline} from '@mdi/js';
+
 
 export default function FormGeneraux () {
 
     return (
-        <div className="bg-(--light-grey) p-5">
+        <div className="bg-(--light-grey) flex flex-col p-5">
             <Form layout="vertical">
                 <Form.Item
                     label={"Nom de l'établissement"}
@@ -88,7 +91,6 @@ export default function FormGeneraux () {
                                 >
                                 <Input />
                             </Form.Item>
-
                         </div>
                         <div className="flex-1">
                             <Form.Item
@@ -131,19 +133,25 @@ export default function FormGeneraux () {
                     >
                     <Input />
                 </Form.Item>
-                    <Form.Item>
-                        <Radio.Group optionType="" buttonStyle="solid">
-                <div className="flex flex-col">
-                            <Radio value="Horaires fixes">Sur une plage horaire fixe, quasiment toujours les mêmes horaires</Radio>
-                            <Radio value="Horaires flexibles">Sur des horaires de bureaux flexibles : entre 8 h et 20 h</Radio>
-                            <Radio value="Horaires décalés">Sur des plages horaires en décalé (ex : début à 5 h ou fin à 21 h)</Radio>
-                            <Radio value="3/8 ou 2/8">Sur des plages horaires en décalé (ex : début à 5 h ou fin à 21 h)</Radio>
-                            
-                        
-                </div>
+                    <Form.Item
+                        label={"Rythme de travail"}
+                        name="Horaires_Travail"
+                        rules={[
+                        { required: true, message: "Veuillez renseigner un rythme de travail." },
+                    ]}>
+                        <Radio.Group  buttonStyle="solid">
+                            <div className="flex flex-col">
+                                <Radio value="Horaires fixes">Sur une plage horaire fixe, quasiment toujours les mêmes horaires</Radio>
+                                <Radio value="Horaires flexibles">Sur des horaires de bureaux flexibles : entre 8 h et 20 h</Radio>
+                                <Radio value="Horaires décalés">Sur des plages horaires en décalé (ex : début à 5 h ou fin à 21 h)</Radio>
+                                <Radio value="3/8 ou 2/8">Travail en cycles (2/8, 3/8)</Radio>
+                            </div>
                         </Radio.Group>
                     </Form.Item>
-
+                    <div className="flex justify-end gap-2">
+                        <Button title="Annuler" bgColor={"white"}/>
+                        <Button iconPath={mdiCheckCircleOutline} title="Sauvagarder" bgColor={"blue"}/>
+                    </div>
             </Form>
         </div>
     )

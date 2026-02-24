@@ -26,7 +26,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function login(email: string, password: string): Promise<boolean> {
     try {
-      console.log('on est là ?')
+      
       const found = await loginUser(email, password);
       setUser(found);
       localStorage.setItem('user', JSON.stringify(found));

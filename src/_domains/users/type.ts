@@ -6,12 +6,12 @@ export enum UserRole {
 export type UserData = {
   id: number;
   fields: {
-    Firstname: string;
-    Lastname: string;
+    Prenom: string;
+    Nom: string;
     Email: string;
     Role: UserRole;
     Password: string;
     ref_company: number;
-    ref_company_Name : string
+    ref_company_Nom : string
   };
 };

@@ -1,7 +1,9 @@
 export type CompanyData = {
   id: number;
   fields: {
-    Name: string;
-    City: string;
+    Nom: string;
+    Siret: string;
+    Code_APE: string;
+    
   };
 };

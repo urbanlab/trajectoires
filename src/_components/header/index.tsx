@@ -27,7 +27,7 @@ export function Header() {
       {user && (
         <div className="flex py-4 gap-5  items-center">
           <div className="rounded-full lg:bg-(--dark-grey) bg-white px-3 py-1 flex gap-3 items-center">
-            <Typography.Text style={{fontSize:15}} className='lg:block hidden font-medium'>{`${user.fields.Firstname} ${user.fields.Lastname.toUpperCase()}`}{' '}<Typography.Text  style={{color: token.colorPrimary, fontSize:15 }}>-{' '}{user.fields.ref_company_Name}</Typography.Text></Typography.Text>
+            <Typography.Text style={{fontSize:15}} className='lg:block hidden font-medium'>{user.fields.Prenom}{' '}{user.fields.Nom}{' '}<Typography.Text  style={{color: token.colorPrimary, fontSize:15 }}>-{' '}{user.fields.ref_company_Nom}</Typography.Text></Typography.Text>
             <Icon path={mdiAccountCircleOutline} size={1}/>
           </div>
           <button onClick={onClick} className="cursor-pointer">
