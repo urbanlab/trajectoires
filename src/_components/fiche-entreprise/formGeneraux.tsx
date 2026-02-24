@@ -1,13 +1,22 @@
 import { Form, Input, Radio} from "antd"
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
+import {sendFormGenerauxToGrist} from '@Domains/companies/api'
+import {getFormGenerauxFromGrist} from '@Domains/companies/api'
+import {useState, useEffect} from 'react'
 
 
-export default function FormGeneraux () {
+export default function FormGeneraux ({companyId}: {companyId:number}) {
+    useEffect (() => {
+        getFormGenerauxFromGrist(companyId)
+    })
+    const onFinish = (values: any) => {
+        sendFormGenerauxToGrist(values, companyId)
+    }
 
     return (
         <div className="bg-(--light-grey) flex flex-col p-5">
-            <Form layout="vertical">
+            <Form layout="vertical" onFinish={onFinish}>
                 <Form.Item
                     label={"Nom de l'établissement"}
                     name="Nom"
@@ -39,16 +48,7 @@ export default function FormGeneraux () {
                     label={"Secteur d'activité"}
                     name="Secteur_activite"
                     rules={[
-                        { required: true, message: "Veuillez saisir le code APE de l'entreprise." },
-                    ]}
-                    >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label={"Secteur d'activité"}
-                    name="Secteur_activite"
-                    rules={[
-                        { required: true, message: "Veuillez renseigner le secteur d'activité de l'entreprise." },
+                        { required: true, message: "Veuillez saisir le secteur d'activité de l'entreprise." },
                     ]}
                     >
                     <Input />

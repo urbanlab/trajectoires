@@ -4,7 +4,7 @@ import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 
 
-export default function FormIncitation () {
+export default function FormIncitation ({companyId}: {companyId:number}) {
     const [Fdm, setFmd] = useState(false)
     const [covoit, setCovoit] = useState(false)
     const [enquete, setEnquete] = useState(false)

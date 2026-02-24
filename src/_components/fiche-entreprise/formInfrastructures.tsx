@@ -4,7 +4,7 @@ import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 
 
-export default function FormInfra () {
+export default function FormInfra ({companyId}: {companyId:number}) {
     const [yes, isYes] = useState(false)
 
     return (

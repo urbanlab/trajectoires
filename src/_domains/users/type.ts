@@ -11,7 +11,7 @@ export type UserData = {
     Email: string;
     Role: UserRole;
     Password: string;
-    ref_company: number;
+    ref_company_id: number;
     ref_company_Nom : string
   };
 };

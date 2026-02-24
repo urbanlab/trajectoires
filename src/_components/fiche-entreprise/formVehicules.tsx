@@ -2,7 +2,7 @@ import { Form, Input,} from "antd"
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 
-export default function FormVehicules () {
+export default function FormVehicules ({companyId}: {companyId:number}) {
     return (
         <div className="bg-(--light-grey) flex flex-col p-5">
             <Form layout="vertical" className="flex flex-col gap-5">

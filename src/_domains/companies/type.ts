@@ -4,6 +4,9 @@ export type CompanyData = {
     Nom: string;
     Siret: string;
     Code_APE: string;
+    Secteur_activite: string;
+    Adresse_site: string
     
+
   };
 };

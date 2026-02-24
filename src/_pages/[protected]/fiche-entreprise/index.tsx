@@ -9,12 +9,19 @@ import FormInfra from '@Components/fiche-entreprise/formInfrastructures'
 import FormVehicules from '@Components/fiche-entreprise/formVehicules'
 import FormIncitation from '@Components/fiche-entreprise/formIncitation'
 import FormContact from '@Components/fiche-entreprise/formContact'
+import { useAuth } from '@Hooks/auth';
 
 
 import { mdiChevronLeft,  mdiChevronRight} from '@mdi/js';
 import { useNavigate } from 'react-router-dom';
 
 export default function FicheEntreprise () {
+    const { user, logout } = useAuth();
+    if (!user) {
+        return null
+    }
+    const companyId = user.fields.ref_company_id
+
     const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState(1)
 
@@ -42,18 +49,18 @@ export default function FicheEntreprise () {
                 </div>
                 <div className="flex-1">
                     {activeTab === 1 ?
-                    <FormGeneraux/>
+                    <FormGeneraux companyId={companyId}/>
                     :
                     activeTab === 2 ? 
-                    <FormInfra/>
+                    <FormInfra companyId={companyId}/>
                     : activeTab === 3 ?
-                    <FormVehicules/>
+                    <FormVehicules companyId={companyId}/>
                     :
                     activeTab === 4 ?
-                    <FormIncitation/>
+                    <FormIncitation companyId={companyId}/>
                     :
                     activeTab === 5 ?
-                    <FormContact/>
+                    <FormContact companyId={companyId}/>
                     : null}
 
                 </div>
