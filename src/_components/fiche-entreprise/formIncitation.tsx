@@ -2,16 +2,23 @@ import { Form, Input, Radio, Switch} from "antd"
 import {useState} from 'react'
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
+import {sendToGrist} from '@Domains/companies/api'
 
 
 export default function FormIncitation ({companyId}: {companyId:number}) {
+    const [form] = Form.useForm()
     const [Fdm, setFmd] = useState(false)
     const [covoit, setCovoit] = useState(false)
     const [enquete, setEnquete] = useState(false)
 
+    const onFinish = (values: any) => {
+        sendToGrist(values, companyId)
+    }
+
+
     return (
         <div className="bg-(--light-grey) flex flex-col p-5">
-            <Form layout="vertical" className="flex flex-col gap-5">
+            <Form layout="vertical" className="flex flex-col gap-5" onFinish={onFinish} form={form}>
                 <div className="flex gap-5">
                     <div className="flex flex-col gap-5">
                         <p className="text-[1.2em]">FMD mis en place ? (Forfait mobilité douces)</p>

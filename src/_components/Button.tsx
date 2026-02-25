@@ -12,6 +12,7 @@ export interface ButtonProps {
     iconRight?: boolean
     isLoading? : boolean,
     disabled?: boolean
+    htmlType?: "button" | "submit" | "reset"
 
     
 }
@@ -25,7 +26,7 @@ const colorVariants: Record<AllowedColors, string> = {
     orange: 'bg-(--orange)'
   // ... ajoute les autres
 }
-export default function Button({iconPath, iconRight, title, bgColor, onPress, disabled, isLoading}: ButtonProps) {
+export default function Button({iconPath, iconRight, title, bgColor, onPress, disabled, isLoading, htmlType}: ButtonProps) {
 
     const isWhite = bgColor.includes('white')
     const isGrey = bgColor.includes('grey')
@@ -35,6 +36,7 @@ export default function Button({iconPath, iconRight, title, bgColor, onPress, di
 
     return (
         <button
+        type={htmlType}
         disabled={disabled}
         className={`flex ${iconRight ? "flex-row-reverse" : ""} cursor-pointer px-4 py-3 text-[2em] rounded-lg items-center justify-center flex-row gap-2 ${disabled ? " pointer-events-none border-none bg-(--disabled-grey)" : colorButton} ` }
         onClick={onPress}>

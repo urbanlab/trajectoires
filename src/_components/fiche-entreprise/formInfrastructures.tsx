@@ -2,14 +2,20 @@ import { Form, Input, Radio, Switch} from "antd"
 import {useState} from 'react'
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
+import {sendToGrist} from '@Domains/companies/api'
 
 
 export default function FormInfra ({companyId}: {companyId:number}) {
+    const [form] = Form.useForm()
     const [yes, isYes] = useState(false)
+    const onFinish = (values: any) => {
+        sendToGrist(values, companyId)
+    }
+
 
     return (
         <div className="bg-(--light-grey) flex flex-col p-5">
-            <Form layout="vertical" className="flex flex-col gap-5">
+            <Form layout="vertical" className="flex flex-col gap-5" onFinish={onFinish} form={form}>
                 <div className=" bg-(--select-grey) flex flex-col gap-5 p-5">
                     <p className="text-[1.2em]">Nombre de places de stationnement voiture</p>
                     <Form.Item

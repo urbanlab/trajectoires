@@ -1,22 +1,34 @@
 import { Form, Input, Radio} from "antd"
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
-import {sendFormGenerauxToGrist} from '@Domains/companies/api'
+import {sendToGrist} from '@Domains/companies/api'
 import {getFormGenerauxFromGrist} from '@Domains/companies/api'
 import {useState, useEffect} from 'react'
 
 
 export default function FormGeneraux ({companyId}: {companyId:number}) {
+    const [form] = Form.useForm()
+
     useEffect (() => {
-        getFormGenerauxFromGrist(companyId)
-    })
+        const loadData = async () => {
+        const data = await getFormGenerauxFromGrist(companyId)
+        console.log("donnée", data.records[0].fields)
+        const formattedData = data.records[0].fields
+        
+        form.setFieldsValue(formattedData)
+        }
+        loadData()
+        
+    }, [form])
+
+
     const onFinish = (values: any) => {
-        sendFormGenerauxToGrist(values, companyId)
+        sendToGrist(values, companyId)
     }
 
     return (
         <div className="bg-(--light-grey) flex flex-col p-5">
-            <Form layout="vertical" onFinish={onFinish}>
+            <Form layout="vertical" onFinish={onFinish} form={form}>
                 <Form.Item
                     label={"Nom de l'établissement"}
                     name="Nom"
@@ -58,8 +70,8 @@ export default function FormGeneraux ({companyId}: {companyId:number}) {
                     <div className="flex gap-5">
                         <div className="flex-1">
                             <Form.Item
-                                label={"Numéro"}
-                                name="streetNumero"
+                                label={"Numéro de voie"}
+                                name="Numero_voie"
                                 rules={[
                                     { required: true, message: "Veuillez renseigner le numéro de voie." },
                                 ]}
@@ -70,8 +82,8 @@ export default function FormGeneraux ({companyId}: {companyId:number}) {
                         </div>
                         <div className="flex-1">
                             <Form.Item
-                                label={"Voie"}
-                                name="streetName"
+                                label={"Nom de voie"}
+                                name="Nom_voie"
                                 rules={[
                                     { required: true, message: "Veuillez renseigner le nom de la voie." },
                                 ]}
@@ -84,7 +96,7 @@ export default function FormGeneraux ({companyId}: {companyId:number}) {
                         <div className="flex-1">
                             <Form.Item
                                 label={"Code postal"}
-                                name="ZipCode"
+                                name="Code_Postal"
                                 rules={[
                                     { required: true, message: "Veuillez saisir le code postal." },
                                 ]}
@@ -95,7 +107,7 @@ export default function FormGeneraux ({companyId}: {companyId:number}) {
                         <div className="flex-1">
                             <Form.Item
                                 label={"Commune"}
-                                name="District"
+                                name="Commune"
                                 rules={[
                                     { required: true, message: "Veuillez renseigner le nom de la commune." },
                                 ]}
@@ -106,6 +118,7 @@ export default function FormGeneraux ({companyId}: {companyId:number}) {
                     </div>
 
                 </div>
+                
                 <Form.Item
                     label={"Nombre de salariés rattachés au site"}
                     name="Nb_salaries"
@@ -149,8 +162,8 @@ export default function FormGeneraux ({companyId}: {companyId:number}) {
                         </Radio.Group>
                     </Form.Item>
                     <div className="flex justify-end gap-2">
-                        <Button title="Annuler" bgColor={"white"}/>
-                        <Button iconPath={mdiCheckCircleOutline} title="Sauvagarder" bgColor={"blue"}/>
+                        <Button title="Annuler" bgColor={"white"} />
+                        <Button iconPath={mdiCheckCircleOutline} title="Sauvagarder" bgColor={"blue"} htmlType={"submit"}/>
                     </div>
             </Form>
         </div>

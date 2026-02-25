@@ -18,19 +18,22 @@ export  async function getFormGenerauxFromGrist (companyId: number) {
     }
 
     const data = await response.json();
-    console.log('data', data)
-
+    return data
   } catch (error) {
 
   }
 
 }
 
-export  async function sendFormGenerauxToGrist (values: any, companyId: number) {
+export  async function sendToGrist (values: any, companyId: number) {
+  const data = {...values}
 
-  const address = `${values.streetNumero} ${values.streetName}, ${values.ZipCode} ${values.District} `
-  const {streetNumero, streetName, ZipCode, District, ...trimmedData} = values 
-  trimmedData.Adresse_site = address
+  if (values.Numero_voie) {
+    const address = `${values.Numero_voie} ${values.Nom_voie}, ${values.Code_Postal} ${values.Commune} `
+    data.Adresse_site = address
+
+  }
+  
 
 
   try {
@@ -42,7 +45,7 @@ export  async function sendFormGenerauxToGrist (values: any, companyId: number) 
         body: JSON.stringify({
             "records":[
                 { "id": companyId,
-                  "fields": trimmedData
+                  "fields": data
                 }
             ],
             "onMany": "all", 

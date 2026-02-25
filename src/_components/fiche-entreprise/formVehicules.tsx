@@ -1,11 +1,17 @@
 import { Form, Input,} from "antd"
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
+import {sendToGrist} from '@Domains/companies/api'
 
 export default function FormVehicules ({companyId}: {companyId:number}) {
+    const [form] = Form.useForm()
+    const onFinish = (values: any) => {
+        sendToGrist(values, companyId)
+    }
+
     return (
         <div className="bg-(--light-grey) flex flex-col p-5">
-            <Form layout="vertical" className="flex flex-col gap-5">
+            <Form layout="vertical" className="flex flex-col gap-5" onFinish={onFinish} form={form}>
                 <div className="bg-(--select-grey) flex flex-col p-5" >
                     <p className="text-[1.2em]">Nombre de poids lourds en fonction du Crit’Air</p>
                     <Form.Item
