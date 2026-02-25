@@ -2,9 +2,19 @@ import { Form, Input,} from "antd"
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 import {sendToGrist} from '@Domains/companies/api'
+import {useEffect} from 'react'
+import {CompanyData} from '@Domains/companies/type'
 
-export default function FormVehicules ({companyId}: {companyId:number}) {
+
+export default function FormVehicules ({companyId, data}: {companyId:number, data?: CompanyData}) {
     const [form] = Form.useForm()
+
+    const FormData = data?.fields
+
+    useEffect (() => {
+        form.setFieldsValue(FormData)
+    }, [data])
+
     const onFinish = (values: any) => {
         sendToGrist(values, companyId)
     }

@@ -1,6 +1,6 @@
 import { CompanyData } from './type';
 
-export  async function getFormGenerauxFromGrist (companyId: number) {
+export  async function getFromGrist (companyId: number) {
   const filter = {"id":[companyId]}
   const encryptedFilter = encodeURIComponent(JSON.stringify(filter));
 

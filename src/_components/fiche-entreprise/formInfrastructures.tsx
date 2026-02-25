@@ -1,13 +1,30 @@
 import { Form, Input, Radio, Switch} from "antd"
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 import {sendToGrist} from '@Domains/companies/api'
+import {CompanyData} from '@Domains/companies/type'
 
-
-export default function FormInfra ({companyId}: {companyId:number}) {
+export default function FormInfra ({companyId, data}: {companyId:number, data?: CompanyData}) {
     const [form] = Form.useForm()
-    const [yes, isYes] = useState(false)
+    const placeRecharge = Form.useWatch('Places_velo_recharge', form)
+
+    const FormData = data?.fields
+    useEffect (() => {
+        form.setFieldsValue(FormData)
+    }, [data])
+
+    useEffect(() => {
+    if (placeRecharge === false) {
+        form.setFieldValue("Nb_Velo_recharge", 0);
+    }
+}, [placeRecharge, form]);
+
+
+    useEffect(() => {
+
+    })
+
     const onFinish = (values: any) => {
         sendToGrist(values, companyId)
     }
@@ -76,16 +93,13 @@ export default function FormInfra ({companyId}: {companyId:number}) {
                         <Input />
                     </Form.Item>
                     <div className="flex gap-5 items-center">
-
-                        <div className="flex-1 flex flex-col gap-5">
-                            <p className="text-[1.2em]">Certaines des places sont équipées de prise pour recharger une batterie ? </p>
-                            <div className="flex-1 flex gap-2">
-                                <Switch
-                                onChange={() => isYes(!yes)}/>
-                                <p>{yes ? "Oui" : "Non"}</p>
-                            </div>
-                        </div>
-                        <div className="flex-1">
+                        <Form.Item
+                        label={"Certaines des places sont équipées de prise pour recharger une batterie ?"}
+                        name={"Places_velo_recharge"}
+                        valuePropName="checked">
+                            <Switch/>
+                        </Form.Item>
+                        <div className="flex-1/2">
                         <Form.Item
                         label={"Nombre de places avec prises disponibles"}
                         name="Nb_Velo_recharge"
@@ -93,7 +107,7 @@ export default function FormInfra ({companyId}: {companyId:number}) {
                             { required: true, message: "Veuillez saisir le nombre de place avec prise disponibles." },
                         ]}
                         >
-                        <Input />
+                        <Input/>
                     </Form.Item>
                         </div>
                     </div>    

@@ -2,24 +2,18 @@ import { Form, Input, Radio} from "antd"
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 import {sendToGrist} from '@Domains/companies/api'
-import {getFormGenerauxFromGrist} from '@Domains/companies/api'
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
+import {CompanyData} from '@Domains/companies/type'
 
 
-export default function FormGeneraux ({companyId}: {companyId:number}) {
+export default function FormGeneraux ({companyId, data}: {companyId:number, data?:CompanyData}) {
     const [form] = Form.useForm()
 
+    const FormData = data?.fields
+
     useEffect (() => {
-        const loadData = async () => {
-        const data = await getFormGenerauxFromGrist(companyId)
-        console.log("donnée", data.records[0].fields)
-        const formattedData = data.records[0].fields
-        
-        form.setFieldsValue(formattedData)
-        }
-        loadData()
-        
-    }, [form])
+        form.setFieldsValue(FormData)
+    }, [data])
 
 
     const onFinish = (values: any) => {

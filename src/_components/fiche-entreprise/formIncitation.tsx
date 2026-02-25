@@ -1,15 +1,36 @@
 import { Form, Input, Radio, Switch} from "antd"
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 import {sendToGrist} from '@Domains/companies/api'
+import {CompanyData} from '@Domains/companies/type'
 
 
-export default function FormIncitation ({companyId}: {companyId:number}) {
+
+export default function FormIncitation ({companyId, data}: {companyId:number, data?: CompanyData}) {
     const [form] = Form.useForm()
-    const [Fdm, setFmd] = useState(false)
-    const [covoit, setCovoit] = useState(false)
-    const [enquete, setEnquete] = useState(false)
+
+    const FmdYes = Form.useWatch('FMD', form)
+    const MER =Form.useWatch('Outil_MER_covoit', form)
+    const Enquete = Form.useWatch ('Deja_fait_enquete_mob0', form)
+    const FormData = data?.fields
+
+    useEffect (() => {
+        form.setFieldsValue(FormData)
+    }, [data])
+
+    useEffect (() => {
+        if (FmdYes === false) {
+            form.setFieldValue('Nb_pers_FMD', 0)
+        }
+        if (MER === false) {
+            form.setFieldValue('Quelle_application_covoit', null)
+        }
+
+        if (Enquete === false) {
+            form.setFieldValue('Annee_enquete_mob', null)
+        }
+    }, [FmdYes, Enquete, MER, form])
 
     const onFinish = (values: any) => {
         sendToGrist(values, companyId)
@@ -21,21 +42,23 @@ export default function FormIncitation ({companyId}: {companyId:number}) {
             <Form layout="vertical" className="flex flex-col gap-5" onFinish={onFinish} form={form}>
                 <div className="flex gap-5">
                     <div className="flex flex-col gap-5">
-                        <p className="text-[1.2em]">FMD mis en place ? (Forfait mobilité douces)</p>
                         <div className="flex gap-5" >
-                            <Switch
-                            onChange={() => setFmd(!Fdm)}/>
-                            <p>{Fdm ? "Oui": "Non"}</p>
+                            <Form.Item
+                            label ={"FMD mis en place ? (Forfait mobilité douces)"}
+                            name={"FMD"}
+                            valuePropName="checked">
+                                <Switch/>
+                            </Form.Item>
                         </div>
                     </div>
                     <Form.Item
                         label={"Nombre de personne l’ayant demandé"}
-                        name="Nb_Velo_recharge"
+                        name="Nb_pers_FMD"
                         rules={[
                             { required: true, message: "Veuillez saisir le nombre de place avec prise disponibles." },
                         ]}
                         >
-                        <Input />
+                        <Input disabled={!FmdYes}/>
                     </Form.Item>
 
                 </div>
@@ -70,18 +93,18 @@ export default function FormIncitation ({companyId}: {companyId:number}) {
                     </Form.Item>
                 </div>
                 <div className="flex gap-5">
-                    <div className="flex flex-col gap-5 flex-1">
-                        <p className="text-[1.2em]">Mise à disposition d'un outil de mise en relation pour le covoiturage ?</p>
-                        <div className="flex gap-5" >
-                            <div className="flex gap-5 ">
-                                <Switch
-                                onChange={() => setCovoit(!covoit)}/>
-                                <p>{covoit ? "Oui": "Non"}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <Form.Item className="flex-1">
-                        <Radio.Group  buttonStyle="solid" >
+                    <Form.Item
+                        className="flex-1"
+                        label={"Mise à disposition d'un outil de mise en relation pour le covoiturage ?"}
+                        name={"Outil_MER_covoit"}
+                        valuePropName="checked">
+                        <Switch/>
+                    </Form.Item>
+                    <Form.Item className="flex-1"
+                    label={"Via quelle application ?"}
+                    name={"Quelle_application_covoit"}
+                    >
+                        <Radio.Group  buttonStyle="solid" disabled={!MER} >
                             <div className="flex flex-col">
                                 <Radio value="Aros">En covoit Rendez-vous (Aros)</Radio>
                                 <Radio value="Blablacar">Blablacar Daily</Radio>
@@ -92,24 +115,23 @@ export default function FormIncitation ({companyId}: {companyId:number}) {
 
                 </div>
                 <div className="flex gap-5">
-                    <div className="flex flex-col gap-5 flex-1">
-                        <p className="text-[1.2em]">Avez-vous déjà organisé une enquête mobilité ?</p>
-                        <div className="flex gap-5" >
-                            <div className="flex gap-5 ">
-                                <Switch
-                                onChange={() => setEnquete(!enquete)}/>
-                                <p>{enquete ? "Oui": "Non"}</p>
-                            </div>
-                        </div>
-                    </div>
+
                     <Form.Item
+                    className="flex-1"
+                    label={"Avez-vous déjà organisé une enquête mobilité ?"}
+                    name={"Deja_fait_enquete_mob"}
+                    valuePropName="checked">
+                        <Switch/>
+                    </Form.Item>
+                    <Form.Item
+                        className="flex-1"
                         label={"En quelle année ?"}
                         name="Annee_enquete_mob"
                         rules={[
                             { required: true, message: "Veuillez saisir un valeure." },
                         ]}
                         >
-                        <Input />
+                        <Input disabled={!Enquete}/>
                     </Form.Item>
 
                 </div>
