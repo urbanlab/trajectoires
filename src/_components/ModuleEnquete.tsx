@@ -3,12 +3,12 @@ import { mdiChevronRight } from '@mdi/js';
 
 
 interface Module {
-    blocked?: boolean
+    unlocked?: boolean
 }
 
-export default function ModuleEnquete ({blocked}: Module) {
+export default function ModuleEnquete ({unlocked}: Module) {
     
-        if (blocked === true){
+        if (!unlocked){
         return (
             <div className="bg-white rounded-2xl w-full flex gap-2 p-5 items-center ">
                 <Icon path={mdiChevronRight} color="var(--blue)" size={2}></Icon>

@@ -162,7 +162,7 @@ export default function FormGeneraux ({companyId, data, onSave}: {companyId:numb
                         </Radio.Group>
                     </Form.Item>
                     <div className="flex justify-end gap-2">
-                        <Button title="Annuler" bgColor={"white"} />
+                        <Button title="Annuler" bgColor={"whiteBlue"} />
                         <Button iconPath={mdiCheckCircleOutline} title="Sauvagarder" bgColor={"blue"} htmlType={"submit"}/>
                     </div>
             </Form>
