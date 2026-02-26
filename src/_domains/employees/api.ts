@@ -8,7 +8,7 @@ interface EmployeeProps {
 
 
 export async function getEmployeesFromGrist (companyId: number) {
-    const filter = {"ref_companies_id":[companyId]}
+    const filter = {"ref_company_id":[companyId]}
     const encryptedFilter = encodeURIComponent(JSON.stringify(filter));
     const response = await fetch(`/api/grist/tables/Employees/records?filter=${encryptedFilter}`)
     const data = await response.json()
@@ -39,7 +39,7 @@ export async function SendEmployeesToGrist({rows, companyId}: {rows:string[][], 
             fields: {
                 "email": row[0],
                 "postal_address": postalAddress,
-                "ref_companies_id": companyId
+                "ref_company_id": companyId
             }
         };
     });

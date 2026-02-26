@@ -1,7 +1,7 @@
 import Button from "@/_components/Button";
-import {Typography} from 'antd'
+import {Typography, message} from 'antd'
 import Icon from '@mdi/react';
-import { mdiChevronLeft, mdiPlayCircle , mdiLockOutline,  mdiInformationVariantCircleOutline, mdiAlert, mdiMessageOutline, mdiThumbDownOutline  } from '@mdi/js';
+import { mdiFileDocumentEditOutline , mdiChevronLeft, mdiPlayCircle , mdiLockOutline,  mdiInformationVariantCircleOutline, mdiAlert, mdiMessageOutline, mdiThumbDownOutline  } from '@mdi/js';
 import { useNavigate } from 'react-router-dom';
 
 interface EnqueteProps {
@@ -9,21 +9,48 @@ interface EnqueteProps {
 }
 
 export default function EnqueteDemaree({updateState}: EnqueteProps) {
-
     const navigate = useNavigate()
+    const handleCopy = async () => {
+    const urlToCopy = "https://form.typeform.com/to/LpHZ9JDv#organisationid=xxxxx";
+    
+    try {
+        await navigator.clipboard.writeText(urlToCopy);
+        message.success("Lien copié dans le presse-papier !");
+    } catch (err) {
+        message.error("Impossible de copier le lien");
+    }
+    };
+
     return (
         <div className="flex flex-col gap-5">
 
         <div className="flex justify-between w-full max-h-[120px] "> 
             <div className="flex flex-col gap-2">
                 <Typography.Title className=''>Etapes 3 : Enquête</Typography.Title>
-                <div>
+                <div className="flex">
                     <Button iconPath={mdiChevronLeft} title="Retour à l'acceuil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
                 </div>
             </div>
             <div className='flex  gap-1 py-5 '>
                 <button className="flex flex-col justify-center bg-(--red) p-4 gap-2 items-center rounded-sm w-[50%]"><Icon path={mdiPlayCircle} color={"white"} size={1.5}/><p className="text-[1.3em] text-white font-medium">Participation</p></button>
                 <button className="flex flex-col justify-center bg-(--dark-grey) p-4 gap-2 items-center rounded-sm  w-[50%]"><Icon path={mdiLockOutline} color={"black"} size={1.5}/><p className="text-[1.3em] font-medium">Résultats</p></button>
+            </div>
+        </div>
+        <div className="flex lg:flex-row md:flex-row flex-col bg-(--light-grey) p-8 rounded-2xl items-center justify-between gap-10">
+            <div className="flex ">
+                    <div className="gap-10 flex items-center">
+                        <Icon path={mdiFileDocumentEditOutline} color="var(--blue)" size={3} className="min-w-[50px]"/>
+                        <div className ="flex flex-col gap-3">
+                            <Typography.Title level={4}>Informez vos salariés</Typography.Title>
+                            <div className="flex flex-col gap-2">
+                                <p className="text-[1.3em] text-wrap">Transmettez le lien ci-dessous à vos salariés pour les inviter à répondre à l’enquête :</p>
+                                <p className="text-[1.5em] text-(--blue)" >https://form.typeform.com/to/LpHZ9JDv#organisationid=xxxxx</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div className="">
+                <Button title="Copier le lien" bgColor="red" onPress={() => handleCopy()}></Button>
             </div>
         </div>
         <div className="flex flex-wrap gap-4">
@@ -43,7 +70,6 @@ export default function EnqueteDemaree({updateState}: EnqueteProps) {
                     <div className="flex justify-center">
                         <div className="flex flex-col gap-4">
                             <Button title="Clôturer l'enquête" bgColor="red"/>
-                            <Button title="Relancer les salariés" bgColor="red"/>
                         </div>
                     </div>
                 </div>

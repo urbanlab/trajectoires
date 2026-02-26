@@ -20,7 +20,8 @@ export function PageMenu() {
     return 
   }
   const companyId = user.fields.ref_company_id
-  
+  const form = useForm((s) => s)
+  console.log("form", form)
   const getEmployeesCompletion = useForm((s) => s.getEmployeesCompletion)
   const getEntrepriseCompletion = useForm((s) => s.getEntrepriseCompletion)
   const StepOneFinished = (getEntrepriseCompletion() === 100)
