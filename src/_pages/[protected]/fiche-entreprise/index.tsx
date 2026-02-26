@@ -11,38 +11,33 @@ import FormIncitation from '@Components/fiche-entreprise/formIncitation'
 import FormContact from '@Components/fiche-entreprise/formContact'
 import { useAuth } from '@Hooks/auth';
 import {CompanyData} from '@Domains/companies/type'
-
 import {getFromGrist} from '@Domains/companies/api'
 import {useForm} from '@/stores/form'
-
-
 import { mdiChevronLeft,  mdiChevronRight} from '@mdi/js';
 import { useNavigate } from 'react-router-dom';
 
 export default function FicheEntreprise () {
+    const StoreForm = useForm((s) => s)
+    const completion = useForm((s)=> s.getCompletion)
+    const EntrepriseCompletion = useForm((s) =>s.getEntrepriseCompletion )
     const navigate = useNavigate()
     const { user, logout } = useAuth();
+    const [activeTab, setActiveTab] = useState(1)
     if (!user) {
         return null
     }
-
-    const [activeTab, setActiveTab] = useState(1)
-    const [formData, setFormData] = useState<CompanyData | undefined>(undefined)
-
-
+    const companyId = user.fields.ref_company_id
+    
     useEffect(() => {
         const loadData = async () => {
         const data = await getFromGrist(companyId)
-        console.log("donnée dans page entrerpsie", data.records[0])
-        const formattedData = data.records[0]
-        setFormData(formattedData)
+        const formatedData = data.records[0]
+        StoreForm.setForm(formatedData)
         }
         loadData()
     }, [])
 
-
-    
-    const companyId = user.fields.ref_company_id
+    const formatedData = StoreForm.form
 
     return(
         <div className="flex flex-col gap-10">
@@ -55,31 +50,31 @@ export default function FicheEntreprise () {
                     </div>
                 </div>
                 <div className=' min-w-[40%]'>
-                    <ModuleCompletion></ModuleCompletion>
+                    <ModuleCompletion percentage={EntrepriseCompletion()}></ModuleCompletion>
                 </div>
             </div>
             <div className="flex gap-10">
-                <div className="flex flex-col gap-1 w-[350px]">
-                    <Onglet title="Renseignements généraux" index={1} percentage={60} setIndex={setActiveTab} activeTab={activeTab}/>
+                <div className="flex flex-col gap-1 w-[350px] sticky top-20 h-fit">
+                    <Onglet title="Renseignements généraux" index={1} percentage={completion("generaux")} setIndex={setActiveTab} activeTab={activeTab}/>
                     <Onglet title= "Contacts associés" index={5}  setIndex={setActiveTab} activeTab={activeTab}/>
-                    <Onglet title="Infrastructure" index={2} percentage={100} setIndex={setActiveTab} activeTab={activeTab}/>
-                    <Onglet title="Véhicules" index={3} percentage={60} setIndex={setActiveTab} activeTab={activeTab}/>
-                    <Onglet title="Incitation et accompagnement" index={4} percentage={60} setIndex={setActiveTab} activeTab={activeTab}/>
+                    <Onglet title="Infrastructure" index={2} percentage={completion('infra')} setIndex={setActiveTab} activeTab={activeTab}/>
+                    <Onglet title="Véhicules" index={3} percentage={completion('vehicules')} setIndex={setActiveTab} activeTab={activeTab}/>
+                    <Onglet title="Incitation et accompagnement" index={4} percentage={completion("incitation")} setIndex={setActiveTab} activeTab={activeTab}/>
                 </div>
                 <div className="flex-1">
                     {activeTab === 1 ?
-                    <FormGeneraux companyId={companyId} data={formData}/>
+                    <FormGeneraux companyId={companyId} data={formatedData}/>
                     :
                     activeTab === 2 ? 
-                    <FormInfra companyId={companyId} data={formData}/>
+                    <FormInfra companyId={companyId} data={formatedData}/>
                     : activeTab === 3 ?
-                    <FormVehicules companyId={companyId} data={formData}/>
+                    <FormVehicules companyId={companyId} data={formatedData}/>
                     :
                     activeTab === 4 ?
-                    <FormIncitation companyId={companyId} data={formData}/>
+                    <FormIncitation companyId={companyId} data={formatedData}/>
                     :
                     activeTab === 5 ?
-                    <FormContact companyId={companyId} data={formData}/>
+                    <FormContact companyId={companyId} data={formatedData}/>
                     : null}
 
                 </div>

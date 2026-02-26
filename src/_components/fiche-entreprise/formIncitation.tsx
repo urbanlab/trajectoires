@@ -1,4 +1,4 @@
-import { Form, Input, Radio, Switch} from "antd"
+import { Form, Input, Radio, Switch, InputNumber} from "antd"
 import {useState, useEffect} from 'react'
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
@@ -12,7 +12,7 @@ export default function FormIncitation ({companyId, data}: {companyId:number, da
 
     const FmdYes = Form.useWatch('FMD', form)
     const MER =Form.useWatch('Outil_MER_covoit', form)
-    const Enquete = Form.useWatch ('Deja_fait_enquete_mob0', form)
+    const Enquete = Form.useWatch ('Deja_fait_enquete_mob', form)
     const FormData = data?.fields
 
     useEffect (() => {
@@ -30,6 +30,8 @@ export default function FormIncitation ({companyId, data}: {companyId:number, da
         if (Enquete === false) {
             form.setFieldValue('Annee_enquete_mob', null)
         }
+
+        
     }, [FmdYes, Enquete, MER, form])
 
     const onFinish = (values: any) => {
@@ -65,13 +67,14 @@ export default function FormIncitation ({companyId, data}: {companyId:number, da
                 <div className=" bg-(--select-grey) flex flex-col gap-5 p-5">
                     <p className="text-[1.2em]">Remboursement des transports en communs</p>
                         <Form.Item
+                        className="w-full"
                         label={"Pourcentage remboursement abonnement transports en commun mis en place :"}
                         name="Pourc_remb_transport"
                         rules={[
                             { required: true, message: "Veuillez saisir un valeure." },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width:"100%"}} suffix={"%"} />
                     </Form.Item>
                     <Form.Item
                         label={"Nombre d’abonnements remboursés"}
@@ -80,7 +83,7 @@ export default function FormIncitation ({companyId, data}: {companyId:number, da
                             { required: true, message: "Veuillez saisir un valeure." },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width:"100%"}} />
                     </Form.Item>
                     <Form.Item
                         label={"Montant total d’abonnement remboursé annuel"}
@@ -89,7 +92,7 @@ export default function FormIncitation ({companyId, data}: {companyId:number, da
                             { required: true, message: "Veuillez saisir un valeure." },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width:"100%"}} suffix={"€"} />
                     </Form.Item>
                 </div>
                 <div className="flex gap-5">
@@ -103,6 +106,9 @@ export default function FormIncitation ({companyId, data}: {companyId:number, da
                     <Form.Item className="flex-1"
                     label={"Via quelle application ?"}
                     name={"Quelle_application_covoit"}
+                    rules={[
+                            { required: MER, message: "Veuillez selectionner une application." },
+                        ]}
                     >
                         <Radio.Group  buttonStyle="solid" disabled={!MER} >
                             <div className="flex flex-col">
@@ -128,7 +134,7 @@ export default function FormIncitation ({companyId, data}: {companyId:number, da
                         label={"En quelle année ?"}
                         name="Annee_enquete_mob"
                         rules={[
-                            { required: true, message: "Veuillez saisir un valeure." },
+                            { required: Enquete, message: "Veuillez saisir un valeure." },
                         ]}
                         >
                         <Input disabled={!Enquete}/>

@@ -3,8 +3,13 @@ import {CardStep} from '@Components/cardStep'
 import content from '@/content.json'
 import { mdiLockOutline } from '@mdi/js';
 import ModuleCompletion from '@Components/ModuleCompletion'
+import ModuleEnquete from '@Components/ModuleEnquete'
 import Modale from '@Components/modale'
 import { useNavigate } from 'react-router-dom';
+import {useForm} from '@/stores/form'
+import { getFromGrist } from '@/_domains/companies/api';
+import { useAuth } from '@Hooks/auth';
+import {getEmployeesFromGrist} from '@Domains/employees/api'
 
 
 
@@ -12,8 +17,32 @@ import { useNavigate } from 'react-router-dom';
 
 
 export function PageMenu() {
-  const navigate = useNavigate();
+  const StoreForm = useForm((s) => s)
+  console.log("le store", StoreForm)
   const [open, setOpen] = useState(false)
+  const navigate = useNavigate();
+  const {user} = useAuth()
+  if (!user) {
+    return 
+  }
+  const companyId = user.fields.ref_company_id
+  
+  const getEmployeesCompletion = useForm((s) => s.getEmployeesCompletion)
+  const percentage = getEmployeesCompletion()
+  console.log("pourcentg", percentage)
+  const getEntrepriseCompletion = useForm((s) => s.getEntrepriseCompletion)
+
+    useEffect(() => {
+        const loadData = async () => {
+        const data = await getFromGrist(companyId)
+        const employees = await getEmployeesFromGrist(companyId)
+        const formattedData = data.records[0]
+        StoreForm.setForm(formattedData)
+        StoreForm.setEmployees(employees)
+        }
+        loadData()
+    }, [])
+  
 
   const onClose = () => {
     setOpen(false)
@@ -29,13 +58,13 @@ export function PageMenu() {
     <div className="">
       <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-15 ">
         <CardStep title="Étape 1" subtitle="Fiche entreprise" text={content.Step1.text} buttonConfig={{onPress:() => onClick('fiche-entreprise'), bgColor: "red", title:"Compléter"}} >
-          <ModuleCompletion></ModuleCompletion>
+          <ModuleCompletion percentage={getEntrepriseCompletion()}></ModuleCompletion>
         </CardStep>
         <CardStep title="Étape 2" subtitle="Informations salariés" text={content.Step2.text } buttonConfig={{onPress:() => onClick('informations-salaries'), bgColor: "red",  title:"Compléter"}} >
-          <ModuleCompletion></ModuleCompletion>
+          <ModuleCompletion percentage={getEmployeesCompletion()}></ModuleCompletion>
         </CardStep>
         <CardStep title="Étape 3" subtitle="Enquête" text={content.Step3.text} buttonConfig={{onPress:()=> onClick('url'), bgColor: "red", disabled: true, title:"Lancer l'enquête", iconPath: mdiLockOutline}}>
-          <ModuleCompletion blocked={true}/>
+          <ModuleEnquete blocked={true}/>
         </CardStep>
       
       </div>

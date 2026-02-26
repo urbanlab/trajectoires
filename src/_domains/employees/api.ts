@@ -6,7 +6,31 @@ interface EmployeeProps {
     postalAddress: string
 }
 
-export async function SendEmployeesToGrist(rows: string[][]) {
+
+export async function getEmployeesFromGrist (companyId: number) {
+    const filter = {"ref_companies_id":[companyId]}
+    const encryptedFilter = encodeURIComponent(JSON.stringify(filter));
+    const response = await fetch(`/api/grist/tables/Employees/records?filter=${encryptedFilter}`)
+    const data = await response.json()
+    
+    return data.records
+}
+
+export async function CancelEmployeesFromGrist ( ids:number[]) {
+    try {
+        const response = await fetch('/api/grist/tables/Employees/records/delete', {
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(ids)
+        })
+    } catch (error) {
+        throw new Error(`Erreur de connexion`);
+    }
+}
+
+export async function SendEmployeesToGrist({rows, companyId}: {rows:string[][], companyId:number}) {
     
 
     for (const [index, row] of rows.entries()) {
@@ -28,7 +52,8 @@ export async function SendEmployeesToGrist(rows: string[][]) {
                         {
                             "fields": {
                                 "email": employee.mail,
-                                "postal_address": employee.postalAddress
+                                "postal_address": employee.postalAddress,
+                                "ref_companies_id": companyId
                             }
                         }
                     ]

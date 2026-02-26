@@ -6,9 +6,11 @@ interface BoardProps {
 }
 
 export function Board({headers, rows}: BoardProps){
+    const nbrofColumns = headers.length
+    console.log(nbrofColumns)
     return (
         <>
-            <div className="grid grid-cols-6">
+            <div style={{ gridTemplateColumns: `repeat(${nbrofColumns}, minmax(0, 1fr))` }}className={`grid `}>
                 {headers.map((header, index) => (
                     <div key={index} className="bg-(--dark-grey) border-b border-black text-center p-2">
                         <p className="text-[1.3em]">{header}</p>

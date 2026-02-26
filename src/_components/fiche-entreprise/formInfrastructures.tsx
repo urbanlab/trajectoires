@@ -51,7 +51,7 @@ export default function FormInfra ({companyId, data}: {companyId:number, data?: 
                             { required: true, message: "Veuillez saisir le nombre de place équipée d'une borne éléctrique." },
                         ]}
                         >
-                        <Input />
+                        <Input/>
                     </Form.Item>
                     <Form.Item
                         label={"Places sans distinctions"}
@@ -107,7 +107,7 @@ export default function FormInfra ({companyId, data}: {companyId:number, data?: 
                             { required: true, message: "Veuillez saisir le nombre de place avec prise disponibles." },
                         ]}
                         >
-                        <Input/>
+                        <Input disabled={!placeRecharge}/>
                     </Form.Item>
                         </div>
                     </div>    

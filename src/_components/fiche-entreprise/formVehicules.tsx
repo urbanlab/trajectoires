@@ -1,4 +1,4 @@
-import { Form, Input,} from "antd"
+import { Form, InputNumber,} from "antd"
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 import {sendToGrist} from '@Domains/companies/api'
@@ -31,7 +31,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 0" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                     <Form.Item
                         label={"Crit’Air 1"}
@@ -40,7 +40,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 1" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                     <Form.Item
                         label={"Crit’Air 2"}
@@ -49,7 +49,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 2" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                     <Form.Item
                         label={"Crit’Air 3 et +"}
@@ -58,7 +58,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 3 et +" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                 </div>
                 <div className="bg-(--select-grey) flex flex-col p-5" >
@@ -70,7 +70,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de voitures de fonction crit'Air 0" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                     <Form.Item
                         label={"Crit’Air 1"}
@@ -79,7 +79,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de voitures de fonction crit'Air 1" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                     <Form.Item
                         label={"Crit’Air 2"}
@@ -88,7 +88,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de voitures de fonction crit'Air 2" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                     <Form.Item
                         label={"Crit’Air 3 et +"}
@@ -97,7 +97,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de voitures de fonction crit'Air 3 et +" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                 </div>
                 <div className="bg-(--select-grey) flex flex-col p-5" >
@@ -109,7 +109,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de voitures de service crit'Air 0" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                     <Form.Item
                         label={"Crit’Air 1"}
@@ -118,7 +118,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de voitures de service crit'Air 1" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                     <Form.Item
                         label={"Crit’Air 2"}
@@ -127,7 +127,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de voitures de service crit'Air 2" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                     <Form.Item
                         label={"Crit’Air 3 et +"}
@@ -136,7 +136,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                             { required: true, message: "Veuillez saisir le nombre de voitures de service crit'Air 3 et +" },
                         ]}
                         >
-                        <Input />
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                     </Form.Item>
                 </div>
                 <Form.Item
@@ -146,7 +146,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                         { required: true, message: "Veuillez saisir le nombre de vélo de service" },
                     ]}
                     >
-                    <Input />
+                    <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                 </Form.Item>
                 <Form.Item
                     label={"Nombre de vélo de fonction"}
@@ -155,7 +155,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                         { required: true, message: "Veuillez saisir le nombre de vélo de fonction" },
                     ]}
                     >
-                    <Input />
+                    <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                 </Form.Item>
                 <div className="flex justify-end gap-2">
                     <Button title="Annuler" bgColor={"white"}/>

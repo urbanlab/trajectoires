@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {Typography} from 'antd'
 import Button from '@Components/Button'
 import ModuleCompletion from '@Components/ModuleCompletion'
@@ -8,43 +8,95 @@ import Content from '@/content.json'
 import DropZone from '@/_components/Infos-Salaries/DropZone'
 import BoardInfos from '@/_components/Infos-Salaries/BoardInfos'
 import BoardSuccess from '@/_components/Infos-Salaries/BoardSuccess'
-
 import {Board} from '@/_components/Infos-Salaries/board'
 import {SendEmployeesToGrist} from '@Domains/employees/api'
-
 import { useNavigate } from 'react-router-dom';
+import {useForm} from '@/stores/form'
+import { getEmployeesFromGrist } from '@Domains/employees/api';
+import { CancelEmployeesFromGrist } from '@Domains/employees/api';
+import { useAuth } from '@Hooks/auth';
+
+interface GristEmployee {
+    id: number;
+    fields: {
+        email: string;
+        postal_address: string;
+        [key: string]: any;
+    };
+}
 
 
 export function InfoSalaries(){
+    const {user} = useAuth()
+    if (!user) {
+        return
+    }
+    const companyId = user.fields.ref_company_id
     const content = Content.Salaries.download
     const navigate = useNavigate();
     const [headers, setHeaders] = useState<any[]>([])
     const [rows, setRows] = useState<any[][]>([])
     const [error, setError] = useState<string | null>(null)
     const [saved, setSaved] = useState(false)
+    const [ids, setIds] = useState<number[]>([])
+    const getForm = useForm((s) => s)
+    const setEmployees = useForm((s) => s.setEmployees)
+    const Employees = getForm.employees
+    const getEmployeesCompletion = useForm((s) => s.getEmployeesCompletion)
     
+    const percentage = getEmployeesCompletion() 
+
+    useEffect (() => {
+        const loadData = async () => {
+            const data = await getEmployeesFromGrist(companyId)
+            setEmployees(data)
+            const formattedData = (data ?? []).map((employee: GristEmployee) => [
+                employee.fields.email , employee.fields.postal_address
+            ])
+            const employeesIds = (data ?? []).map((employee: GristEmployee) => employee.id)
+            if (formattedData.length !== 0) {
+                setRows(formattedData)
+                setHeaders(["Email", "Adresse"])
+                setIds(employeesIds)
+                setSaved(true)
+                
+            }
+            
+        }
+        loadData()
+        
+        
+    }, [rows])
+    console.log("rows", rows)
 
     const settingArray = (parsedXlsx: any[]) => {
         const [firstRow, ...otherRows] = parsedXlsx
         setHeaders(firstRow)
         setRows(otherRows)
+        
     }
+    
+    const handleCancel = async () => {
+        try {
+                await CancelEmployeesFromGrist(ids)
+                setHeaders([])
+                setRows([])
+                setSaved(false)
 
-    const handleCancel = () => {
-        setHeaders([])
-        setRows([])
-        setSaved(false)
+            } catch(error) {
+                setError('une erreur est survenue')
+            }
+        
     }
 
     const handleSave = async () => {
         setSaved(false)
         try{
-            await SendEmployeesToGrist(rows)
+            await SendEmployeesToGrist({rows, companyId})
             setSaved(true)
         } catch (error) {
             if (error instanceof Error){
                 setError(error.message)
-                setSaved(true)
             } else {
                 setError("une erreur s'est produite.")
                 setHeaders([])
@@ -63,7 +115,7 @@ export function InfoSalaries(){
                     </div>
                 </div>
                 <div className=' min-w-[40%]'>
-                    <ModuleCompletion></ModuleCompletion>
+                    <ModuleCompletion percentage={percentage}></ModuleCompletion>
                 </div>
             </div>
             <div className="flex flex-col gap-8">

@@ -1,4 +1,4 @@
-import { Form, Input, Radio} from "antd"
+import { Form, Input, Radio, InputNumber} from "antd"
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 import {sendToGrist} from '@Domains/companies/api'
@@ -120,7 +120,7 @@ export default function FormGeneraux ({companyId, data}: {companyId:number, data
                         { required: true, message: "Veuillez renseigner le nombre de salariés." },
                     ]}
                     >
-                    <Input />
+                    <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                 </Form.Item>
                 <Form.Item
                     label={"Nombre d’intérimaires, sous-traitants"}
@@ -129,7 +129,7 @@ export default function FormGeneraux ({companyId, data}: {companyId:number, data
                         { required: true, message: "Veuillez renseigner le nombre d'interimaires et/ou sous-traitants." },
                     ]}
                     >
-                    <Input />
+                    <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                 </Form.Item>
                 <Form.Item
                     label={"Nombre de jours travaillés par semaine"}
@@ -138,7 +138,7 @@ export default function FormGeneraux ({companyId, data}: {companyId:number, data
                         { required: true, message: "Veuillez renseigner le nombre de jours travaillés." },
                     ]}
                     >
-                    <Input />
+                    <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                 </Form.Item>
                     <Form.Item
                         label={"Rythme de travail"}

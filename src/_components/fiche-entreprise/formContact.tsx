@@ -2,8 +2,9 @@ import { Form, Input,} from "antd"
 import  Button from '@Components/Button'
 import Icon from '@mdi/react';
 import { mdiCheckCircleOutline, mdiInformationVariantCircleOutline} from '@mdi/js';
+import {CompanyData} from '@Domains/companies/type'
 
-export default function FormContact ({companyId}: {companyId:number}) {
+export default function FormContact ({companyId, data}: {companyId:number, data?:CompanyData}) {
     return (
         <div className="bg-(--light-grey) flex flex-col gap-5 p-5">
             <p className="text-[1.5em]">Contacts renseignés</p>
