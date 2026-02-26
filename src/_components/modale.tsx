@@ -17,7 +17,7 @@ export default function Modale({isOpen, onClose}: Modale){
     const Content = content.Modale
 
     if (!isOpen) {
-        return
+        return null
     }
     return (
         createPortal(
@@ -28,9 +28,8 @@ export default function Modale({isOpen, onClose}: Modale){
                     </button>
                     <span className='text-[2em] font-bold'>Trajectoires</span>
                     <span className='text-[1.5em] font-bold text-(--red)'>La démarche</span>
-                    <span className="text-[1em]">{Content.demarche}</span>
-                    <span className='text-[1.5em] font-bold text-(--red)'>Ressources</span>
-                    <span className="text-[1em]">{Content.ressource}</span>
+                    <span className="text-[1em]">{Content.demarche1}</span>
+                    <span className="text-[1em]">{Content.demarche2}</span>
                     <div className="rounded-4xl bg-white p-5 flex items-center mt-10">
                         <Icon path={mdiChevronRight} color={'#99C24D'} size={1}/>
                         <div className=" flex flex-col gap-1">
@@ -38,11 +37,15 @@ export default function Modale({isOpen, onClose}: Modale){
                             <span className='italic text-[1em]'>agencedesmobilite@grandlyon.com </span>
                         </div>
                     </div>
-                    <div className='mt-10 flex flex-col justify-end gap-1 pr-30'>
+                    <div className='mt-10 flex flex-col items-center gap-1'>
                         <span className='font-medium text-[1em]'>Une expérimentation menée par </span>
-                        <div className='flex gap-3 items-center'>
-                            <Image src={Metro} preview={false} height={100} className="object-contain"></Image>
-                            <Image src={Mobilites} preview={false} height={60} className="object-contain"></Image>
+                        <div className='flex gap-3 items-center px-10'>
+                            <a href="https://www.grandlyon.com/" target="_blank">
+                                <Image src={Metro} preview={false} height={100} className="object-contain"></Image>
+                            </a>
+                            <a href="https://mobilites.grandlyon.com/espace-pros" target="_blank">
+                                <Image src={Mobilites} preview={false} height={60} className="object-contain"></Image>
+                            </a>
                         </div>
                     </div>
                 </div>

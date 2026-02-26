@@ -5,13 +5,14 @@ import { mdiCheckCircleOutline} from '@mdi/js';
 import {sendToGrist} from '@Domains/companies/api'
 import {CompanyData} from '@Domains/companies/type'
 
-export default function FormInfra ({companyId, data}: {companyId:number, data?: CompanyData}) {
+export default function FormInfra ({companyId, data, onSave}: {companyId:number, data?: CompanyData, onSave:() => void}) {
     const [form] = Form.useForm()
     const placeRecharge = Form.useWatch('Places_velo_recharge', form)
 
     const FormData = data?.fields
     useEffect (() => {
         form.setFieldsValue(FormData)
+        FormData?.Places_velo_recharge === null ? form.setFieldValue("Places_velo_recharge", 0) : null
     }, [data])
 
     useEffect(() => {
@@ -25,8 +26,14 @@ export default function FormInfra ({companyId, data}: {companyId:number, data?: 
 
     })
 
-    const onFinish = (values: any) => {
-        sendToGrist(values, companyId)
+    const onFinish = async (values: any) => {
+        try{
+            await sendToGrist(values, companyId)
+            onSave()
+
+        } catch(error) {
+            console.error("Erreur lors de la sauvegarde :", error);
+        }
     }
 
 

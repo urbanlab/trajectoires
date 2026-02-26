@@ -7,7 +7,7 @@ import {CompanyData} from '@Domains/companies/type'
 
 
 
-export default function FormIncitation ({companyId, data}: {companyId:number, data?: CompanyData}) {
+export default function FormIncitation ({companyId, data, onSave}: {companyId:number, data?: CompanyData, onSave:() => void}) {
     const [form] = Form.useForm()
 
     const FmdYes = Form.useWatch('FMD', form)
@@ -34,8 +34,14 @@ export default function FormIncitation ({companyId, data}: {companyId:number, da
         
     }, [FmdYes, Enquete, MER, form])
 
-    const onFinish = (values: any) => {
-        sendToGrist(values, companyId)
+    const onFinish = async (values: any) => {
+        try{
+            await sendToGrist(values, companyId)
+            onSave()
+
+        } catch(error) {
+            console.error("Erreur lors de la sauvegarde :", error);
+        }
     }
 
 

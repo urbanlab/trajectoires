@@ -6,7 +6,7 @@ import {useEffect} from 'react'
 import {CompanyData} from '@Domains/companies/type'
 
 
-export default function FormVehicules ({companyId, data}: {companyId:number, data?: CompanyData}) {
+export default function FormVehicules ({companyId, data, onSave}: {companyId:number, data?: CompanyData,  onSave:() => void}) {
     const [form] = Form.useForm()
 
     const FormData = data?.fields
@@ -15,10 +15,15 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
         form.setFieldsValue(FormData)
     }, [data])
 
-    const onFinish = (values: any) => {
-        sendToGrist(values, companyId)
-    }
+    const onFinish = async (values: any) => {
+        try{
+            await sendToGrist(values, companyId)
+            onSave()
 
+        } catch(error) {
+            console.error("Erreur lors de la sauvegarde :", error);
+        }
+    }
     return (
         <div className="bg-(--light-grey) flex flex-col p-5">
             <Form layout="vertical" className="flex flex-col gap-5" onFinish={onFinish} form={form}>
@@ -159,7 +164,7 @@ export default function FormVehicules ({companyId, data}: {companyId:number, dat
                 </Form.Item>
                 <div className="flex justify-end gap-2">
                     <Button title="Annuler" bgColor={"white"}/>
-                    <Button iconPath={mdiCheckCircleOutline} title="Sauvagarder" bgColor={"blue"}/>
+                    <Button htmlType="submit" iconPath={mdiCheckCircleOutline} title="Sauvagarder" bgColor={"blue"}/>
                 </div>
             </Form>
         </div>

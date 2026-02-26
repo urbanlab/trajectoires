@@ -32,48 +32,36 @@ export async function CancelEmployeesFromGrist ( ids:number[]) {
 
 export async function SendEmployeesToGrist({rows, companyId}: {rows:string[][], companyId:number}) {
     
-
-    for (const [index, row] of rows.entries()) {
-        const employee: EmployeeProps = 
-        {
-            mail: row[1],
-            postalAddress: `${row[2] ?? ""} ${row[3] ?? ""}, ${row[4] ?? ""} ${row[5] ?? ""} `
-        }
-
-        try {
-    
-            const response = await fetch('/api/grist/tables/Employees/records', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    "records":[
-                        {
-                            "fields": {
-                                "email": employee.mail,
-                                "postal_address": employee.postalAddress,
-                                "ref_companies_id": companyId
-                            }
-                        }
-                    ]
-                }) 
-            })
-    
-            if (!response.ok){
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.error || `Erreur lors de l'écriture sur Grist à la ligne ${index + 1 }.`);
+    const records = rows.map((row) => {
+        const postalAddress = `${row[1] ?? ""} ${row[2] ?? ""}, ${row[3] ?? ""} ${row[4] ?? ""}`.trim();
+        
+        return {
+            fields: {
+                "email": row[0],
+                "postal_address": postalAddress,
+                "ref_companies_id": companyId
             }
-    
-        } catch (error) {
-            if (error instanceof Error) throw error;
-            throw new Error(`Erreur de connexion au serveur de Grist à la ligne ${index + 1 }.`);
+        };
+    });
+
+    try {
+        const response = await fetch('/api/grist/tables/Employees/records', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ records }) 
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || "Erreur lors de l'enregistrement groupé sur Grist.");
         }
 
+        return await response.json();
 
+    } catch (error) {
+        if (error instanceof Error) throw error;
+        throw new Error("Erreur de connexion au serveur de Grist lors de l'envoi groupé.");
     }
-
-    
-
-    
 }

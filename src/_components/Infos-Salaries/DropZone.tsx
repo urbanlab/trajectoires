@@ -16,7 +16,7 @@ export default function MyDropzone({settingArray}: DropZoneProps) {
         setError(null)
         const file = Files[0]
         readXlsxFile(file).then((rows) => {
-            if (rows[0].length !== 6){
+            if (rows[0].length !== 5){
                 setError("Le fichier déposé ne correspond pas au gabarit.")
                 return
             }else {

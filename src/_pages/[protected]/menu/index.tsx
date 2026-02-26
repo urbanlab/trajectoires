@@ -12,10 +12,6 @@ import { useAuth } from '@Hooks/auth';
 import {getEmployeesFromGrist} from '@Domains/employees/api'
 
 
-
-
-
-
 export function PageMenu() {
   const StoreForm = useForm((s) => s)
   console.log("le store", StoreForm)
@@ -28,8 +24,6 @@ export function PageMenu() {
   const companyId = user.fields.ref_company_id
   
   const getEmployeesCompletion = useForm((s) => s.getEmployeesCompletion)
-  const percentage = getEmployeesCompletion()
-  console.log("pourcentg", percentage)
   const getEntrepriseCompletion = useForm((s) => s.getEntrepriseCompletion)
 
     useEffect(() => {

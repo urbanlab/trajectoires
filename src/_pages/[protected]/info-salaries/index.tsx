@@ -29,7 +29,7 @@ interface GristEmployee {
 export function InfoSalaries(){
     const {user} = useAuth()
     if (!user) {
-        return
+        return null
     }
     const companyId = user.fields.ref_company_id
     const content = Content.Salaries.download
@@ -46,27 +46,34 @@ export function InfoSalaries(){
     
     const percentage = getEmployeesCompletion() 
 
-    useEffect (() => {
-        const loadData = async () => {
-            const data = await getEmployeesFromGrist(companyId)
-            setEmployees(data)
-            const formattedData = (data ?? []).map((employee: GristEmployee) => [
-                employee.fields.email , employee.fields.postal_address
-            ])
-            const employeesIds = (data ?? []).map((employee: GristEmployee) => employee.id)
-            if (formattedData.length !== 0) {
-                setRows(formattedData)
-                setHeaders(["Email", "Adresse"])
-                setIds(employeesIds)
-                setSaved(true)
-                
-            }
-            
+    const loadData = async () => {
+    try {
+        const data = await getEmployeesFromGrist(companyId)
+        setEmployees(data)
+        const formattedData = (data ?? []).map((employee: GristEmployee) => [
+            employee.fields.email, 
+            employee.fields.postal_address
+        ])
+        const employeesIds = (data ?? []).map((employee: GristEmployee) => employee.id)
+        setRows(formattedData)
+        setIds(employeesIds)
+        
+        if (formattedData.length !== 0) {
+            setHeaders(["Email", "Adresse"])
+            setSaved(true)
+        } else {
+            setSaved(false)
+            setHeaders([])
         }
+    } catch (e) {
+        setError("Erreur lors du chargement")
+    }
+}
+
+    useEffect (() => {
         loadData()
-        
-        
-    }, [rows])
+    }, [])
+
     console.log("rows", rows)
 
     const settingArray = (parsedXlsx: any[]) => {
@@ -82,6 +89,7 @@ export function InfoSalaries(){
                 setHeaders([])
                 setRows([])
                 setSaved(false)
+                setEmployees([])
 
             } catch(error) {
                 setError('une erreur est survenue')
@@ -94,6 +102,7 @@ export function InfoSalaries(){
         try{
             await SendEmployeesToGrist({rows, companyId})
             setSaved(true)
+            loadData()
         } catch (error) {
             if (error instanceof Error){
                 setError(error.message)

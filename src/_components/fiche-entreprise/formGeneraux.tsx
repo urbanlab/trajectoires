@@ -6,7 +6,7 @@ import {useEffect} from 'react'
 import {CompanyData} from '@Domains/companies/type'
 
 
-export default function FormGeneraux ({companyId, data}: {companyId:number, data?:CompanyData}) {
+export default function FormGeneraux ({companyId, data, onSave}: {companyId:number, data?:CompanyData, onSave: () => void}) {
     const [form] = Form.useForm()
 
     const FormData = data?.fields
@@ -16,8 +16,14 @@ export default function FormGeneraux ({companyId, data}: {companyId:number, data
     }, [data])
 
 
-    const onFinish = (values: any) => {
-        sendToGrist(values, companyId)
+    const onFinish = async (values: any) => {
+        try{
+            await sendToGrist(values, companyId)
+            onSave()
+
+        } catch(error) {
+            console.error("Erreur lors de la sauvegarde :", error);
+        }
     }
 
     return (

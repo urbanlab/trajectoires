@@ -28,14 +28,18 @@ export default function FicheEntreprise () {
     }
     const companyId = user.fields.ref_company_id
     
+    const loadData = async () => {
+    const data = await getFromGrist(companyId)
+    const formatedData = data.records[0]
+    StoreForm.setForm(formatedData)
+    }
     useEffect(() => {
-        const loadData = async () => {
-        const data = await getFromGrist(companyId)
-        const formatedData = data.records[0]
-        StoreForm.setForm(formatedData)
-        }
         loadData()
     }, [])
+
+    const onSave = () => {
+        loadData()
+    }
 
     const formatedData = StoreForm.form
 
@@ -63,18 +67,18 @@ export default function FicheEntreprise () {
                 </div>
                 <div className="flex-1">
                     {activeTab === 1 ?
-                    <FormGeneraux companyId={companyId} data={formatedData}/>
+                    <FormGeneraux companyId={companyId} data={formatedData} onSave={onSave}/>
                     :
                     activeTab === 2 ? 
-                    <FormInfra companyId={companyId} data={formatedData}/>
+                    <FormInfra companyId={companyId} data={formatedData} onSave={onSave}/>
                     : activeTab === 3 ?
-                    <FormVehicules companyId={companyId} data={formatedData}/>
+                    <FormVehicules companyId={companyId} data={formatedData} onSave={onSave}/>
                     :
                     activeTab === 4 ?
-                    <FormIncitation companyId={companyId} data={formatedData}/>
+                    <FormIncitation companyId={companyId} data={formatedData} onSave={onSave}/>
                     :
                     activeTab === 5 ?
-                    <FormContact companyId={companyId} data={formatedData}/>
+                    <FormContact companyId={companyId} data={formatedData} />
                     : null}
 
                 </div>

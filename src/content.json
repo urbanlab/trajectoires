@@ -10,8 +10,8 @@
         "text": "Démarrer l'enquête auprès de vos salariés. Vous pourrez paramétrez et suivre l'avancement de l'enquête. "
     }, 
     "Modale": {
-        "demarche":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros.",
-        "ressource": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros."
+        "demarche1":"Trajectoires constitue une initiative pilotée par la Métropole de Lyon via son Agence des Mobilités. Elle vise à mettre à disposition des entreprises un outil leur permettant d’appréhender de manière autonome les enjeux liés aux déplacements de leurs salariés. ",
+        "demarche2": "Ce dispositif s’appuie sur la génération automatique d’un diagnostic des mobilités de l'entreprise, offrant ainsi une base d’analyse nécessaire pour la création d'un Plan de Mobilité Employeur."
     },
     "Salaries": {
         "download": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros."
