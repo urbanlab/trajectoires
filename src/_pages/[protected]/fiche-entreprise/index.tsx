@@ -12,12 +12,16 @@ import FormContact from '@Components/fiche-entreprise/formContact'
 import { useAuth } from '@Hooks/auth';
 import {CompanyData} from '@Domains/companies/type'
 import {getFromGrist} from '@Domains/companies/api'
+import { getUserByCompany } from '@/_domains/users/api'
 import {useForm} from '@/stores/form'
 import { mdiChevronLeft,  mdiChevronRight} from '@mdi/js';
 import { useNavigate } from 'react-router-dom';
 
 export default function FicheEntreprise () {
-    const StoreForm = useForm((s) => s)
+    const StoreForm = useForm((s) => s.form)
+    const setForm = useForm((s) => s.setForm)
+    const setUsers = useForm((s) => s.setUsers)
+    const StoreUsers = useForm((s) => s.users)
     const completion = useForm((s)=> s.getCompletion)
     const EntrepriseCompletion = useForm((s) =>s.getEntrepriseCompletion )
     const navigate = useNavigate()
@@ -29,9 +33,19 @@ export default function FicheEntreprise () {
     const companyId = user.fields.ref_company_id
     
     const loadData = async () => {
-    const data = await getFromGrist(companyId)
-    const formatedData = data.records[0]
-    StoreForm.setForm(formatedData)
+        try {
+            const data = await getFromGrist(companyId)
+            const formatedData = data.records[0]
+            
+            const users = await getUserByCompany(companyId)
+            const formatedUsers = users.map((user:any) => 
+                ({Prenom: user.fields.Prenom, Nom: user.fields.Nom, Email:user.fields.Email, Telephone: user.fields.Telephone, Fonction: user.fields.Fonction, Role: user.fields.Role}))
+            setUsers(formatedUsers)
+            setForm(formatedData)
+            console.log("users", users)
+        } catch (error) {
+            throw new Error ("une erreur est survenue au chargement des données")
+        }
     }
     useEffect(() => {
         loadData()
@@ -40,8 +54,8 @@ export default function FicheEntreprise () {
     const onSave = () => {
         loadData()
     }
-
-    const formatedData = StoreForm.form
+    const userData = StoreUsers
+    const formatedData = StoreForm
 
     return(
         <div className="flex flex-col gap-10">
@@ -78,7 +92,7 @@ export default function FicheEntreprise () {
                     <FormIncitation companyId={companyId} data={formatedData} onSave={onSave}/>
                     :
                     activeTab === 5 ?
-                    <FormContact companyId={companyId} data={formatedData} />
+                    <FormContact data={userData} />
                     : null}
 
                 </div>

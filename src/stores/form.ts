@@ -3,7 +3,7 @@ import {create} from "zustand"
 interface Form {
     id : number
     fields : {
-        [key:string] : string | boolean | number | null | undefined
+        [key:string] : string | boolean | number | null 
     }
 }
 
@@ -17,12 +17,12 @@ interface Employee {
 }
 
 interface FormStore {
-    companyId: number | null
+    users: []
     employees: Employee[] 
     form: Form | undefined
-    setCompanyId: (companyId: number) => void
     setEmployees: (data: Employee[] | null) => void
-    setForm: (data: Form | null) => void
+    setForm: (data: Form | undefined) => void
+    setUsers: (data: []) => void
     getCompletion: (categorie: string) => number
     getEntrepriseCompletion: () => number
     getEmployeesCompletion: () => number
@@ -38,11 +38,11 @@ const FIELDS_BY_CATEGORY = {
 
 
 export const useForm = create<FormStore>((set, get:any) => ({
-    companyId: null,
+    users: [],
     employees: [],
     form: undefined,
 
-    setCompanyId: (companyId: number) => set({companyId: companyId}),
+    setUsers: (data: any) => set ({users: data}),
     setEmployees: (data: any) => set({employees: data}),
     setForm: (data: any) => set({form: data}),
 

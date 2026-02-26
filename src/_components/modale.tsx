@@ -24,7 +24,7 @@ export default function Modale({isOpen, onClose}: Modale){
             <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 ">
                 <div className="relative flex flex-col gap-6 bg-(--light-grey) p-8 shadow-2xl w-full max-w-[500px] max-h-full   ">
                     <button className='absolute top-10 right-10 cursor-pointer' onClick={onClose}>
-                        <span className=""><Icon path={mdiPlus} size={1}/></span>
+                        <span className="block rotate-45"><Icon path={mdiPlus} size={1}/></span>
                     </button>
                     <span className='text-[2em] font-bold'>Trajectoires</span>
                     <span className='text-[1.5em] font-bold text-(--red)'>La démarche</span>
