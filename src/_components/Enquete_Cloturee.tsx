@@ -11,12 +11,27 @@ import { mdiChevronLeft, mdiPlayCircle ,  mdiInformationVariantCircleOutline, md
 import { useNavigate } from 'react-router-dom';
 
 interface EnqueteProps {
-    updateState: () => void
-
+    survey: {[key:string]: string | number }
+    nbr_of_employees: number
+    nbr_of_responses : number
 }
 
-export default function EnqueteCloturee({updateState}: EnqueteProps) {
+
+export default function EnqueteCloturee({survey, nbr_of_employees, nbr_of_responses}: EnqueteProps) {
     const [Active, setActive] = useState(1)
+    
+    const dateConvert = (timeStamp : number) => {
+        const rawDate = new Date(timeStamp * 1000)
+        const date = rawDate.toLocaleDateString('fr-FR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+            });
+        return date
+    }
+
+    const date_debut = dateConvert(survey.Date_debut as number)
+    const date_fin = dateConvert(survey.Date_de_fin as number)
 
     const navigate = useNavigate()
 
@@ -42,7 +57,7 @@ export default function EnqueteCloturee({updateState}: EnqueteProps) {
                 </div>
             </div>
             {Active === 1 ? 
-            <Participation updateState={updateState}/>
+            <Participation date_debut={date_debut} date_fin={date_fin} nbr_of_employees={nbr_of_employees} nbr_of_responses={nbr_of_responses} />
             :
             Active === 2 ?
             <Deplacement></Deplacement>

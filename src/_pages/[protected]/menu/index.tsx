@@ -12,16 +12,19 @@ import {getEmployeesFromGrist} from '@Domains/employees/api'
 
 
 export function PageMenu() {
-  const StoreForm = useForm((s) => s)
+  const form = useForm((s) => s)
+  const setForm = useForm((s) => s.setForm)
+  const setEmployees = useForm((s) => s.setEmployees)
   const [open, setOpen] = useState(false)
+  const [loading, isLoading] = useState(false)
+  const [error, setError] = useState("")
   const navigate = useNavigate();
   const {user} = useAuth()
+  console.log("user", user)
   if (!user) {
     return 
   }
   const companyId = user.fields.ref_company_id
-  const form = useForm((s) => s)
-  console.log("form", form)
   const getEmployeesCompletion = useForm((s) => s.getEmployeesCompletion)
   const getEntrepriseCompletion = useForm((s) => s.getEntrepriseCompletion)
   const StepOneFinished = (getEntrepriseCompletion() === 100)
@@ -35,11 +38,19 @@ export function PageMenu() {
         localStorage.setItem('hasSeenModal', 'true')
       }
       const loadData = async () => {
-      const data = await getFromGrist(companyId)
-      const employees = await getEmployeesFromGrist(companyId)
-      const formattedData = data.records[0]
-      StoreForm.setForm(formattedData)
-      StoreForm.setEmployees(employees)
+        isLoading(true)
+        try{
+          const data = await getFromGrist(companyId)
+          const employees = await getEmployeesFromGrist(companyId)
+          const formattedData = data.records[0]
+          setForm(formattedData)
+          setEmployees(employees)
+          isLoading(false)
+        } catch (error) {
+          isLoading(false)
+          setError("Un Erreur s'est produite lors du chargement des données.")
+          
+        }
       }
       loadData()
     }, [])
@@ -57,13 +68,13 @@ export function PageMenu() {
     <div className="">
       <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-15 ">
         <CardStep title="Étape 1" subtitle="Fiche entreprise" text={content.Step1.text} buttonConfig={{onPress:() => onClick('fiche-entreprise'), bgColor: "red", title:"Compléter"}} >
-          <ModuleCompletion percentage={getEntrepriseCompletion()}></ModuleCompletion>
+          <ModuleCompletion percentage={getEntrepriseCompletion()} isLoading={loading}></ModuleCompletion>
         </CardStep>
         <CardStep title="Étape 2" subtitle="Informations salariés" text={content.Step2.text } buttonConfig={{onPress:() => onClick('informations-salaries'), bgColor: "red",  title:"Compléter"}} >
-          <ModuleCompletion percentage={getEmployeesCompletion()}></ModuleCompletion>
+          <ModuleCompletion percentage={getEmployeesCompletion()} isLoading={loading}></ModuleCompletion>
         </CardStep>
         <CardStep title="Étape 3" subtitle="Enquête" text={content.Step3.text} buttonConfig={{onPress:()=> onClick('url'), bgColor: "red", disabled: !isEnqueteReady, title:"Lancer l'enquête"}}>
-          <ModuleEnquete unlocked={isEnqueteReady}/>
+          <ModuleEnquete unlocked={isEnqueteReady} isLoading={loading}/>
         </CardStep>
       
       </div>

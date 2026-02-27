@@ -2,6 +2,9 @@ import {Typography, Image} from 'antd'
 import Icon from '@mdi/react';
 import { mdiAccountMultipleOutline } from '@mdi/js';
 import Vehicules from '@Commons/img/illustrations.png'
+import AgeMoyen from '@Commons/img/age_moyen.png'
+import Genres from '@Commons/img/rep_genres.png'
+import Mediane from '@Commons/img/mediane_trajets.png'
 import BarChart from '@/_components/Charts/barChart'
 import DoughnutChart from '@/_components/Charts/DoughnutChart'
 import PolarChart from '@/_components/Charts/PolarChart'
@@ -10,14 +13,14 @@ import PolarChart from '@/_components/Charts/PolarChart'
 export default function Deplacement () {
     return (
         <div className="">
-            <div className=" flex flex-col gap-5">
+            <div className="flex flex-col gap-5">
                 <Typography.Title level={3}>Pratiques de mobilité actuelle et indicateurs de trajets</Typography.Title>
-                <div className=" flex gap-5 flex-wrap ">
-                    <div className=" flex flex-col gap-5 bg-(--light-grey) p-5 flex-1">
+                <div className="flex gap-5">
+                    <div className=" flex flex-col gap-5 bg-(--light-grey) p-5 w-1/2">
                         <Typography.Title level={4}>Temps</Typography.Title>
                         <div className="bg-white h-[200px] "><BarChart/></div>
                     </div>
-                    <div className=" flex flex-col gap-2 bg-(--light-grey) p-5 flex-1">
+                    <div className=" flex flex-col gap-2 bg-(--light-grey) p-5 w-1/2">
                         <Typography.Title level={4}>Distance</Typography.Title>
                         <div className="bg-white h-[200px]"><BarChart/></div>
                     </div>
@@ -25,36 +28,39 @@ export default function Deplacement () {
                 <div className="flex flex-col gap-2 bg-(--light-grey) p-5 flex-1">
                     <Typography.Title level={4}>Public et modes de déplacement</Typography.Title>
                     <div className=" flex gap-2 flex-wrap justify-between">
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2 flex-1">
                             <Typography.Title level={5}>Mode de déplacement principal</Typography.Title>
                             <div>///COMPOSANT</div>
                         </div>
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2 flex-1">
                             <Typography.Title level={5}>Âge moyen</Typography.Title>
                             <div className="bg-white flex gap-2">
-                                <Icon path={mdiAccountMultipleOutline} color={"var(--blue)"} size={3}/>
-                                <div>///COMPOSANT</div>
+                                <div><Image src={AgeMoyen} preview={false}/></div>
                             </div>
                         </div>
-                        < div className="flex flex-col gap-2">
+                        < div className="flex flex-col gap-2 flex-1">
                             <Typography.Title level={5}>Répartition des genres</Typography.Title>
-                            <div className="bg-white h-[200px]"><DoughnutChart/></div>
+                            <div className="bg-white h-[200px]">
+                                <Image src={Genres} preview={false}/>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="flex gap-2 bg-(--light-grey) max-h-[500px] border p-5 flex-1">
+                <div className="flex gap-2 bg-(--light-grey)  border p-5 flex-1 flex-wrap">
                     <div className="flex flex-col gap-2 flex-1">
                         <Typography.Title level={5}>Détail des modes de déplacement principaux utilisés</Typography.Title>
-                        <div className="bg-white max-h-full border"><PolarChart/></div>    
+                        <div className="bg-white w-full border flex-1"><PolarChart/></div>    
                     </div>
                     <div className="flex flex-col gap-2 flex-1">
                         <div className="flex flex-col gap-2">
                             <Typography.Title level={5}>Temps de trajet moyen par mode utilisé</Typography.Title>
-                            <div className="bg-white h-[200px]"><BarChart/></div>    
+                            <div className="bg-white "><BarChart/></div>    
                         </div>
                         <div className="flex flex-col gap-2">
                             <Typography.Title level={5}>Variation médiane du temps de trajet en fonction du mode utilisé</Typography.Title>
-                            <div className="bg-white h-[200px]"><BarChart/></div>    
+                            <div className="bg-white">
+                                <Image src={Mediane} preview={false}/>
+                            </div>    
                         </div>
                     </div>
 

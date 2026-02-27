@@ -27,12 +27,16 @@ export default function FicheEntreprise () {
     const navigate = useNavigate()
     const { user, logout } = useAuth();
     const [activeTab, setActiveTab] = useState(1)
+    const [loading, isLoading] = useState(false)
+    const [error, setError] = useState("")
+
     if (!user) {
         return null
     }
     const companyId = user.fields.ref_company_id
     
     const loadData = async () => {
+        isLoading(true)
         try {
             const data = await getFromGrist(companyId)
             const formatedData = data.records[0]
@@ -42,9 +46,10 @@ export default function FicheEntreprise () {
                 ({Prenom: user.fields.Prenom, Nom: user.fields.Nom, Email:user.fields.Email, Telephone: user.fields.Telephone, Fonction: user.fields.Fonction, Role: user.fields.Role}))
             setUsers(formatedUsers)
             setForm(formatedData)
-            console.log("users", users)
+            isLoading(false)
         } catch (error) {
-            throw new Error ("une erreur est survenue au chargement des données")
+            setError("une erreur est survenue au chargement des données")
+            isLoading(false)
         }
     }
     useEffect(() => {
@@ -68,7 +73,7 @@ export default function FicheEntreprise () {
                     </div>
                 </div>
                 <div className=' min-w-[40%]'>
-                    <ModuleCompletion percentage={EntrepriseCompletion()}></ModuleCompletion>
+                    <ModuleCompletion percentage={EntrepriseCompletion()} isLoading={loading}></ModuleCompletion>
                 </div>
             </div>
             <div className="flex gap-10">

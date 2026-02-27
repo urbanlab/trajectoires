@@ -1,8 +1,10 @@
 import Icon from '@mdi/react';
 import { mdiChevronRight } from '@mdi/js';
+import {Spin} from 'antd'
 
 interface Module {
     percentage: number
+    isLoading: boolean
 }
 
 const TEXT: Record<number, string> = {
@@ -15,13 +17,21 @@ const TEXT: Record<number, string> = {
 }
 
 
-export default function ModuleCompletion({percentage}: Module) {
+export default function ModuleCompletion({percentage, isLoading}: Module) {
     console.log('percentage', percentage)
     const IconColor =percentage < 30 ? "var(--red)" : percentage < 60 ? "var(--orange)" : percentage < 100 ? "var(--blue)" : "var(--green)"
     const bgColor = percentage < 30 ? "bg-(--red)" : percentage < 60 ? "bg-(--orange)" : percentage < 100 ? "bg-(--blue)" : "bg-(--green)"
     const fontColor = percentage < 30 ? "text-(--red)" : percentage < 60 ? "text-(--orange)" : percentage < 100 ? "text-(--blue)" : "text-white"
     const position = percentage === 100 ? "right-1" : "-right-10"
     
+    if (isLoading === true ) {
+        return (
+            <div className="bg-white rounded-2xl w-full flex flex-col gap-5 p-5">
+                <span className="text-[1.2em] font-bold">Avancement du module</span>
+                <Spin/>
+            </div>
+        )
+    }
 
 
     return(

@@ -25,7 +25,12 @@ export default function PolarChart () {
     ]
   }]
 };
+
+const options ={
+  responsive: true,
+  maintainAspectRatio: false
+}
     return(
-        <PolarArea data={data}/>
+        <PolarArea data={data} options={options}/>
     )
 }

@@ -1,17 +1,26 @@
 import Button from "@/_components/Button";
 import {Typography, message} from 'antd'
 import Icon from '@mdi/react';
-import { mdiFileDocumentEditOutline , mdiChevronLeft, mdiPlayCircle , mdiLockOutline,  mdiInformationVariantCircleOutline, mdiAlert, mdiMessageOutline, mdiThumbDownOutline  } from '@mdi/js';
+import { mdiFileDocumentEditOutline , mdiChevronLeft, mdiPlayCircle , mdiLockOutline,  mdiInformationVariantCircleOutline, mdiAlert, mdiMessageOutline, mdiThumbDownOutline, mdiThumbUpOutline  } from '@mdi/js';
 import { useNavigate } from 'react-router-dom';
+import ResponsesPercentage from "./ResponsesPercentage";
 
 interface EnqueteProps {
-    updateState: () => void
+    updateData: () => void
+    uuid : string
+    survey: {[key:string]: string | number }
+    nbr_of_employees: number
+    nbr_of_responses : number
 }
 
-export default function EnqueteDemaree({updateState}: EnqueteProps) {
+
+export default function EnqueteDemaree({updateData, uuid, survey, nbr_of_responses, nbr_of_employees}: EnqueteProps) {
     const navigate = useNavigate()
+    const Url = `https://form.typeform.com/to/LpHZ9JDv#organisationid=${uuid}`
+
+
     const handleCopy = async () => {
-    const urlToCopy = "https://form.typeform.com/to/LpHZ9JDv#organisationid=xxxxx";
+    const urlToCopy = Url;
     
     try {
         await navigator.clipboard.writeText(urlToCopy);
@@ -20,6 +29,28 @@ export default function EnqueteDemaree({updateState}: EnqueteProps) {
         message.error("Impossible de copier le lien");
     }
     };
+
+    const dateConvert = (timeStamp : number) => {
+        const rawDate = new Date(timeStamp * 1000)
+        const date = rawDate.toLocaleDateString('fr-FR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+            });
+        return date
+    }
+
+    const handleClose = async () => {
+        updateData()
+    }
+
+    const date_debut = dateConvert(survey.Date_debut as number)
+    const date_fin = dateConvert(survey.Date_de_fin as number)
+    const today = new Date()
+    const time_restant = (survey.Date_de_fin as number * 1000)  - today.getTime()
+    const jours_restants = Math.max(0, Math.ceil(time_restant / (1000 * 60 * 60 * 24)));
+
+    const percentage = (nbr_of_responses / nbr_of_employees) * 100
 
     return (
         <div className="flex flex-col gap-5">
@@ -44,7 +75,7 @@ export default function EnqueteDemaree({updateState}: EnqueteProps) {
                             <Typography.Title level={4}>Informez vos salariés</Typography.Title>
                             <div className="flex flex-col gap-2">
                                 <p className="text-[1.3em] text-wrap">Transmettez le lien ci-dessous à vos salariés pour les inviter à répondre à l’enquête :</p>
-                                <p className="text-[1.5em] text-(--blue)" >https://form.typeform.com/to/LpHZ9JDv#organisationid=xxxxx</p>
+                                <p className="text-[1.5em] text-(--blue)" >{Url}</p>
                             </div>
                         </div>
                     </div>
@@ -59,9 +90,7 @@ export default function EnqueteDemaree({updateState}: EnqueteProps) {
                 < div className='bg-(--light-grey) p-6 flex flex-col gap-5'>
                     <div className="flex gap-3">
                         <p className="italic text-[1.3em]">Statut de l'enquête:</p>
-                        <button onClick={updateState}>
-                            <p className="italic text-[1.3em] rounded-full bg-(--light-orange) px-2 ">Démarée</p>
-                        </button>
+                        <p className="italic text-[1.3em] rounded-full bg-(--light-orange) px-2 ">Démarée</p>
                     </div>
                     <div className="flex gap-4 border-(--blue) border-l-3 bg-white p-5 items-center">
                         <Icon path={mdiInformationVariantCircleOutline} color="var(--blue)" size={1.5}/>
@@ -69,7 +98,7 @@ export default function EnqueteDemaree({updateState}: EnqueteProps) {
                     </div>
                     <div className="flex justify-center">
                         <div className="flex flex-col gap-4">
-                            <Button title="Clôturer l'enquête" bgColor="red"/>
+                            <Button onPress={handleClose} disabled={percentage < 20} title="Clôturer l'enquête" bgColor="red"/>
                         </div>
                     </div>
                 </div>
@@ -82,16 +111,16 @@ export default function EnqueteDemaree({updateState}: EnqueteProps) {
                         <div className="bg-white p-6 flex flex-col gap-5">
                             <div>
                                 <p className="text-[1.3em] ">Date de début</p>
-                                <p className="text-[1.5em] font-bold">22/01/2026</p>
+                                <p className="text-[1.5em] font-bold">{date_debut}</p>
                             </div>
                             <div>
                                 <p className="text-[1.3em] ">Date de fin</p>
-                                <p className="text-[1.5em] font-bold">22/02/2026</p>
+                                <p className="text-[1.5em] font-bold">{date_fin}</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-3">
                             <Icon path={mdiAlert} color="var(--blue)" size={1}/>
-                            <p className=" font-bold text-[1.5em] text-(--blue)">30 jours restants</p>
+                            <p className=" font-bold text-[1.5em] text-(--blue)">{jours_restants} jours restants</p>
                         </div>
                     </div>
                     <div className=" bg-(--light-grey) p-6 flex flex-col justify-between gap-5 flex-1">
@@ -100,19 +129,16 @@ export default function EnqueteDemaree({updateState}: EnqueteProps) {
                             <Icon path={mdiMessageOutline} color="var(--blue)" size={3}/>
                             <div className= "flex flex-col gap-5">
                                 <div className="flex gap-3 items-center">
-                                    <p className='font-bold text-[1.5em]'>1/25</p>
+                                    <p className='font-bold text-[1.5em]'>{nbr_of_responses}/{nbr_of_employees}</p>
                                     <p className="text-[1.3em] ">Réponses</p>
                                 </div>
                                 <div className="flex gap-3 items-center">
-                                    <p className='font-bold text-[1.5em]'>4%</p>
-                                    <p className="text-[1.3em] ">Répondant</p>
+                                    <p className='font-bold text-[1.5em]'>{percentage}%</p>
+                                    <p className="text-[1.3em] ">Répondants</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="flex items-center gap-3">
-                            <Icon path={mdiThumbDownOutline } color="var(--red)" size={1}/>
-                            <p className=" font-bold text-[1.5em] text-(--red)">Ce n'est que le début</p>
-                        </div>
+                        <ResponsesPercentage percentage={percentage}/>
                     </div>
                 </div>
                 <div className="bg-(--light-grey) p-6 flex flex-col gap-5">

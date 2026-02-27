@@ -34,6 +34,7 @@ export function InfoSalaries(){
     const companyId = user.fields.ref_company_id
     const content = Content.Salaries.download
     const navigate = useNavigate();
+    const [loading, isLoading] = useState(false)
     const [headers, setHeaders] = useState<any[]>([])
     const [rows, setRows] = useState<any[][]>([])
     const [error, setError] = useState<string | null>(null)
@@ -47,6 +48,8 @@ export function InfoSalaries(){
     const percentage = getEmployeesCompletion() 
 
     const loadData = async () => {
+        isLoading(true)
+
     try {
         const data = await getEmployeesFromGrist(companyId)
         setEmployees(data)
@@ -65,8 +68,10 @@ export function InfoSalaries(){
             setSaved(false)
             setHeaders([])
         }
+        isLoading(false)
     } catch (e) {
         setError("Erreur lors du chargement")
+        isLoading(false)
     }
 }
 
@@ -124,7 +129,7 @@ export function InfoSalaries(){
                     </div>
                 </div>
                 <div className=' min-w-[40%]'>
-                    <ModuleCompletion percentage={percentage}></ModuleCompletion>
+                    <ModuleCompletion percentage={percentage} isLoading={loading}></ModuleCompletion>
                 </div>
             </div>
             <div className="flex flex-col gap-8">

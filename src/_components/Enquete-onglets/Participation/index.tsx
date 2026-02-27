@@ -3,11 +3,14 @@ import Icon from '@mdi/react';
 import {mdiInformationVariantCircleOutline, mdiMessageOutline } from '@mdi/js';
 
 interface ParticipationProps {
-    updateState: () => void
+    date_debut: string
+    date_fin : string
+    nbr_of_employees: number
+    nbr_of_responses: number
 }
 
-export default function Participation ({updateState}: ParticipationProps) {
-
+export default function Participation ({date_debut, date_fin, nbr_of_employees, nbr_of_responses  }: ParticipationProps) {
+    const percentage = (nbr_of_responses / nbr_of_employees) * 100
     return( 
         <div className="flex flex-wrap gap-5">
             <div className="flex flex-col gap-5 w-[500px] ">
@@ -15,9 +18,7 @@ export default function Participation ({updateState}: ParticipationProps) {
                 < div className='bg-(--light-grey) p-6 flex flex-col gap-5'>
                     <div className="flex gap-3">
                         <p className="italic text-[1.3em]">Statut de l'enquête:</p>
-                        <button onClick={updateState}>
-                            <p className="italic text-[1.3em] rounded-full bg-(--green) px-2 ">Cloturée</p>
-                        </button>
+                        <p className="italic text-[1.3em] rounded-full bg-(--green) px-2 ">Cloturée</p>
                     </div>
                     <div className="flex gap-4 border-(--blue) border-l-3 bg-white p-5 items-center">
                         <Icon path={mdiInformationVariantCircleOutline} color="var(--blue)" size={1}/>
@@ -33,11 +34,11 @@ export default function Participation ({updateState}: ParticipationProps) {
                         <div className="bg-white p-6 flex flex-col gap-5">
                             <div>
                                 <p className="text-[1.3em] ">Date de début</p>
-                                <p className="text-[1.5em] font-bold">22/01/2026</p>
+                                <p className="text-[1.5em] font-bold">{date_debut}</p>
                             </div>
                             <div>
                                 <p className="text-[1.3em] ">Date de fin</p>
-                                <p className="text-[1.5em] font-bold">22/02/2026</p>
+                                <p className="text-[1.5em] font-bold">{date_fin}</p>
                             </div>
                         </div>
                     </div>
@@ -47,12 +48,12 @@ export default function Participation ({updateState}: ParticipationProps) {
                             <Icon path={mdiMessageOutline} color="var(--blue)" size={3}/>
                             <div className= "flex flex-col gap-5">
                                 <div className="flex gap-3 items-center">
-                                    <p className='font-bold text-[1.5em]'>18/25</p>
+                                    <p className='font-bold text-[1.5em]'>{nbr_of_responses}/{nbr_of_employees}</p>
                                     <p className="text-[1.3em] ">Réponses</p>
                                 </div>
                                 <div className="flex gap-3 items-center">
-                                    <p className='font-bold text-[1.5em]'>4%</p>
-                                    <p className="text-[1.3em] ">Répondant</p>
+                                    <p className='font-bold text-[1.5em]'>{percentage} %</p>
+                                    <p className="text-[1.3em] ">Répondants</p>
                                 </div>
                             </div>
                         </div>

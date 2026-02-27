@@ -1,13 +1,22 @@
 import Icon from '@mdi/react';
 import { mdiChevronRight } from '@mdi/js';
+import {Spin} from 'antd'
 
 
 interface Module {
     unlocked?: boolean
+    isLoading: boolean
 }
 
-export default function ModuleEnquete ({unlocked}: Module) {
-    
+export default function ModuleEnquete ({unlocked, isLoading}: Module) {
+
+        if(isLoading) {
+            return (
+                <div className="bg-white rounded-2xl w-full flex gap-2 p-5 items-center ">
+                    <Spin/>
+            </div>
+            )
+        }
         if (!unlocked){
         return (
             <div className="bg-white rounded-2xl w-full flex gap-2 p-5 items-center ">
