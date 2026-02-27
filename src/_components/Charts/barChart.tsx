@@ -4,12 +4,17 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Lege
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 
-export default function BarChart () {
+export default function BarChart ({donnees, label, type}: {donnees: any[], label: any[], type:string}) {
+
+    const unite = type === "km" ? "km" : type === "min" ? "Minutes" : ""
+    
+    const Moyenne = []
+
     const data = {
-        labels: ['Lun', 'Mar', 'Mer', 'Jeu'], // Tes étiquettes en bas
+        labels: label, // Tes étiquettes en bas
         datasets: [
-        { label: 'Ventes',
-          data: [12, 19, 3, 5], // Tes valeurs
+        { 
+        data: donnees, 
           backgroundColor: ['#99C24D', '#F18F01', '#F18F01', '#E60027'], // Une couleur par barre !
         },
         ],
@@ -19,22 +24,27 @@ export default function BarChart () {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
+            datalabels: {
+            anchor: 'start' as const, // Positionne l'ancre en haut de la barre
+            align: 'top' as const,
+            formatter: (val: string) => `${val} ${unite}`, // Ton unité
+            color: '#FFFFFF',
+            font: { weight: 'bold' as const }
+            },
             legend: {
                 display: false
             },
         },
-        scales:{
-        x: {
-            grid: {
-            display: false 
+        scales: {
+            x: { 
+                grid: { display: false },
+                border: { display: false } // Supprime la ligne de l'axe
+            },
+            y: { 
+                display: false, // 4. SUPPRIME L'AXE Y COMPLETEMENT
+                grid: { display: false }
             }
         },
-        y: {
-            grid: {
-            display: false 
-            }
-        }
-        }
     
     }
 

@@ -4,12 +4,12 @@ import { AuthProvider } from '@Providers/auth';
 import { BreakpointProvider } from '@Providers/breakpoint';
 import { ModalProvider } from '@Providers/modal';
 import { ThemeProvider } from '@Providers/theme';
-
-
-
 import { Layout } from 'antd';
-
 import { Outlet, ScrollRestoration } from 'react-router-dom';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Chart } from 'chart.js';
+
+Chart.register(ChartDataLabels);
 
 export default function App() {
   return (

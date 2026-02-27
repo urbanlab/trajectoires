@@ -23,7 +23,6 @@ export function Enquete() {
     const Results = useEnquete((s) => s.enquete_results)
     const setSurvey = useSurvey((s) => s.setSurvey)
     const Survey = useSurvey((s) => s.survey)
-    console.log(Survey)
     const [finished, isFinished] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
     const [surveyId, setsurveyId] = useState<number>()
@@ -87,7 +86,7 @@ export function Enquete() {
         <>
 
         { finished ? 
-            <EnqueteCloturee  survey={Survey} nbr_of_responses={responses} nbr_of_employees={employees} />
+            <EnqueteCloturee survey={Survey} nbr_of_responses={responses} nbr_of_employees={employees} />
             : 
             <EnqueteDemarree updateData={UpdateData} uuid={companyUuid!} survey={Survey} nbr_of_responses={responses} nbr_of_employees={employees}/>
         }

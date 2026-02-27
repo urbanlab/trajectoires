@@ -9,6 +9,7 @@ import {Typography} from 'antd'
 import Icon from '@mdi/react';
 import { mdiChevronLeft, mdiPlayCircle ,  mdiInformationVariantCircleOutline, mdiWalk , mdiMessageOutline, mdiHeartOutline  , mdiTimerOutline, mdiArrowDecision , mdiMapMarkerOutline } from '@mdi/js';
 import { useNavigate } from 'react-router-dom';
+import { useEnquete } from '@/stores/enquete_results';
 
 interface EnqueteProps {
     survey: {[key:string]: string | number }
@@ -17,8 +18,11 @@ interface EnqueteProps {
 }
 
 
-export default function EnqueteCloturee({survey, nbr_of_employees, nbr_of_responses}: EnqueteProps) {
+export default function EnqueteCloturee({ survey, nbr_of_employees, nbr_of_responses}: EnqueteProps) {
     const [Active, setActive] = useState(1)
+    
+
+
     
     const dateConvert = (timeStamp : number) => {
         const rawDate = new Date(timeStamp * 1000)
@@ -30,8 +34,8 @@ export default function EnqueteCloturee({survey, nbr_of_employees, nbr_of_respon
         return date
     }
 
-    const date_debut = dateConvert(survey.Date_debut as number)
-    const date_fin = dateConvert(survey.Date_de_fin as number)
+    const date_debut = dateConvert(survey?.Date_debut as number)
+    const date_fin = dateConvert(survey?.Date_de_fin as number)
 
     const navigate = useNavigate()
 
