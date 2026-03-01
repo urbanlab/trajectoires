@@ -1,4 +1,44 @@
 
+
+
+export async function createSurvey(companyId: number){
+
+    const now = new Date()
+    const formatted_now = now.getTime()/1000
+    const threeMonthLater = now.setMonth(now.getMonth() + 3)
+    const formatted_threeMonth = Math.floor(now.getTime() / 1000);
+
+    const records = [{
+            fields: {
+                "Date_debut": formatted_now,
+                "Date_de_fin": formatted_threeMonth, 
+                "Statut": "Démarrée",
+                "ref_company_id": companyId
+            }
+        }];
+
+    try{
+
+        const res: Response = await fetch(`/api/grist/tables/Surveys/records`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ records }) 
+        });
+        if (!res.ok) {
+            throw new Error
+        }
+
+        console.log("cliké")
+
+    } catch(error) {
+        throw new Error ('erreur lors de la creation de survey')
+    }
+    
+}
+
+
 export async function getSurvey(companyId: number) {
 
     const filter = {"ref_company_id":[companyId]}
@@ -44,10 +84,10 @@ export async function UpdateSurvey(surveyId: number) {
         }) 
         })
         if (!res.ok){
-            console.log("erreur grist")
+            
             throw new Error
         };
-        console.log('data envoyée')
+        
     } catch (error){    
             console.log('error')
     }
