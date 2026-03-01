@@ -1,14 +1,19 @@
 import {useState, useEffect} from 'react'
-import {CardStep} from '@Components/cardStep'
+import { useNavigate } from 'react-router-dom';
 import content from '@/content.json'
+import { useAuth } from '@Hooks/auth';
+//COMPONENTS
+import {CardStep} from '@Components/cardStep'
 import ModuleCompletion from '@Components/ModuleCompletion'
 import ModuleEnquete from '@Components/ModuleEnquete'
 import Modale from '@Components/modale'
-import { useNavigate } from 'react-router-dom';
+
+//STORES
 import {useForm} from '@/stores/form'
 import { useSurvey } from '@/stores/survey'
+
+//API
 import { getFromGrist } from '@/_domains/companies/api';
-import { useAuth } from '@Hooks/auth';
 import {getEmployeesFromGrist} from '@Domains/employees/api'
 import { createSurvey } from '@/_domains/survey/api'
 import { getSurvey } from '@/_domains/survey/api';
@@ -16,6 +21,7 @@ import { getSurvey } from '@/_domains/survey/api';
 
 
 export function PageMenu() {
+  const {user} = useAuth()
   const setForm = useForm((s) => s.setForm)
   const setEmployees = useForm((s) => s.setEmployees)
   const setSurvey = useSurvey((s) => s.setSurvey)
@@ -23,11 +29,8 @@ export function PageMenu() {
   const [loading, isLoading] = useState(false)
   const [error, setError] = useState("")
   const navigate = useNavigate();
-  const {user} = useAuth()
-  if (!user) {
-    return 
-  }
-  const companyId = user.fields.ref_company_id
+
+  const companyId = user?.fields.ref_company_id
   const Survey = useSurvey((s)=> s.survey)
   const getEmployeesCompletion = useForm((s) => s.getEmployeesCompletion)
   const getEntrepriseCompletion = useForm((s) => s.getEntrepriseCompletion)
@@ -35,15 +38,23 @@ export function PageMenu() {
   const StepTwoFinished = (getEmployeesCompletion() === 100)
   const isEnqueteReady = StepOneFinished && StepTwoFinished
   const surveyExist = Survey?.id
-
+  
+  if (!user) {
+    return 
+  }
   
   const loadData = async () => {
+    if (!companyId) {
+      return null
+    }
     isLoading(true)
     try{
-      const data = await getFromGrist(companyId)
+      const [data, employees, survey] = await Promise.all([
+        getFromGrist(companyId),
+        getEmployeesFromGrist(companyId),
+        getSurvey(companyId)
+      ]);
       const formattedData = data.records[0]
-      const employees = await getEmployeesFromGrist(companyId)
-      const survey = await getSurvey(companyId)
       setForm(formattedData)
       setEmployees(employees)
       setSurvey(survey)
@@ -75,6 +86,9 @@ export function PageMenu() {
     }
     
     const sendSurvey = async() => {
+      if (!companyId){
+        return null
+      }
       isLoading(true)
       try {
         await createSurvey(companyId)

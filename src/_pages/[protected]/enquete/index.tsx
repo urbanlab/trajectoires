@@ -42,10 +42,10 @@ export function Enquete() {
         setIsLoading(true)
         try{
             const employees = await getEmployeesFromGrist(companyId)
-            setEmployees(employees)
             const data = await getForms(companyId)
-            setResults(data)
             const data_survey = await getSurvey(companyId)
+            setResults(data)
+            setEmployees(employees)
             setSurvey(data_survey.fields)
             setsurveyId(data_survey.id)
             if (data_survey.fields.Statut === 'Démarrée'){
