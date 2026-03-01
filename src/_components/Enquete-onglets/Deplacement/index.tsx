@@ -155,7 +155,7 @@ const dataMoyennes = labelModes.map((mode) => {
                     <div className="flex flex-col gap-2 flex-1">
                         <div className="flex flex-col gap-2">
                             <Typography.Title level={5}>Temps de trajet moyen par mode utilisé</Typography.Title>
-                            <div className="bg-white h-[300px] p-5"><BarChart2 donnees={dataMoyennes} label={labelModes} type="min"/></div>    
+                            <div className="bg-white h-[300px] p-5"><BarChart2 donnees={dataMoyennes} label={labelModes} typeLabel="min"/></div>    
                         </div>
                         <div className="flex flex-col gap-2">
                             <Typography.Title level={5}>Variation médiane du temps de trajet en fonction du mode utilisé</Typography.Title>

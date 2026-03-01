@@ -1,19 +1,27 @@
 import {Bar} from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
 
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 
-export default function BarChart2 ({donnees, label, type}: {donnees: any, label: any[], type:string}) {
+export default function BarChart2 ({donnees, label, type, typeLabel}: {donnees: any, label: any[], type?:string, typeLabel?:string}) {
 
-    const unite = type === "km" ? "km" : type === "min" ? "Minutes" : ""
-
+    
+    console.log("typelabel", typeLabel)
     const data = {
-        labels: label, // Tes étiquettes en bas
+        labels: label, 
         datasets: [
         { 
             data: donnees,
-            backgroundColor: ['#99C24D', '#F18F01', '#F18F01', '#E60027'],
+            backgroundColor: [
+            'rgba(230, 0, 39, 0.7)' ,    // #E60027 (Rouge)
+            'rgba(4, 139, 168, 0.7)',   // #048BA8 (Bleu canard)
+            'rgba(241, 143, 1, 0.7)',   // #F18F01 (Orange)
+            'rgba(119, 116, 116, 0.7)', // #777474 (Gris)
+            'rgba(153, 194, 77, 0.7)',  // #99C24D (Vert)
+            'rgba(242, 226, 57, 0.7)',  // #F2E239 (Jaune)
+            ],
         },
         ],
     };
@@ -23,9 +31,10 @@ export default function BarChart2 ({donnees, label, type}: {donnees: any, label:
         maintainAspectRatio: false,
         plugins: {
             datalabels: {
+            display: typeLabel === undefined ? false : true ,
             anchor: 'end' as const, 
             align: 'top' as const,
-            formatter: (val: string) => `${val} ${unite}`,
+            formatter: (val: string) => `${val} ${typeLabel}`,
             color: '#000000',
             font: { weight: 'normal' as const, family: "Jost" }
             },
@@ -40,7 +49,8 @@ export default function BarChart2 ({donnees, label, type}: {donnees: any, label:
                     autoSkip: false, 
                     maxRotation: 0, 
                     minRotation: 0,
-                    font: { size: 13, family: "Jost" },
+                    color: '#000000',
+                    font: { size: 13, family: "Jost", },
                     callback: function(value: any, index: number) {
                         const labelText = label[index];
                         if (labelText.length > 15) {
@@ -53,7 +63,15 @@ export default function BarChart2 ({donnees, label, type}: {donnees: any, label:
             },
             y: { 
                 display: true, 
-                grid: { display: true }
+                grid: { display: true },
+                ticks: {
+                    color: '#000000',
+                    font: { size: 13, family: "Jost", },
+                    callback: function(value: any) {
+                        return value + ( type != undefined ? type : "");
+                    }
+    }
+                
             }
         },
     
