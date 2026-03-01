@@ -6,18 +6,13 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 export default function BarChart2 ({donnees, label, type}: {donnees: any, label: any[], type:string}) {
 
-    const dataMoyennes = label.map((mode) => {
-        const s = donnees[mode];
-        return s && s.qty > 0 ? Math.round(s.totalMinutes / s.qty) : 0;
-    });
-
     const unite = type === "km" ? "km" : type === "min" ? "Minutes" : ""
 
     const data = {
         labels: label, // Tes étiquettes en bas
         datasets: [
         { 
-            data: dataMoyennes,
+            data: donnees,
             backgroundColor: ['#99C24D', '#F18F01', '#F18F01', '#E60027'],
         },
         ],

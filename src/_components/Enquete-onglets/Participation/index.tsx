@@ -10,7 +10,7 @@ interface ParticipationProps {
 }
 
 export default function Participation ({date_debut, date_fin, nbr_of_employees, nbr_of_responses  }: ParticipationProps) {
-    const percentage = (nbr_of_responses / nbr_of_employees) * 100
+    const percentage = Math.round((nbr_of_responses / nbr_of_employees) * 100)
     
     return( 
         <div className="flex flex-wrap gap-5">

@@ -1,6 +1,5 @@
 import {Typography, Image, Spin} from 'antd'
-import Icon from '@mdi/react';
-import { mdiAccountMultipleOutline } from '@mdi/js';
+import { CATEGORY_MAPPING } from '@/constants'
 import Vehicules from '@Commons/img/illustrations.png'
 import AgeMoyen from '@Commons/img/age_moyen.png'
 import Genres from '@Commons/img/rep_genres.png'
@@ -10,21 +9,6 @@ import FavMode from '@/_components/FavMode';
 import PolarChart from '@/_components/Charts/PolarChart'
 import { useEnquete } from '@/stores/enquete_results';
 import BarChart2 from '@/_components/Charts/barChart2';
-
-const CATEGORY_MAPPING: Record<string, string> = {
-    "Voiture personnelle": "Automobile",
-    "Voiture de service": "Automobile",
-    "Covoiturage": "Automobile",
-    "Autopartage": "Automobile",
-    "Transports en commun ferrés (train, métro, tramway)": "Transports en commun",
-    "Transports en commun routiers (bus, bus en site propre)": "Transports en commun",
-    "Vélo à Assistance Électrique (dont vélo cargo)": "Vélo",
-    "Vélo (dont vélo cargo)": "Vélo",
-    "Engin de mobilité électrique (trottinette électrique, etc.)": "Engins de mobilité électrique",
-    "Engin de mobilité non électrique (skateboard, trottinette, etc.)": "Marche et micromobilités",
-    "Marche": "Marche et micromobilités",
-    "2/3 roues motorisés (moto, scooters, etc.)": "Deux-roues motorisés"
-};
 
 export default function Deplacement () {
 
@@ -98,6 +82,7 @@ export default function Deplacement () {
     StatMode[mode] = { totalMinutes: 0, qty: 0 };
     });
 
+
     responses.forEach((r: any) => {
     const fields = r.fields;
     const temps = fields?.Temps_trajet || 0;
@@ -112,6 +97,12 @@ export default function Deplacement () {
         }
     });
 });
+
+const dataMoyennes = labelModes.map((mode) => {
+        const s = StatMode[mode];
+        return s && s.qty > 0 ? Math.round(s.totalMinutes / s.qty) : 0;
+    });
+
 
 
     return (
@@ -164,7 +155,7 @@ export default function Deplacement () {
                     <div className="flex flex-col gap-2 flex-1">
                         <div className="flex flex-col gap-2">
                             <Typography.Title level={5}>Temps de trajet moyen par mode utilisé</Typography.Title>
-                            <div className="bg-white h-[300px] p-5"><BarChart2 donnees={StatMode} label={labelModes} type="min"/></div>    
+                            <div className="bg-white h-[300px] p-5"><BarChart2 donnees={dataMoyennes} label={labelModes} type="min"/></div>    
                         </div>
                         <div className="flex flex-col gap-2">
                             <Typography.Title level={5}>Variation médiane du temps de trajet en fonction du mode utilisé</Typography.Title>

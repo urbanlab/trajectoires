@@ -2,9 +2,33 @@ import {Typography, Image} from 'antd'
 import Vehicules from '@Commons/img/illustrations.png'
 import { mdiOfficeBuilding, mdiClockTimeEightOutline   } from '@mdi/js';
 import Icon from '@mdi/react';
-import SyntheseMode from "@/_components/Enquete-onglets/Satisfaction/Synthese-mode"
+import { PieChart } from '@Components/Charts/pieChart'
+import { useEnquete } from '@/stores/enquete_results';
+
 
 export default function Organisation () {
+    
+    const responses = useEnquete((s) => s.enquete_results)
+    const qty = responses.length
+
+    const pauseMidi: Record<string, number> = {
+    "Oui": 0,
+    "Non": 0
+};
+
+responses.forEach((r: any,) => {
+    const value = r?.fields?.Pause_midi;
+    if (value === true) {
+        pauseMidi["Oui"] += 1;
+    } else if (value === false) {
+        pauseMidi["Non"] += 1;
+    }
+});
+
+const percent_yes = Math.round((pauseMidi["Oui"] / qty) * 100)
+const percent_no = Math.round((pauseMidi["Non"] / qty) * 100)
+const percentData = [percent_yes, percent_no]
+
     return (
         <div className="flex flex-col gap-5">
             <Typography.Title level={3}>Organisation des temps et rythme de travail</Typography.Title>
@@ -42,8 +66,11 @@ export default function Organisation () {
             </div>
             <div className='bg-(--light-grey) flex flex-col gap-5 p-5'>
                 <Typography.Title level={4}>Pause méridienne</Typography.Title>
-                <div>
-                    ///GRAPHIQUE
+                <div className="flex gap-5">
+                    <div className='flex-1'>
+                        <PieChart donnees={percentData}/>
+                    </div>
+                    <div className='flex-1'>AUTRE CHART</div>
                 </div>
 
             </div>
