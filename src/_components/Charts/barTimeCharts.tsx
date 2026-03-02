@@ -31,6 +31,7 @@ export default function BarTimeChart ({donnees, label, type, typeLabel, depart}:
         { 
             data: chartDataPoints,
             backgroundColor: [  color ],
+            barThickness: 15,
         },
         ],
     };
@@ -39,13 +40,28 @@ export default function BarTimeChart ({donnees, label, type, typeLabel, depart}:
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
+            tooltip: {
+                enabled: true, // On le garde activé
+                callbacks: {
+                    // Cette fonction modifie le titre du tooltip (qui affiche la date par défaut)
+                    title: function(context: any) {
+                        const date = new Date(context[0].parsed.x);
+                        return `${date.getHours()}h`; // N'affiche que l'heure
+                    },
+                    // Optionnel : tu peux aussi personnaliser le libellé de la donnée
+                    label: function(context: any) {
+                        return `Valeur : ${context.parsed.y}${type !== undefined ? type : "%"}`;
+                    }
+                }
+            },
             datalabels: {
-            display: typeLabel === undefined ? false : true ,
-            anchor: 'end' as const, 
-            align: 'top' as const,
-            formatter: (val: string) => `${val} ${typeLabel}`,
-            color: '#000000',
-            font: { weight: 'normal' as const, family: "Jost" }
+                
+                display: typeLabel === undefined ? false : true ,
+                anchor: 'end' as const, 
+                align: 'top' as const,
+                formatter: (val: string) => `${val} ${typeLabel}`,
+                color: '#000000',
+                font: { weight: 'normal' as const, family: "Jost" }
             },
             legend: {
                 display: false,
@@ -66,6 +82,7 @@ export default function BarTimeChart ({donnees, label, type, typeLabel, depart}:
             
                 grid: { display: false },
                 ticks: {
+                    
                     source: 'auto' as const,
                     autoSkip: true as const, 
                     maxRotation: 0, 

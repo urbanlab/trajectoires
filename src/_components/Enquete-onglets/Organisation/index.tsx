@@ -54,7 +54,8 @@ export default function Organisation () {
     const arriveeStats = calculateTimeStats(rawArrivee);
     const departStats = calculateTimeStats(rawDepart);
 
-    
+    console.log(arriveeStats)
+    console.log(departStats)
 
     const MidiModes  = [...responses.map((r: any) => r.fields.Quel_mode_de_deplacement)
         .filter(mode => mode !== undefined && mode !== null && mode !== "")]
