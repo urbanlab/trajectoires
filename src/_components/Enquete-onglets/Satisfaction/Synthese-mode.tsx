@@ -39,9 +39,9 @@ export default function SyntheseMode ({mode, satis, insatis}: SyntheseProps) {
                         <Icon path={mdiThumbUpOutline} color="var(--green)" size={1}/>
                         <p className= 'text-(--green) font-medium text-[1.2em]'>Raisons de satisfaction</p>
                     </div>
-                    {satis?.map((s) => {
+                    {satis?.map((s, index) => {
                         return(
-                        <p className= "text-[1.2em]">{s}</p>
+                        <p key={index} className= "text-[1.2em]">{s}</p>
 
                         )
 
@@ -53,9 +53,9 @@ export default function SyntheseMode ({mode, satis, insatis}: SyntheseProps) {
                         <Icon path={mdiThumbDownOutline} color="var(--orange)" size={1}/>
                         <p className= 'text-(--orange) font-medium text-[1.2em]'>Raisons d’insatisfaction</p>
                     </div>
-                    {insatis?.map((s) => {
+                    {insatis?.map((s, index) => {
                         return(
-                        <p className= "text-[1.2em]">{s}</p>
+                        <p key={index} className= "text-[1.2em]">{s}</p>
 
                         )
 

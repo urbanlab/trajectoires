@@ -1,13 +1,14 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import Button from "@/_components/Button";
 import Participation from "@/_components/Enquete-onglets/Participation";
 import Deplacement from "@/_components/Enquete-onglets/Deplacement";
 import Satisfaction from "@/_components/Enquete-onglets/Satisfaction";
 import Organisation from "@/_components/Enquete-onglets/Organisation";
+import ReportModal from './Enquete-onglets/ReportModal';
 import Onglet from "@/_components/Enquete-onglets/Onglet";
 import {Typography} from 'antd'
-import Icon from '@mdi/react';
-import { mdiChevronLeft, mdiPlayCircle ,  mdiInformationVariantCircleOutline, mdiWalk , mdiMessageOutline, mdiHeartOutline  , mdiTimerOutline, mdiArrowDecision , mdiMapMarkerOutline } from '@mdi/js';
+
+import { mdiChevronLeft, mdiInformationVariantCircleOutline, mdiWalk ,  mdiHeartOutline  , mdiTimerOutline, mdiArrowDecision , mdiMapMarkerOutline } from '@mdi/js';
 import { useNavigate } from 'react-router-dom';
 import { useEnquete } from '@/stores/enquete_results';
 
@@ -22,8 +23,6 @@ export default function EnqueteCloturee({ survey, nbr_of_employees, nbr_of_respo
     const [Active, setActive] = useState(1)
     
 
-
-    
     const dateConvert = (timeStamp : number) => {
         const rawDate = new Date(timeStamp * 1000)
         const date = rawDate.toLocaleDateString('fr-FR', {
@@ -71,6 +70,9 @@ export default function EnqueteCloturee({ survey, nbr_of_employees, nbr_of_respo
             :
             Active === 4 ?
             <Organisation></Organisation>
+            :
+            Active === 5 ? 
+            <ReportModal/>
             :
             null
             }

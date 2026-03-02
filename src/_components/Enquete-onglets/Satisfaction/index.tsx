@@ -33,7 +33,6 @@ responses.forEach((r: any) => {
         .filter(m => m !== "L" && m !== "")
         .map(m => CATEGORY_MAPPING[m.startsWith("L") ? m.slice(1) : m])
         .filter(cat => cat && countsByMode[cat]); 
- // Pour chaque mode détecté dans cette réponse, on incrémente les raisons
         modes.forEach(category => {
         const listGood = Array.isArray(rawGood) ? rawGood : [rawGood];
         listGood.forEach(reason => {
@@ -104,9 +103,11 @@ const dataMoyennes = labelModes.map((mode) => {
             </div>
             <div className="bg-(--light-grey) p-5 flex flex-col gap-5">
                 <Typography.Title level={4}>Synthèse par mode</Typography.Title>
-                {finalStatsByMode.map((mode) => {
+                {finalStatsByMode.map((mode, index) => {
                     return(
-                        <SyntheseMode mode={mode.mode} satis={mode.topSatisfaction} insatis={mode.topInsatisfaction}/>
+                        <div key={index}>
+                            <SyntheseMode mode={mode.mode} satis={mode.topSatisfaction} insatis={mode.topInsatisfaction}/>
+                        </div>
                     )
                 })}
                 
