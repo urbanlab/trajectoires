@@ -42,14 +42,14 @@ export default function EnqueteCloturee({ survey, nbr_of_employees, nbr_of_respo
     return (
         <div className="flex flex-col gap-5">
 
-            <div className="flex justify-between w-full lg:max-h-[120px] "> 
+            <div className="flex lg:flex-row flex-col justify-between w-full lg:max-h-[150px] gap-10  "> 
                 <div className="flex flex-col gap-2">
                     <Typography.Title className=''>Etapes 3 : Enquête</Typography.Title>
                     <div>
                         <Button iconPath={mdiChevronLeft} title="Retour à l'acceuil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
                     </div>
                 </div>
-                <div className='flex  gap-1 py-5 '>
+                <div className='flex  gap-1 py-5 self-end '>
                     <Onglet title={"Participation"} iconPath={mdiInformationVariantCircleOutline}  index={1} onSelect={setActive} ActiveTab={Active}/>
                     <Onglet title={"Déplacement"} iconPath={mdiWalk}  index={2} onSelect={setActive} ActiveTab={Active}/>
                     <Onglet title={"Satisfaction"} iconPath={mdiHeartOutline } index={3} onSelect={setActive} ActiveTab={Active}/>

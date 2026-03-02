@@ -11,14 +11,14 @@ interface Freins {
 export default function FreinsMode ({mode, freins}: Freins) {
     const img = mode === 'bus' ? bus : mode === 'velo' ? velo : mode === 'voiture' ? voiture : ""
     return (
-        <div className = "bg-white p-5 flex flex-col gap-2 items-center ">
+        <div className = "bg-white p-5 flex flex-col gap-2 items-center h-full ">
             <div className="w-[30%]">
                 <Image src={img}  preview={false}/>
             </div>
-            <div className = "flex-1 flex flex-col gap-3 w-full">
+            <div className = "flex-1 flex flex-col gap-3 w-full items-start justify-end">
             {freins.map((frein, index) => {
                 return (
-                    <p key={index}>{`${index + 1}. ${frein.raison}`}</p>
+                    <p className="text-[1.2em]"key={index}>{`${index + 1}. ${frein.raison}`}</p>
                 )
             })}
             </div>

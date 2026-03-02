@@ -16,9 +16,11 @@ export default function Onglet ({title, onSelect, iconPath, index, ActiveTab, di
     const isActive = ActiveTab === index
 
     return(
-        <button disabled={disabled} onClick={() => onSelect(index)} className={`${disabled ? "bg-(--select-grey) " : isActive ? "bg-(--red)": "bg-(--dark-grey) text-white"} flex flex-col justify-center p-4 gap-2 items-center rounded-sm `}>
-            <Icon path={iconPath} color={disabled ? "var(--disabled-grey)" : isActive ? "white" : "black"} size={1.5}/><span className={`${disabled ? "text-(--disabled-grey)" : isActive ? "text-white" :"text-black" } text-[1.3em] font-medium`}>{title}</span>
-        </button>
+        <div    className= "flex">
+            <button disabled={disabled} onClick={() => onSelect(index)} className={`${disabled ? "bg-(--select-grey) " : isActive ? "bg-(--red)": "bg-(--dark-grey) text-white"} flex flex-col justify-center p-4 gap-2 items-center rounded-sm `}>
+                <Icon path={iconPath} color={disabled ? "var(--disabled-grey)" : isActive ? "white" : "black"} size={1.5}/><span className={`${disabled ? "text-(--disabled-grey)" : isActive ? "text-white" :"text-black" } text-[1.3em] font-medium lg:flex hidden`}>{title}</span>
+            </button>
+        </div>
 
     )
 }

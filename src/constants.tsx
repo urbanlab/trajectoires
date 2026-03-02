@@ -30,3 +30,26 @@ export const CATEGORY_MAPPING_MIDI: Record<string, string> = {
     "Le covoiturage": "Automobile",
     "La marche": "Marche et micromobilités",
 };
+
+
+export const CATEGORY_MAPPING_SOUHAIT: Record<string, string> = {
+    "Un véhicule motorisé à faibles émissions (électrique, hybride, hydrogène, véhicule à faibles émissions inférieures à 60g/km, etc.)": "Véhicule faible émission",
+    "Un véhicule motorisé (essence, diesel, ...)": "Véhicule thermique",
+    "Les transports en commun ferrés (train, métro, tramway)": "Train / métro / tram",
+    "Les transports en commun routiers (bus, bus en site propre)": "Bus",
+    "Un vélo à assistance électrique (VAE) dont vélo cargo": "Vélo électrique",
+    "Un vélo classique (mécanique)": "Vélo mécanique",
+    "Un engin de mobilité non électrique (skateboard, trottinette, ...)": "Engin non électrique",
+    "Un engin de mobilité électrique (trottinette électrique, ...)": "Engin électrique",
+    "Un 2/3 roues électrique": "Scooter / moto électrique",
+    "Le covoiturage": "Covoiturage",
+    "La marche": "Marche",
+    "J'utilise le mode de déplacement qui me convient": "Pas de changement"
+
+
+
+
+
+
+
+}

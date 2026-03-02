@@ -25,7 +25,7 @@ export default function BarChart ({donnees, label, type}: {donnees: any[], label
         maintainAspectRatio: false,
         plugins: {
             datalabels: {
-            anchor: 'start' as const, // Positionne l'ancre en haut de la barre
+            anchor: 'start' as const, 
             align: 'top' as const,
             formatter: (val: string) => `${val} ${unite}`, // Ton unité
             color: '#FFFFFF',
@@ -38,10 +38,10 @@ export default function BarChart ({donnees, label, type}: {donnees: any[], label
         scales: {
             x: { 
                 grid: { display: false },
-                border: { display: false } // Supprime la ligne de l'axe
+                border: { display: false } 
             },
             y: { 
-                display: false, // 4. SUPPRIME L'AXE Y COMPLETEMENT
+                display: false, 
                 grid: { display: false }
             }
         },

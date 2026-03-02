@@ -30,7 +30,6 @@ export async function createSurvey(companyId: number){
             throw new Error
         }
 
-        console.log("cliké")
 
     } catch(error) {
         throw new Error ('erreur lors de la creation de survey')
