@@ -10,7 +10,7 @@ import BarChartSmiley from '@/_components/Charts/barChart2';
 
 export default function Satsifaction () {
     const responses = useEnquete((s) => s.enquete_results)
-    console.log(responses)
+    
     const labelModes = ["Transports en commun", "Marche et micromobilités", "Automobile", "Deux-roues motorisés", "Vélo", "Engins de mobilité électrique"]
 
     const StatMode: Record<string, { statifactionTotal: number, qty: number }> = {};
@@ -63,7 +63,7 @@ const finalStatsByMode = labelModes.map(mode => ({
     topInsatisfaction: extractTop3(countsByMode[mode].bad)
 }));
 
-console.log("final", finalStatsByMode);
+
 
 
 

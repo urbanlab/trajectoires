@@ -55,7 +55,6 @@ export function Enquete() {
             }
             setIsLoading(false)
         } catch (error){
-            console.log(error)
             setIsLoading(false)
         }
     }
@@ -72,7 +71,6 @@ export function Enquete() {
 
 
         } catch (error) {
-            console.error(error)
         }
     }
     if (!user) {

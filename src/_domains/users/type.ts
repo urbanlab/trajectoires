@@ -1,7 +1,4 @@
-export enum UserRole {
-  Référent = 'Référent',
-  Collectivité = 'Collectivité',
-}
+
 
 export type UserData = {
   id: number;
@@ -9,7 +6,7 @@ export type UserData = {
     Prenom: string;
     Nom: string;
     Email: string;
-    Role: UserRole;
+    Role: string;
     Password: string;
     ref_company_id: number;
     ref_company_Nom : string

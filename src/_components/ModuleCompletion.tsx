@@ -18,7 +18,6 @@ const TEXT: Record<number, string> = {
 
 
 export default function ModuleCompletion({percentage, isLoading}: Module) {
-    console.log('percentage', percentage)
     const IconColor =percentage < 30 ? "var(--red)" : percentage < 60 ? "var(--orange)" : percentage < 100 ? "var(--blue)" : "var(--green)"
     const bgColor = percentage < 30 ? "bg-(--red)" : percentage < 60 ? "bg-(--orange)" : percentage < 100 ? "bg-(--blue)" : "bg-(--green)"
     const fontColor = percentage < 30 ? "text-(--red)" : percentage < 60 ? "text-(--orange)" : percentage < 100 ? "text-(--blue)" : "text-white"

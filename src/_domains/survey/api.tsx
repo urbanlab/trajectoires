@@ -88,6 +88,5 @@ export async function UpdateSurvey(surveyId: number) {
         };
         
     } catch (error){    
-            console.log('error')
     }
 }

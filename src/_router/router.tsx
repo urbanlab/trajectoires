@@ -1,5 +1,4 @@
 import { ProtectedRoute } from '@Components/protectedRoute';
-import { UserRole } from '@Domains/users/type';
 import { PageMenu } from '@PagesProtected/menu';
 import {InfoSalaries} from '@PagesProtected/info-salaries';
 import FicheEntreprise from '@PagesProtected/fiche-entreprise';
@@ -9,12 +8,6 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import App from '../app';
 import { pageIntro } from './global';
-export type UserRoleNavigation = {
-  [key in UserRole.Référent | UserRole.Collectivité]: {
-    label: string;
-    path: string;
-  }[];
-};
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +38,7 @@ export const router = createBrowserRouter([
           <Enquete/>
         </ProtectedRoute>
       )},
-       { path: 'fiche-entreprise',
+      { path: 'fiche-entreprise',
       element: (
         <ProtectedRoute>
           <FicheEntreprise/>

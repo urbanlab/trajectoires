@@ -13,7 +13,7 @@ import BarChart2 from '@/_components/Charts/barChart2';
 export default function Deplacement () {
 
     const responses = useEnquete((s) => s.enquete_results)
-    console.log(responses)
+   
     
     if (!responses || responses.length === 0) {
         return <div><Spin/></div>
@@ -92,7 +92,7 @@ export default function Deplacement () {
         const val = String(m).trim();
         return val !== "L" && val !== "l" && val !== "";
     });
-    console.log("validMode", validModes)
+    
     const nbModes = validModes.length;
     const tempsPartage = nbModes > 0 ? temps / nbModes : 0;
     validModes.forEach(m => {

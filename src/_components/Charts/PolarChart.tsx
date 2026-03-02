@@ -6,7 +6,7 @@ import { Rectangle } from 'recharts';
 ChartJS.register(ArcElement, Tooltip, Legend, RadialLinearScale);
 
 export default function PolarChart ({label, donnees, total}: {label: any[], donnees:any, total: number}) {
-  console.log("donne", donnees)
+
   
   const arrayPercent = [(donnees["Transport en commun"] / total) * 100, (donnees["Marche et micromobilités"] / total) * 100, (donnees["Automobile"] / total) * 100, (donnees["Deux-roues motorisés"] / total) * 100, (donnees["Vélo"] / total) * 100 , (donnees["Engins de mobilité électrique"] / total) * 100]
 

@@ -7,7 +7,6 @@ interface BoardProps {
 
 export function Board({headers, rows}: BoardProps){
     const nbrofColumns = headers.length
-    console.log(nbrofColumns)
     return (
         <>
             <div style={{ gridTemplateColumns: `repeat(${nbrofColumns}, minmax(0, 1fr))` }}className={`grid `}>

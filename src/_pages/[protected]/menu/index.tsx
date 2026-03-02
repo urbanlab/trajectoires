@@ -40,7 +40,7 @@ export function PageMenu() {
   const surveyExist = Survey?.id
   
   if (!user) {
-    return 
+    return null
   }
   
   const loadData = async () => {

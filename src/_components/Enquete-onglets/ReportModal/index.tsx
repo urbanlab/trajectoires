@@ -24,7 +24,7 @@ export default function ReportModal () {
         const cleanedarray = arrayCarOwner.filter((item) => item?.toLowerCase().includes("voiture") || item?.toLowerCase().includes("covoiturage")  )
         const isCarOwner = cleanedarray.length > 0
         const wish = r.fields?.Souhait_moyens_de_transport.filter((item: string) => item !== "L" && item !== null && item !== undefined)
-        console.log("whish", wish)
+        
         const formattedWish = wish.map((w: string) => CATEGORY_MAPPING_SOUHAIT[w])
         formattedWish.forEach((w: string) => {
             souhaitStat[w].general = (souhaitStat[w].general|| 0) + 1

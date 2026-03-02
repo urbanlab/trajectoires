@@ -23,8 +23,6 @@ export default function BarTimeChart ({donnees, label, type, typeLabel, depart}:
         };
     });
 
-    console.log("chart", chartDataPoints)
-
     const data = {
         
         datasets: [

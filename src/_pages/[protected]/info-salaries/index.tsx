@@ -79,7 +79,6 @@ export function InfoSalaries(){
         loadData()
     }, [])
 
-    console.log("rows", rows)
 
     const settingArray = (parsedXlsx: any[]) => {
         const [firstRow, ...otherRows] = parsedXlsx

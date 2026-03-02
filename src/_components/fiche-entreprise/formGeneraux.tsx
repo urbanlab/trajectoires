@@ -22,7 +22,7 @@ export default function FormGeneraux ({companyId, data, onSave}: {companyId:numb
             onSave()
 
         } catch(error) {
-            console.error("Erreur lors de la sauvegarde :", error);
+            
         }
     }
 

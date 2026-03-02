@@ -69,7 +69,6 @@ export const useForm = create<FormStore>((set, get:any) => ({
             if (result === 100){
                 completed += 1
             }
-            console.log("total", total)
         }
         const percentage = (completed / total) * 100
 

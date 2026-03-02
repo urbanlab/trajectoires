@@ -40,7 +40,7 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
             onSave()
 
         } catch(error) {
-            console.error("Erreur lors de la sauvegarde :", error);
+            
         }
     }
 

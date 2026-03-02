@@ -3,7 +3,7 @@ import Icon from '@mdi/react';
 import { mdiCheckCircleOutline, mdiInformationVariantCircleOutline} from '@mdi/js';
 
 export default function FormContact ({data}: {data?:[]}) {
-    console.log('datauser' , data)
+    
     return (
         <div className="bg-(--light-grey) flex flex-col gap-5 p-5">
             <p className="text-[1.5em]">Contacts renseignés</p>

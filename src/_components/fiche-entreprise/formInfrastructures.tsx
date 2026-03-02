@@ -32,7 +32,7 @@ export default function FormInfra ({companyId, data, onSave}: {companyId:number,
             onSave()
 
         } catch(error) {
-            console.error("Erreur lors de la sauvegarde :", error);
+            
         }
     }
 
