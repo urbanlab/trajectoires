@@ -13,17 +13,19 @@ type Mode = typeof modes[number]
 
 interface SyntheseProps {
     mode: Mode
+    satis: any[]
+    insatis :any[]
 }
 
-export default function SyntheseMode ({mode}: SyntheseProps) {
+export default function SyntheseMode ({mode, satis, insatis}: SyntheseProps) {
 
-    const title = mode === "community" ?  "les transports en communs" : mode === "micromobility" ? "la marche et les micromobilités"
-    : mode === "velo" ? "le vélo" : mode === "car" ? "l'automobile" : mode ==="two-wheels" ? "les deux-roues motorisés"
-    : mode === "electric" ? "les engins de mobilité électrique" : ""
+    const title = mode === "Transports en commun" ?  "les transports en communs" : mode === "Marche et micromobilités" ? "la marche et les micromobilités"
+    : mode === "Vélo" ? "le vélo" : mode === "Automobile" ? "l'automobile" : mode === "Deux-roues motorisés" ? "les deux-roues motorisés"
+    : mode === "Engins de mobilité électrique" ? "les engins de mobilité électrique" : ""
 
-    const img = mode === "community" ?  Bus : mode === "micromobility" ? Scooter
-    : mode === "velo" ? Velo : mode === "car" ? Voiture : mode ==="two-wheels" ? Scooter
-    : mode === "electric" ? Scooter : ""
+    const img = mode === "Transports en commun" ?  Bus : mode === "Marche et micromobilités" ? Scooter
+    : mode === "Vélo" ? Velo : mode ===  "Automobile"? Voiture : mode ==="Deux-roues motorisés" ? Scooter
+    : mode === "Engins de mobilité électrique" ? Scooter : ""
 
     return (
         <div className="flex flex-col gap-2">
@@ -37,19 +39,28 @@ export default function SyntheseMode ({mode}: SyntheseProps) {
                         <Icon path={mdiThumbUpOutline} color="var(--green)" size={1}/>
                         <p className= 'text-(--green) font-medium text-[1.2em]'>Raisons de satisfaction</p>
                     </div>
-                    <p className= "text-[1.2em]">1.Le trajet est confortable</p>
-                    <p className= "text-[1.2em]">2.C'est simple de se stationner (voiture, vélo…)</p>
-                    <p className= "text-[1.2em]">3.Mon mode de déplacement est pratique</p>
+                    {satis?.map((s) => {
+                        return(
+                        <p className= "text-[1.2em]">{s}</p>
+
+                        )
+
+                    })}
+                    
                 </div>
                 <div className="flex flex-col gap-2">
                     <div className='flex gap-2 items-center'>
                         <Icon path={mdiThumbDownOutline} color="var(--orange)" size={1}/>
                         <p className= 'text-(--orange) font-medium text-[1.2em]'>Raisons d’insatisfaction</p>
                     </div>
-                    <p className= "text-[1.2em]">1.J’aimerais changer pour plus confortable</p>
-                    <p className= "text-[1.2em]">2.J’aimerais changer pour plus flexible</p>
-                    <p className= "text-[1.2em]">3.J’aimerais changer pour plus fiable </p>
+                    {insatis?.map((s) => {
+                        return(
+                        <p className= "text-[1.2em]">{s}</p>
 
+                        )
+
+                    })}
+                    
                 </div>
             </div>
         </div>

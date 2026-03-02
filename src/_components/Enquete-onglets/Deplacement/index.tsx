@@ -88,20 +88,27 @@ export default function Deplacement () {
     const temps = fields?.Temps_trajet || 0;
     const rawMode = fields?.Moyens_transport_unique_ || fields?.Moyens_transport_multiples_;
     const modeEmployee = Array.isArray(rawMode) ? rawMode : (rawMode ? [rawMode] : []);
-    modeEmployee.forEach(m => {
-        let cleanMode = m.startsWith("L") ? m.slice(1) : m;
-        const category = CATEGORY_MAPPING[cleanMode];
+    const validModes = modeEmployee.filter(m => {
+        const val = String(m).trim();
+        return val !== "L" && val !== "l" && val !== "";
+    });
+    console.log("validMode", validModes)
+    const nbModes = validModes.length;
+    const tempsPartage = nbModes > 0 ? temps / nbModes : 0;
+    validModes.forEach(m => {
+        const category = CATEGORY_MAPPING[m];
         if (category && StatMode[category]) {
-            StatMode[category].totalMinutes += temps;
+            StatMode[category].totalMinutes += tempsPartage;
             StatMode[category].qty += 1;
         }
     });
+    
 });
 
 const dataMoyennes = labelModes.map((mode) => {
-        const s = StatMode[mode];
-        return s && s.qty > 0 ? Math.round(s.totalMinutes / s.qty) : 0;
-    });
+    const s = StatMode[mode];
+    return s && s.qty > 0 ? Math.round(s.totalMinutes / s.qty) : 0;
+});
 
 
 
@@ -155,7 +162,11 @@ const dataMoyennes = labelModes.map((mode) => {
                     <div className="flex flex-col gap-2 flex-1">
                         <div className="flex flex-col gap-2">
                             <Typography.Title level={5}>Temps de trajet moyen par mode utilisé</Typography.Title>
-                            <div className="bg-white h-[300px] p-5"><BarChart2 donnees={dataMoyennes} label={labelModes} typeLabel="min"/></div>    
+                            <div className="bg-white h-[300px] p-5  flex items-end ">
+                                <div className="h-[60%] w-full">
+                                    <BarChart2 donnees={dataMoyennes} label={labelModes} typeLabel="min"/>
+                                </div>
+                            </div>    
                         </div>
                         <div className="flex flex-col gap-2">
                             <Typography.Title level={5}>Variation médiane du temps de trajet en fonction du mode utilisé</Typography.Title>
