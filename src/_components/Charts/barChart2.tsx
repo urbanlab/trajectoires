@@ -7,8 +7,8 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 export default function BarChart2 ({donnees, label, type, typeLabel}: {donnees: any, label: any[], type?:string, typeLabel?:string}) {
 
-    
-    console.log("typelabel", typeLabel)
+
+
     const data = {
         labels: label, 
         datasets: [
