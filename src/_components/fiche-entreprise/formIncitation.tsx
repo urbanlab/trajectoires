@@ -60,7 +60,7 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
                         </div>
                     </div>
                     <Form.Item
-                        label={"Nombre de personne l’ayant demandé"}
+                        label={"Nombre de personnes en bénéficiant"}
                         name="Nb_pers_FMD"
                         rules={[
                             { required: true, message: "Veuillez saisir le nombre de place avec prise disponibles." },
@@ -92,7 +92,7 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
                         <InputNumber style={{width:"100%"}} />
                     </Form.Item>
                     <Form.Item
-                        label={"Montant total d’abonnement remboursé annuel"}
+                        label={"Montant total annuel d’abonnement remboursé"}
                         name="Montant_total_remb"
                         rules={[
                             { required: true, message: "Veuillez saisir un valeure." },
