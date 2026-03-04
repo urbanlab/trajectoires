@@ -16,7 +16,7 @@ interface EnqueteProps {
 
 export default function EnqueteDemaree({updateData, uuid, survey, nbr_of_responses, nbr_of_employees}: EnqueteProps) {
     const navigate = useNavigate()
-    const Url = `https://form.typeform.com/to/LpHZ9JDv#organisationid=${uuid}`
+    const Url = `https://form.typeform.com/to/LpHZ9JDv#uuid=${uuid}`
 
 
     const handleCopy = async () => {

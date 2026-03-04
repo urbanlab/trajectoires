@@ -145,7 +145,7 @@ export function InfoSalaries(){
                     </div>
 
                     <div>
-                        <a href='/public/gabarit_import_Trajectoires.xlsx' download>
+                        <a href='/gabarit_import_Trajectoires.xlsx' download>
                             <Button title="Télécharger" bgColor="red"></Button>
                         </a>
                     </div>
