@@ -44,7 +44,7 @@ export default function EnqueteCloturee({ survey, nbr_of_employees, nbr_of_respo
 
             <div className="flex lg:flex-row flex-col justify-between w-full lg:max-h-[150px] gap-10  "> 
                 <div className="flex flex-col gap-2">
-                    <Typography.Title className=''>Etapes 3 : Enquête</Typography.Title>
+                    <Typography.Title className=''>Étape 3 : Enquête</Typography.Title>
                     <div>
                         <Button iconPath={mdiChevronLeft} title="Retour à l'acceuil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
                     </div>
@@ -52,11 +52,10 @@ export default function EnqueteCloturee({ survey, nbr_of_employees, nbr_of_respo
                 <div className='flex  gap-1 py-5 self-end '>
                     <Onglet title={"Participation"} iconPath={mdiInformationVariantCircleOutline}  index={1} onSelect={setActive} ActiveTab={Active}/>
                     <Onglet title={"Déplacement"} iconPath={mdiWalk}  index={2} onSelect={setActive} ActiveTab={Active}/>
-                    <Onglet title={"Satisfaction"} iconPath={mdiHeartOutline } index={3} onSelect={setActive} ActiveTab={Active}/>
+                    <Onglet title={"Satisfaction"}  iconPath={mdiHeartOutline } index={3} onSelect={setActive} ActiveTab={Active}/>
                     <Onglet title={"Organisation"} iconPath={mdiTimerOutline} index={4} onSelect={setActive} ActiveTab={Active}/>
                     <Onglet title={"Report modal"} iconPath={mdiArrowDecision} index={5} onSelect={setActive} ActiveTab={Active} />
                     <Onglet title={"Carte"} iconPath={mdiMapMarkerOutline} index={6} onSelect={setActive} ActiveTab={Active} disabled={true}/>
-
                 </div>
             </div>
             {Active === 1 ? 

@@ -3,17 +3,16 @@
         "text": "Complétez les informations relatives à votre structure. Ces informations concernent des données génériques et des informations relatives aux dispositifs, équipements et solutions de mobilité proposés par la structure."
     },
     "Step2": {
-        "text": "Complétez les informations relatives à vos salariés (adresses mails et lieux d'habitations)."
-
+        "text": "Complétez les informations relatives à vos salariés (adresses mails et lieux d'habitation)."
     },
     "Step3": {
-        "text": "Démarrer l'enquête auprès de vos salariés. Vous pourrez paramétrez et suivre l'avancement de l'enquête. "
-    }, 
+        "text": "Démarrer l'enquête auprès de vos salariés. Vous pourrez paramétrer et suivre l'avancement de l'enquête. "
+    },
     "Modale": {
-        "demarche1":"Trajectoires constitue une initiative pilotée par la Métropole de Lyon via son Agence des Mobilités. Elle vise à mettre à disposition des entreprises un outil leur permettant d’appréhender de manière autonome les enjeux liés aux déplacements de leurs salariés. ",
+        "demarche1": "Trajectoires constitue une initiative pilotée par la Métropole de Lyon via son Agence des Mobilités. Elle vise à mettre à disposition des entreprises un outil leur permettant d’appréhender de manière autonome les enjeux liés aux déplacements de leurs salariés. ",
         "demarche2": "Ce dispositif s’appuie sur la génération automatique d’un diagnostic des mobilités de l'entreprise, offrant ainsi une base d’analyse nécessaire pour la création d'un Plan de Mobilité Employeur."
     },
     "Salaries": {
-        "download": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim vulputate velit, vel iaculis dolor viverra id. Aenean vel efficitur mauris. Nunc ultrices vestibulum mi, eget luctus eros."
+        "download": "Veuillez télécharger et remplir le gabarit suivant avec les informations de vos salariés afin de les ajouter dans la plateforme."
     }
 }

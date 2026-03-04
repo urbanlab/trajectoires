@@ -66,7 +66,7 @@ export default function FicheEntreprise () {
         <div className="flex flex-col gap-10">
             <div className="flex justify-between  w-full">
                 <div className="flex flex-col gap-8">
-                    <Typography.Title className=''>Etapes 1 : Fiche entreprise</Typography.Title>
+                    <Typography.Title className=''>Étape 1 : Fiche entreprise</Typography.Title>
                     <div className =" flex gap-5">
                         <Button iconPath={mdiChevronLeft} title="Retour à l'acceuil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
                         <Button iconPath={mdiChevronRight} iconRight={true} title ="Étape 2 : Informations salariés" bgColor="white" onPress={()=> navigate('/informations-salaries')}/>

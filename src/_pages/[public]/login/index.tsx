@@ -68,9 +68,9 @@ export function PageLogin() {
               <div className="flex justify-end  ">
                 <Button title="Connexion" type="button" bgColor="red" />
               </div>
-              <div className='mt-5 flex gap-5  justify-center'>
-                <span className="text-[1.1em] italic">Pototype - {pkg.version}</span>
-                <span className ="rounded-full bg-(--light-orange) px-2 text-[1.1em] italic">Alpha</span>
+              <div className='mt-5 flex gap-3  justify-center'>
+                <span className="text-[1.1em] italic">Version {pkg.version}</span>
+                <span className ="rounded-full bg-(--light-orange) px-2 text-[1.1em] italic">Prototype</span>
               </div>
             </Form>
           </div>
@@ -80,8 +80,12 @@ export function PageLogin() {
         <div className='h-[60px]   sm:mt-0 flex flex-col sm:flex-row justify-end sm:items-center gap-15'>
           <span className='font-medium text-[1.1em]'>Une expérimentation menée par </span>
           <div className='flex gap-10 h-full'>
-            <Image src={Mobilites} preview={false} height="100%" className="object-contain"></Image>
-            <Image src={Metro} preview={false} height="100%" className="object-contain"></Image>
+            <a href="https://mobilites.grandlyon.com/espace-pros" target="_blank">
+              <Image src={Mobilites} preview={false} height="100%" className="object-contain"></Image>
+            </a>
+            <a href="https://www.grandlyon.com/" target="_blank">
+              <Image src={Metro} preview={false} height="100%" className="object-contain"></Image>
+            </a>
           </div>
         </div>
       </footer>

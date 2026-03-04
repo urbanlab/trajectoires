@@ -26,10 +26,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function login(email: string, password: string): Promise<boolean> {
     try {
-      
-      const found = await loginUser(email, password);
-      setUser(found);
-      localStorage.setItem('user', JSON.stringify(found));
+      const logguedUser = await loginUser(email, password);
+      setUser(logguedUser);
+      localStorage.setItem('user', JSON.stringify(logguedUser));
       return true;
     } catch {
       return false;

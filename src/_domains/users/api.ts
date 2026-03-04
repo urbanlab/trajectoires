@@ -1,13 +1,14 @@
 import { UserData } from './type';
+import { encryptPassword, decryptPassword} from '@Providers/auth/crypto-utils'
 
-
+const AES_KEY = import.meta.env.VITE_AES_KEY
 
 export async function getUserByCompany(companyId: number) {
   const filter = {"ref_company_id": [companyId]}
-  const ecryptedfilter = encodeURIComponent(JSON.stringify(filter));
+  const encryptedfilter = encodeURIComponent(JSON.stringify(filter));
 
   try  {
-    const res = await fetch(`/api/grist/tables/Users/records?filter=${ecryptedfilter}`, {
+    const res = await fetch(`/api/grist/tables/Users/records?filter=${encryptedfilter}`, {
       method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -40,18 +41,29 @@ export async function getUser(email:string): Promise<UserData[]> {
 }
 
 export async function loginUser(email: string, password: string) {
-  
-  const allUsers = await getUser(email);
-  const foundUser = allUsers.find(
-    (u) => u.fields.Email === email && u.fields.Password === password,
-  );
+  const fetchedUsers = await getUser(email)
+  const foundUser = fetchedUsers.find((u) => u.fields.Email === email)
 
+  if (!AES_KEY) {
+    throw new Error("Missing VITE_AES_KEY");
+  }
+  
   if (!foundUser) {
-    throw new Error('Identifiants incorrects');
+    throw new Error('Identifiants incorrects')
+  } else {
+    // Check Role != Salarié
+    if (foundUser.fields.Role === "Salarié"){
+      throw new Error('Acces refusé')
+    }
+
+    // Decrypt password and compare
+    const decryptedPwd = decryptPassword(foundUser.fields.Password, AES_KEY)
+    if (password !== decryptedPwd) {
+      throw new Error('Identifiants incorrects')
+    }
+
+    // Remove password field from item return and stored
+    foundUser.fields.Password = ""
   }
-  if (foundUser.fields.Role === "Salarié"){
-    throw new Error('Acces refusé');
-  }
-  console.log("user", foundUser)
-  return foundUser;
+  return foundUser
 }

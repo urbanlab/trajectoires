@@ -18,6 +18,7 @@ COPY nginx.conf.template /etc/nginx/nginx.conf.template
 CMD envsubst '\
   $VITE_API_GRIST_URL \
   $VITE_API_GRIST_TOKEN \
+  $VITE_AES_KEY \
   ' < /etc/nginx/nginx.conf.template \
   > /etc/nginx/nginx.conf \
   && nginx -g "daemon off;"

@@ -77,7 +77,7 @@ export default function ReportModal () {
                 <Typography.Title level={4}>Freins à l’usage d’un mode de transport</Typography.Title>
                 <div className='flex lg:flex-row md:flex-col flex-col gap-5 justify-between'>
                     <div className=" flex flex-col gap-5 flex-1">
-                        <Typography.Title level={5} className="whitespace-nowrap">Freins pour les transports en communs</Typography.Title>
+                        <Typography.Title level={5} className="whitespace-nowrap">Freins pour les transports en commun</Typography.Title>
                         <FreinsMode mode="bus" freins={topFreins.transports_communs}/>
                     </div>
                     <div className=" flex flex-col gap-5  flex-1">

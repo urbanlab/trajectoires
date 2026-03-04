@@ -1,4 +1,4 @@
-import { Form, Input, Radio, InputNumber} from "antd"
+import { Form, Input, Radio, InputNumber, message} from "antd"
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 import {sendToGrist} from '@Domains/companies/api'
@@ -20,9 +20,9 @@ export default function FormGeneraux ({companyId, data, onSave}: {companyId:numb
         try{
             await sendToGrist(values, companyId)
             onSave()
-
+            message.success("Informations sauvegardées avec succès !")
         } catch(error) {
-            
+            message.error("Impossible de sauvegarder les informations")
         }
     }
 
@@ -66,7 +66,7 @@ export default function FormGeneraux ({companyId, data, onSave}: {companyId:numb
                     <Input />
                 </Form.Item>
                 <div className="bg-(--select-grey) p-5 flex flex-col gap-2">
-                    <p className="text-[1.2em]">Addresse du Site</p>
+                    <p className="text-[1.2em]">Adresse du site</p>
                     <div className="flex gap-5">
                         <div className="flex-1">
                             <Form.Item
@@ -106,7 +106,7 @@ export default function FormGeneraux ({companyId, data, onSave}: {companyId:numb
                         </div>
                         <div className="flex-1">
                             <Form.Item
-                                label={"Commune"}
+                                label={"Ville"}
                                 name="Commune"
                                 rules={[
                                     { required: true, message: "Veuillez renseigner le nom de la commune." },
@@ -122,6 +122,7 @@ export default function FormGeneraux ({companyId, data, onSave}: {companyId:numb
                 <Form.Item
                     label={"Nombre de salariés rattachés au site"}
                     name="Nb_salaries"
+                    style={{marginTop: "10px"}}
                     rules={[
                         { required: true, message: "Veuillez renseigner le nombre de salariés." },
                     ]}
@@ -163,7 +164,7 @@ export default function FormGeneraux ({companyId, data, onSave}: {companyId:numb
                     </Form.Item>
                     <div className="flex justify-end gap-2">
                         <Button title="Annuler" bgColor={"whiteBlue"} />
-                        <Button iconPath={mdiCheckCircleOutline} title="Sauvagarder" bgColor={"blue"} htmlType={"submit"}/>
+                        <Button iconPath={mdiCheckCircleOutline} title="Sauvegarder" bgColor={"blue"} htmlType={"submit"}/>
                     </div>
             </Form>
         </div>

@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {Typography} from 'antd'
+import {Typography, message} from 'antd'
 import Button from '@Components/Button'
 import ModuleCompletion from '@Components/ModuleCompletion'
 import Icon from '@mdi/react';
@@ -94,9 +94,10 @@ export function InfoSalaries(){
                 setRows([])
                 setSaved(false)
                 setEmployees([])
-
+                message.success("Liste des salariés réinitialisée avec succès !")
             } catch(error) {
                 setError('une erreur est survenue')
+                message.error("Impossible de réinitialiser les informations")
             }
         
     }
@@ -107,6 +108,7 @@ export function InfoSalaries(){
             await SendEmployeesToGrist({rows, companyId})
             setSaved(true)
             loadData()
+            message.success("Liste des salariés sauvegardée avec succès !")
         } catch (error) {
             if (error instanceof Error){
                 setError(error.message)
@@ -114,6 +116,7 @@ export function InfoSalaries(){
                 setError("une erreur s'est produite.")
                 setHeaders([])
                 setRows([])
+                message.error("Impossible de sauvegarder les informations")
             }
         }
     }
@@ -122,7 +125,7 @@ export function InfoSalaries(){
         <div className="flex flex-col gap-10">
             <div className="flex justify-between w-full">
                 <div className="flex flex-col gap-8">
-                    <Typography.Title className=''>Etapes 2 : Informations salariés</Typography.Title>
+                    <Typography.Title className=''>Étape 2 : Informations salariés</Typography.Title>
                     <div>
                         <Button iconPath={mdiChevronLeft} title="Retour à l'acceuil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
                     </div>
@@ -139,10 +142,12 @@ export function InfoSalaries(){
                             <Typography.Title level={4}>Télécharger le gabarit</Typography.Title>
                             <p className="text-[1.3em] text-wrap">{content}</p>
                         </div>
-
                     </div>
+
                     <div>
-                        <Button title="Télécharger" bgColor="red"></Button>
+                        <a href='/public/gabarit_import_Trajectoires.xlsx' download>
+                            <Button title="Télécharger" bgColor="red"></Button>
+                        </a>
                     </div>
                 </div>
                 {headers.length === 0  ?

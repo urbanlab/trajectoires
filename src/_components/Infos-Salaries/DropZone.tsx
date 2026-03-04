@@ -41,7 +41,7 @@ export default function MyDropzone({settingArray}: DropZoneProps) {
             :
             <div className="flex flex-col items-center gap-3">
                 <Icon path={mdiDownloadOutline} color="var(--green)" size={2}/>
-                <p className="text-[1.3em] mb-0 ">Déposer le gabarit préalablement complété.</p>
+                <p className="text-[1.3em] mb-0 ">Déposer le gabarit préalablement complété</p>
                 <p className="italic text-[1em] mb-0 ">Format accepté : xlsx</p>
                 {fileRejections.length > 0 ? 
                     <p className="text-(--red) text-[1.3em] ">Le format de ce document n'est pas pris en charge.</p>

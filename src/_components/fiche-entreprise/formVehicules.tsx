@@ -1,4 +1,4 @@
-import { Form, InputNumber,} from "antd"
+import { Form, InputNumber, message} from "antd"
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 import {sendToGrist} from '@Domains/companies/api'
@@ -19,9 +19,9 @@ export default function FormVehicules ({companyId, data, onSave}: {companyId:num
         try{
             await sendToGrist(values, companyId)
             onSave()
-
+            message.success("Informations sauvegardées avec succès !")
         } catch(error) {
-            
+            message.error("Impossible de sauvegarder les informations")
         }
     }
     return (
@@ -164,7 +164,7 @@ export default function FormVehicules ({companyId, data, onSave}: {companyId:num
                 </Form.Item>
                 <div className="flex justify-end gap-2">
                     <Button title="Annuler" bgColor={"white"}/>
-                    <Button htmlType="submit" iconPath={mdiCheckCircleOutline} title="Sauvagarder" bgColor={"blue"}/>
+                    <Button htmlType="submit" iconPath={mdiCheckCircleOutline} title="Sauvegarder" bgColor={"blue"}/>
                 </div>
             </Form>
         </div>

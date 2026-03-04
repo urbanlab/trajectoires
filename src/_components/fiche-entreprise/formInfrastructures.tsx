@@ -1,4 +1,4 @@
-import { Form, Input, Radio, Switch} from "antd"
+import { Form, Input, Radio, Switch, message} from "antd"
 import {useState, useEffect} from 'react'
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
@@ -23,16 +23,15 @@ export default function FormInfra ({companyId, data, onSave}: {companyId:number,
 
 
     useEffect(() => {
-
     })
 
     const onFinish = async (values: any) => {
         try{
             await sendToGrist(values, companyId)
             onSave()
-
+            message.success("Informations sauvegardées avec succès !")
         } catch(error) {
-            
+            message.error("Impossible de sauvegarder les informations")
         }
     }
 
@@ -148,7 +147,7 @@ export default function FormInfra ({companyId, data, onSave}: {companyId:number,
                 </Form.Item>
                 <div className="flex justify-end gap-2">
                     <Button title="Annuler" bgColor={"white"}/>
-                    <Button iconPath={mdiCheckCircleOutline} title="Sauvagarder" bgColor={"blue"}/>
+                    <Button iconPath={mdiCheckCircleOutline} title="Sauvegarder" bgColor={"blue"}/>
                 </div>
             </Form>
         </div>

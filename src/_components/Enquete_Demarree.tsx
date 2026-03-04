@@ -57,7 +57,7 @@ export default function EnqueteDemaree({updateData, uuid, survey, nbr_of_respons
 
         <div className="flex justify-between w-full max-h-[120px] "> 
             <div className="flex flex-col gap-2">
-                <Typography.Title className=''>Etapes 3 : Enquête</Typography.Title>
+                <Typography.Title className=''>Étape 3 : Enquête</Typography.Title>
                 <div className="flex">
                     <Button iconPath={mdiChevronLeft} title="Retour à l'acceuil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
                 </div>

@@ -1,4 +1,4 @@
-import { Form, Input, Radio, Switch, InputNumber} from "antd"
+import { Form, Input, Radio, Switch, InputNumber, message} from "antd"
 import {useState, useEffect} from 'react'
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
@@ -38,9 +38,9 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
         try{
             await sendToGrist(values, companyId)
             onSave()
-
+            message.success("Informations sauvegardées avec succès !")
         } catch(error) {
-            
+            message.error("Impossible de sauvegarder les informations")
         }
     }
 
@@ -52,7 +52,7 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
                     <div className="flex flex-col gap-5">
                         <div className="flex gap-5" >
                             <Form.Item
-                            label ={"FMD mis en place ? (Forfait mobilité douces)"}
+                            label ={"FMD mis en place ? (Forfait Mobilité Douces)"}
                             name={"FMD"}
                             valuePropName="checked">
                                 <Switch/>
@@ -66,18 +66,18 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
                             { required: true, message: "Veuillez saisir le nombre de place avec prise disponibles." },
                         ]}
                         >
-                        <Input disabled={!FmdYes}/>
+                        <InputNumber style={{width:"100%"}} disabled={!FmdYes}/>
                     </Form.Item>
 
                 </div>
                 <div className=" bg-(--select-grey) flex flex-col gap-5 p-5">
-                    <p className="text-[1.2em]">Remboursement des transports en communs</p>
+                    <p className="text-[1.2em]">Remboursement des transports en commun</p>
                         <Form.Item
                         className="w-full"
                         label={"Pourcentage remboursement abonnement transports en commun mis en place :"}
                         name="Pourc_remb_transport"
                         rules={[
-                            { required: true, message: "Veuillez saisir un valeure." },
+                            { required: true, message: "Veuillez saisir une valeur" },
                         ]}
                         >
                         <InputNumber style={{width:"100%"}} suffix={"%"} />
@@ -86,7 +86,7 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
                         label={"Nombre d’abonnements remboursés"}
                         name="Nb_abo_remb"
                         rules={[
-                            { required: true, message: "Veuillez saisir un valeure." },
+                            { required: true, message: "Veuillez saisir une valeur" },
                         ]}
                         >
                         <InputNumber style={{width:"100%"}} />
@@ -95,7 +95,7 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
                         label={"Montant total annuel d’abonnement remboursé"}
                         name="Montant_total_remb"
                         rules={[
-                            { required: true, message: "Veuillez saisir un valeure." },
+                            { required: true, message: "Veuillez saisir une valeur" },
                         ]}
                         >
                         <InputNumber style={{width:"100%"}} suffix={"€"} />
@@ -140,16 +140,16 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
                         label={"En quelle année ?"}
                         name="Annee_enquete_mob"
                         rules={[
-                            { required: Enquete, message: "Veuillez saisir un valeure." },
+                            { required: Enquete, message: "Veuillez saisir une valeur" },
                         ]}
                         >
-                        <Input disabled={!Enquete}/>
+                        <InputNumber style={{width:"100%"}} disabled={!Enquete}/>
                     </Form.Item>
 
                 </div>
                 <div className="flex justify-end gap-2">
                     <Button title="Annuler" bgColor={"white"}/>
-                    <Button iconPath={mdiCheckCircleOutline} title="Sauvagarder" bgColor={"blue"}/>
+                    <Button iconPath={mdiCheckCircleOutline} title="Sauvegarder" bgColor={"blue"}/>
                 </div>
             </Form>
         </div>

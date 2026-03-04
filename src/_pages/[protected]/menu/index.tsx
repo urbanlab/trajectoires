@@ -102,7 +102,7 @@ export function PageMenu() {
     
     const functionButton = surveyExist ? () => navigateTo("enquete") : sendSurvey
 
-    const titleButton = surveyExist ? "Suivre l'avancement de l'enquête" : "lancer l'enquête"
+    const titleButton = surveyExist ? "Suivre l'avancement de l'enquête" : "Commencer l'enquête"
     
     
     return (
