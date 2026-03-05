@@ -24,6 +24,12 @@ export default function FormVehicules ({companyId, data, onSave}: {companyId:num
             message.error("Impossible de sauvegarder les informations")
         }
     }
+    const onCancel = () => {
+        form.resetFields()
+        onSave()
+        message.success("Modifications annulées !")
+    }
+
     return (
         <div className="bg-(--light-grey) flex flex-col p-5">
             <Form layout="vertical" className="flex flex-col gap-5" onFinish={onFinish} form={form}>
@@ -163,7 +169,7 @@ export default function FormVehicules ({companyId, data, onSave}: {companyId:num
                     <InputNumber style={{width: "100%", fontSize:'20px'}}/>
                 </Form.Item>
                 <div className="flex justify-end gap-2">
-                    <Button title="Annuler" bgColor={"white"}/>
+                    <Button title="Annuler" bgColor={"white"} onPress={onCancel}/>
                     <Button htmlType="submit" iconPath={mdiCheckCircleOutline} title="Sauvegarder" bgColor={"blue"}/>
                 </div>
             </Form>

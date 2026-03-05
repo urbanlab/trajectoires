@@ -25,6 +25,11 @@ export default function FormGeneraux ({companyId, data, onSave}: {companyId:numb
             message.error("Impossible de sauvegarder les informations")
         }
     }
+    const onCancel = () => {
+        form.resetFields()
+        onSave()
+        message.success("Modifications annulées !")
+    }
 
     return (
         <div className="bg-(--light-grey) flex flex-col p-5">
@@ -163,7 +168,7 @@ export default function FormGeneraux ({companyId, data, onSave}: {companyId:numb
                         </Radio.Group>
                     </Form.Item>
                     <div className="flex justify-end gap-2">
-                        <Button title="Annuler" bgColor={"whiteBlue"} />
+                        <Button title="Annuler" bgColor={"white"} onPress={onCancel} />
                         <Button iconPath={mdiCheckCircleOutline} title="Sauvegarder" bgColor={"blue"} htmlType={"submit"}/>
                     </div>
             </Form>

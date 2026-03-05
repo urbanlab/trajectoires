@@ -34,7 +34,11 @@ export default function FormInfra ({companyId, data, onSave}: {companyId:number,
             message.error("Impossible de sauvegarder les informations")
         }
     }
-
+    const onCancel = () => {
+        form.resetFields()
+        onSave()
+        message.success("Modifications annulées !")
+    }
 
     return (
         <div className="bg-(--light-grey) flex flex-col p-5">
@@ -146,7 +150,7 @@ export default function FormInfra ({companyId, data, onSave}: {companyId:number,
                     <Input />
                 </Form.Item>
                 <div className="flex justify-end gap-2">
-                    <Button title="Annuler" bgColor={"white"}/>
+                    <Button title="Annuler" bgColor={"white"} onPress={onCancel}/>
                     <Button iconPath={mdiCheckCircleOutline} title="Sauvegarder" bgColor={"blue"}/>
                 </div>
             </Form>

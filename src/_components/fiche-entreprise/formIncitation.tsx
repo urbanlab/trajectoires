@@ -43,7 +43,11 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
             message.error("Impossible de sauvegarder les informations")
         }
     }
-
+    const onCancel = () => {
+        form.resetFields()
+        onSave()
+        message.success("Modifications annulées !")
+    }
 
     return (
         <div className="bg-(--light-grey) flex flex-col p-5">
@@ -92,7 +96,7 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
                         <InputNumber style={{width:"100%"}} />
                     </Form.Item>
                     <Form.Item
-                        label={"Montant total annuel d’abonnement remboursé"}
+                        label={"Montant total annuel des remboursements (en €)"}
                         name="Montant_total_remb"
                         rules={[
                             { required: true, message: "Veuillez saisir une valeur" },
@@ -149,7 +153,7 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
 
                 </div>
                 <div className="flex justify-end gap-2">
-                    <Button title="Annuler" bgColor={"white"}/>
+                    <Button title="Annuler" bgColor={"white"} onPress={onCancel}/>
                     <Button iconPath={mdiCheckCircleOutline} title="Sauvegarder" bgColor={"blue"}/>
                 </div>
             </Form>
