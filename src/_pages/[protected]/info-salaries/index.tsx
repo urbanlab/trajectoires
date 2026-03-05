@@ -127,7 +127,7 @@ export function InfoSalaries(){
                 <div className="flex flex-col gap-8">
                     <Typography.Title className=''>Étape 2 : Informations salariés</Typography.Title>
                     <div>
-                        <Button iconPath={mdiChevronLeft} title="Retour à l'acceuil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
+                        <Button iconPath={mdiChevronLeft} title="Retour à l'accueil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
                     </div>
                 </div>
                 <div className=' min-w-[40%]'>

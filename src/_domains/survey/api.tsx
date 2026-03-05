@@ -5,7 +5,7 @@ export async function createSurvey(companyId: number){
 
     const now = new Date()
     const formatted_now = now.getTime()/1000
-    const threeMonthLater = now.setMonth(now.getMonth() + 3)
+    const threeMonthLater = now.setMonth(now.getMonth() + 1)
     const formatted_threeMonth = Math.floor(now.getTime() / 1000);
 
     const records = [{

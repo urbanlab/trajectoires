@@ -34,8 +34,8 @@ export default function Modale({isOpen, onClose}: Modale){
                         <Icon path={mdiChevronRight} color={'#99C24D'} size={1}/>
                         <div className=" flex flex-col gap-1">
                             <span className='italic text-[1em]'>Contact :</span>
-                            <a href='mailto:agencedesmobilite@grandlyon.com'>
-                                <span className='italic text-[1em] underline'>agencedesmobilite@grandlyon.com</span>
+                            <a href='mailto:agencedesmobilites@grandlyon.com'>
+                                <span className='italic text-[1em] underline'>agencedesmobilites@grandlyon.com</span>
                             </a>
                         </div>
                     </div>

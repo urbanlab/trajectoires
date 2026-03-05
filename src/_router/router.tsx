@@ -4,6 +4,7 @@ import {InfoSalaries} from '@PagesProtected/info-salaries';
 import FicheEntreprise from '@PagesProtected/fiche-entreprise';
 import {Enquete} from '@PagesProtected/enquete' ;
 import { PageLogin } from '@PagesPublic/login';
+import { EncryptPage } from '@PagesPublic/encrypt';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import App from '../app';
@@ -50,5 +51,9 @@ export const router = createBrowserRouter([
   {
     path: 'login',
     element: <PageLogin />,
+  },
+  {
+    path: 'encrypt',
+    element: <EncryptPage />,
   },
 ]);

@@ -118,7 +118,8 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
                     >
                         <Radio.Group  buttonStyle="solid" disabled={!MER} >
                             <div className="flex flex-col">
-                                <Radio value="Aros">En covoit Rendez-vous (Aros)</Radio>
+                                <Radio value="En_covoit_rdv_Karos">En Covoit' Rendez-vous (Karos)</Radio>
+                                <Radio value="En_covoit_lignes">En Covoit' Lignes</Radio>
                                 <Radio value="Blablacar">Blablacar Daily</Radio>
                                 <Radio value="Autre">Autre</Radio>
                             </div>

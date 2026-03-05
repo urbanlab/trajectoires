@@ -18,7 +18,6 @@ export default function EnqueteDemaree({updateData, uuid, survey, nbr_of_respons
     const navigate = useNavigate()
     const Url = `https://form.typeform.com/to/LpHZ9JDv#uuid=${uuid}`
 
-
     const handleCopy = async () => {
     const urlToCopy = Url;
     
@@ -50,7 +49,10 @@ export default function EnqueteDemaree({updateData, uuid, survey, nbr_of_respons
     const time_restant = (survey.Date_de_fin as number * 1000)  - today.getTime()
     const jours_restants = Math.max(0, Math.ceil(time_restant / (1000 * 60 * 60 * 24)));
 
-    const percentage = (nbr_of_responses / nbr_of_employees) * 100
+    let percentage = Math.round((nbr_of_responses / nbr_of_employees) * 100)
+    if (percentage > 100) { 
+        percentage = 100 
+    }
 
     return (
         <div className="flex flex-col gap-5">
@@ -59,7 +61,7 @@ export default function EnqueteDemaree({updateData, uuid, survey, nbr_of_respons
             <div className="flex flex-col gap-2">
                 <Typography.Title className=''>Étape 3 : Enquête</Typography.Title>
                 <div className="flex">
-                    <Button iconPath={mdiChevronLeft} title="Retour à l'acceuil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
+                    <Button iconPath={mdiChevronLeft} title="Retour à l'accueil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
                 </div>
             </div>
             <div className='flex  gap-1 py-5 '>
@@ -89,7 +91,7 @@ export default function EnqueteDemaree({updateData, uuid, survey, nbr_of_respons
                 <Typography.Title level={4}>Actions</Typography.Title>
                 < div className='bg-(--light-grey) p-6 flex flex-col gap-5'>
                     <div className="flex gap-3">
-                        <p className="italic text-[1.3em]">Statut de l'enquête:</p>
+                        <p className="italic text-[1.3em]">Statut de l'enquête :</p>
                         <p className="italic text-[1.3em] rounded-full bg-(--light-orange) px-2 ">Démarée</p>
                     </div>
                     <div className="flex gap-4 border-(--blue) border-l-3 bg-white p-5 items-center">
@@ -133,7 +135,7 @@ export default function EnqueteDemaree({updateData, uuid, survey, nbr_of_respons
                                     <p className="text-[1.3em] ">Réponses</p>
                                 </div>
                                 <div className="flex gap-3 items-center">
-                                    <p className='font-bold text-[1.5em]'>{percentage}%</p>
+                                    <p className='font-bold text-[1.5em]'>{percentage} %</p>
                                     <p className="text-[1.3em] ">Répondants</p>
                                 </div>
                             </div>
@@ -141,7 +143,7 @@ export default function EnqueteDemaree({updateData, uuid, survey, nbr_of_respons
                         <ResponsesPercentage percentage={percentage}/>
                     </div>
                 </div>
-                <div className="bg-(--light-grey) p-6 flex flex-col gap-5">
+                {/* <div className="bg-(--light-grey) p-6 flex flex-col gap-5">
                     <Typography.Title level={4}>Détails des Réponses</Typography.Title>
                     <div className="flex gap-5 items-center">
                         <p className=" italic text-[1.3em]">Date de dernière réponse :</p>
@@ -151,8 +153,7 @@ export default function EnqueteDemaree({updateData, uuid, survey, nbr_of_respons
                         <p className=" italic text-[1.3em]">Nombre de réponses sur les 7 derniers jours :</p>
                         <p className= "font-bold text-[1.2em]">1</p>
                     </div>
-                    
-                </div>
+                </div> */}
             </div>
         </div>
         </div>

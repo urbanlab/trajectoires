@@ -28,7 +28,6 @@ export async function getUser(email:string): Promise<UserData[]> {
   const filter = {"Email": [email]}
   const encryptedfilter = encodeURIComponent(JSON.stringify(filter));
 
-
   const res: Response = await fetch(`/api/grist/tables/Users/records?filter=${encryptedfilter}`);
   if (!res.ok) {
     throw new Error(`Erreur API : ${res.status}`);

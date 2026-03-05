@@ -46,7 +46,7 @@ export default function EnqueteCloturee({ survey, nbr_of_employees, nbr_of_respo
                 <div className="flex flex-col gap-2">
                     <Typography.Title className=''>Étape 3 : Enquête</Typography.Title>
                     <div>
-                        <Button iconPath={mdiChevronLeft} title="Retour à l'acceuil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
+                        <Button iconPath={mdiChevronLeft} title="Retour à l'accueil" bgColor="red" onPress={()=> navigate('/menu') }></Button>
                     </div>
                 </div>
                 <div className='flex  gap-1 py-5 self-end '>

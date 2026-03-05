@@ -9,8 +9,11 @@ interface ParticipationProps {
     nbr_of_responses: number
 }
 
-export default function Participation ({date_debut, date_fin, nbr_of_employees, nbr_of_responses  }: ParticipationProps) {
-    const percentage = Math.round((nbr_of_responses / nbr_of_employees) * 100)
+export default function Participation ({ date_debut, date_fin, nbr_of_employees, nbr_of_responses }: ParticipationProps) {
+    let percentage = Math.round((nbr_of_responses / nbr_of_employees) * 100)
+    if (percentage > 100) { 
+        percentage = 100 
+    }
     
     return( 
         <div className="flex flex-wrap gap-5">
@@ -18,7 +21,7 @@ export default function Participation ({date_debut, date_fin, nbr_of_employees, 
                 <Typography.Title level={4}>Actions</Typography.Title>
                 < div className='bg-(--light-grey) p-6 flex flex-col gap-5'>
                     <div className="flex gap-3">
-                        <p className="italic text-[1.3em]">Statut de l'enquête:</p>
+                        <p className="italic text-[1.3em]">Statut de l'enquête :</p>
                         <p className="italic text-[1.3em] rounded-full bg-(--green) px-2 ">Cloturée</p>
                     </div>
                     <div className="flex gap-4 border-(--blue) border-l-3 bg-white p-5 items-center">
@@ -60,18 +63,14 @@ export default function Participation ({date_debut, date_fin, nbr_of_employees, 
                         </div>
                     </div>
                 </div>
-                <div className="bg-(--light-grey) p-6 flex flex-col gap-5">
+                {/* <div className="bg-(--light-grey) p-6 flex flex-col gap-5">
                     <Typography.Title level={4}>Détails des Réponses</Typography.Title>
                     <div className="flex gap-5 items-center">
                         <p className=" italic text-[1.3em]">Date de dernière réponse :</p>
                         <p className= "font-bold text-[1.2em]">20/01/2026</p>
                     </div>
-                    
-                </div>
+                </div> */}
             </div>
-        
         </div>
-    
-        
     )
 }
