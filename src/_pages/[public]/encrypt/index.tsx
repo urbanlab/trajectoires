@@ -19,7 +19,7 @@ export function EncryptPage() {
   }
 
   return (
-    <div className='w-100 m-auto pt-10'>
+    <div className='w-130 m-auto pt-10'>
       <Typography.Title level={3}>Encryption des mots de passe</Typography.Title>
       <Form onFinish={handleSubmit} layout="vertical">
         <Form.Item
