@@ -56,7 +56,7 @@ export default function FormIncitation ({companyId, data, onSave}: {companyId:nu
                     <div className="flex flex-col gap-5">
                         <div className="flex gap-5" >
                             <Form.Item
-                            label ={"FMD mis en place ? (Forfait Mobilité Douces)"}
+                            label ={"FMD mis en place ? (Forfait Mobilité Durable)"}
                             name={"FMD"}
                             valuePropName="checked">
                                 <Switch/>
