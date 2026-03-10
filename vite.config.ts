@@ -9,9 +9,6 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), tailwindcss()],
-    define: {
-      __AES_KEY__: JSON.stringify(env.VITE_AES_KEY),
-    },
     server: {
       proxy: {
         '/api/grist': {

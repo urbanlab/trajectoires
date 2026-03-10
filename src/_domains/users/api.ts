@@ -2,8 +2,8 @@ import { UserData } from './type';
 import { encryptPassword, decryptPassword} from '@Providers/auth/crypto-utils'
 
 // const AES_KEY = import.meta.env.VITE_AES_KEY
-declare const __AES_KEY__: string
-const AES_KEY = __AES_KEY__
+import { APP_CONFIG } from '@/config'
+const AES_KEY = APP_CONFIG.aesKey
 
 export async function getUserByCompany(companyId: number) {
   const filter = {"ref_company_id": [companyId]}
