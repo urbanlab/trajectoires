@@ -1,5 +1,8 @@
 function getRequiredEnv(name: keyof NonNullable<typeof window.__APP_CONFIG__>): string {
-  const value = window.__APP_CONFIG__?.[name]
+  const runtimeValue  = window.__APP_CONFIG__?.[name]
+  const viteValue = import.meta.env[name]
+
+  const value = runtimeValue || viteValue
 
   if (!value) {
     throw new Error(`Missing runtime config: ${name}`)

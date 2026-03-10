@@ -1,0 +1,52 @@
+worker_processes 1;
+
+events { 
+    worker_connections 1024; 
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    sendfile on;
+    keepalive_timeout 65;
+
+    server {
+        listen 80;
+
+        # ------------------------------
+        # SERVE REACT BUILD
+        # ------------------------------
+
+        root /usr/share/nginx/html;
+        index index.html;
+
+        location /config.js {
+            add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate";
+            add_header Pragma "no-cache";
+            add_header Expires "0";
+            try_files $uri =404;
+        }
+
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+
+        # ------------------------------
+        # PROXY GRIST
+        # ------------------------------
+        location /api/grist/ {
+            # Don't allow user to browse this path !
+            if ($http_sec_fetch_mode = "navigate") { return 404; }
+            if ($http_accept ~* "text/html") { return 404; }
+            
+            proxy_pass $VITE_API_GRIST_URL/;
+
+            # Force Origin before sending request to Grist
+            proxy_set_header Origin "https://grist.projets.erasme.org";
+            proxy_set_header Referer "https://grist.projets.erasme.org";
+
+            proxy_set_header Authorization "Bearer $VITE_API_GRIST_TOKEN";
+            proxy_set_header Content-Type "application/json";
+        }
+    }
+}
