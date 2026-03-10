@@ -44,21 +44,25 @@ export async function loginUser(email: string, password: string) {
   const foundUser = fetchedUsers.find((u) => u.fields.Email === email)
 
   if (!AES_KEY) {
+    console.error("Missing VITE_AES_KEY")
     throw new Error("Missing VITE_AES_KEY");
   }
   
   if (!foundUser) {
+    console.error("Identifiants incorrects")
     throw new Error('Identifiants incorrects')
   } else {
     // Check Role != Salarié
     if (foundUser.fields.Role === "Salarié"){
+      console.error("Acces refusé")
       throw new Error('Acces refusé')
     }
 
     // Decrypt password and compare
     const decryptedPwd = decryptPassword(foundUser.fields.Password, AES_KEY)
     if (password !== decryptedPwd) {
-      throw new Error('Identifiants incorrects')
+      console.error("Identifiants incorrects (decrypt)")
+      throw new Error('Identifiants incorrects (decrypt)')
     }
 
     // Remove password field from item return and stored
