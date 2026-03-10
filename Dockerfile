@@ -35,6 +35,8 @@ COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 # Runtime frontend config template
 COPY config.js.template /opt/config.js.template
 
-EXPOSE 80
+# Custom entrypoint for envsubst in config.js
+COPY 40-generate-config.sh /docker-entrypoint.d/40-generate-config.sh
+RUN chmod +x /docker-entrypoint.d/40-generate-config.sh
 
-CMD ["/bin/sh", "-c", "envsubst '${VITE_AES_KEY} ${VITE_API_GRIST_URL} ${VITE_API_GRIST_TOKEN}' < /opt/config.js.template > /usr/share/nginx/html/config.js && exec nginx -g 'daemon off;'"]
+EXPOSE 80
