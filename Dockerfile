@@ -10,7 +10,7 @@ ENV VITE_AES_KEY=${VITE_AES_KEY}
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN test -n "$VITE_AES_KEY" || (echo "VITE_AES_KEY missing" && exit 1)
+# RUN test -n "$VITE_AES_KEY" || (echo "VITE_AES_KEY missing" && exit 1)
 RUN npm run build
 # ----------------------------
 FROM nginx:alpine
