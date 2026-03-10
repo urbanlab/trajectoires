@@ -33,5 +33,8 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 
 # Runtime frontend config template
-COPY config.js.template /etc/nginx/templates/config.js.template
+COPY config.js.template /opt/config.js.template
+
 EXPOSE 80
+
+CMD ["/bin/sh", "-c", "envsubst '${VITE_AES_KEY} ${VITE_API_GRIST_URL} ${VITE_API_GRIST_TOKEN}' < /opt/config.js.template > /usr/share/nginx/html/config.js && exec nginx -g 'daemon off;'"]
