@@ -34,45 +34,6 @@ export default function FormVehicules ({companyId, data, onSave}: {companyId:num
         <div className="bg-(--light-grey) flex flex-col p-5">
             <Form layout="vertical" className="flex flex-col gap-5" onFinish={onFinish} form={form}>
                 <div className="bg-(--select-grey) flex flex-col p-5" >
-                    <p className="text-[1.2em]">Nombre de poids lourds en fonction du Crit’Air</p>
-                    <Form.Item
-                        label={"Crit’Air 0"}
-                        name="Nb_poids_lourds_critair0"
-                        rules={[
-                            { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 0" },
-                        ]}
-                        >
-                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
-                    </Form.Item>
-                    <Form.Item
-                        label={"Crit’Air 1"}
-                        name="Nb_poids_lourds_critair1"
-                        rules={[
-                            { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 1" },
-                        ]}
-                        >
-                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
-                    </Form.Item>
-                    <Form.Item
-                        label={"Crit’Air 2"}
-                        name="Nb_poids_lourds_critair2"
-                        rules={[
-                            { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 2" },
-                        ]}
-                        >
-                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
-                    </Form.Item>
-                    <Form.Item
-                        label={"Crit’Air 3 et +"}
-                        name="Nb_poids_lourds_critair3_"
-                        rules={[
-                            { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 3 et +" },
-                        ]}
-                        >
-                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
-                    </Form.Item>
-                </div>
-                <div className="bg-(--select-grey) flex flex-col p-5" >
                     <p className="text-[1.2em]">Nombre de voitures de fonction par niveau du Crit’Air</p>
                     <Form.Item
                         label={"Crit’Air 0"}
@@ -145,6 +106,45 @@ export default function FormVehicules ({companyId, data, onSave}: {companyId:num
                         name="Nb_voiture_service_critair3_"
                         rules={[
                             { required: true, message: "Veuillez saisir le nombre de voitures de service crit'Air 3 et +" },
+                        ]}
+                        >
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
+                    </Form.Item>
+                </div>
+                <div className="bg-(--select-grey) flex flex-col p-5" >
+                    <p className="text-[1.2em]">Nombre de poids lourds en fonction du Crit’Air</p>
+                    <Form.Item
+                        label={"Crit’Air 0"}
+                        name="Nb_poids_lourds_critair0"
+                        rules={[
+                            { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 0" },
+                        ]}
+                        >
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
+                    </Form.Item>
+                    <Form.Item
+                        label={"Crit’Air 1"}
+                        name="Nb_poids_lourds_critair1"
+                        rules={[
+                            { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 1" },
+                        ]}
+                        >
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
+                    </Form.Item>
+                    <Form.Item
+                        label={"Crit’Air 2"}
+                        name="Nb_poids_lourds_critair2"
+                        rules={[
+                            { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 2" },
+                        ]}
+                        >
+                        <InputNumber style={{width: "100%", fontSize:'20px'}}/>
+                    </Form.Item>
+                    <Form.Item
+                        label={"Crit’Air 3 et +"}
+                        name="Nb_poids_lourds_critair3_"
+                        rules={[
+                            { required: true, message: "Veuillez saisir le nombre de poids lourd crit'Air 3 et +" },
                         ]}
                         >
                         <InputNumber style={{width: "100%", fontSize:'20px'}}/>

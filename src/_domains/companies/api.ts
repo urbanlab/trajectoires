@@ -28,6 +28,10 @@ export  async function getFromGrist (companyId: number) {
 export  async function sendToGrist (values: any, companyId: number) {
   const data = {...values}
 
+  if (Array.isArray(data.Horaires_Travail)) {
+    data.Horaires_Travail = ["L", ...data.Horaires_Travail]
+  }
+
   if (values.Numero_voie) {
     const address = `${values.Numero_voie} ${values.Nom_voie}, ${values.Code_Postal} ${values.Commune} `
     data.Adresse_site = address

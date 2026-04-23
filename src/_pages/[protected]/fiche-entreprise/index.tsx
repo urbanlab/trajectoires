@@ -78,7 +78,7 @@ export default function FicheEntreprise () {
             </div>
             <div className="flex gap-10">
                 <div className="flex flex-col gap-1 w-[350px] sticky top-20 h-fit">
-                    <Onglet title="Renseignements généraux" index={1} percentage={completion("generaux")} setIndex={setActiveTab} activeTab={activeTab}/>
+                    <Onglet title="Informations générales" index={1} percentage={completion("generaux")} setIndex={setActiveTab} activeTab={activeTab}/>
                     <Onglet title= "Contacts associés" index={5}  setIndex={setActiveTab} activeTab={activeTab}/>
                     <Onglet title="Infrastructure" index={2} percentage={completion('infra')} setIndex={setActiveTab} activeTab={activeTab}/>
                     <Onglet title="Véhicules" index={3} percentage={completion('vehicules')} setIndex={setActiveTab} activeTab={activeTab}/>

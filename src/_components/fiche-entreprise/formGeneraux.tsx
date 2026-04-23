@@ -1,4 +1,4 @@
-import { Form, Input, Radio, InputNumber, message} from "antd"
+import { Form, Input, Checkbox, InputNumber, message} from "antd"
 import  Button from '@Components/Button'
 import { mdiCheckCircleOutline} from '@mdi/js';
 import {sendToGrist} from '@Domains/companies/api'
@@ -12,8 +12,14 @@ export default function FormGeneraux ({companyId, data, onSave}: {companyId:numb
     const FormData = data?.fields
 
     useEffect (() => {
-        form.setFieldsValue(FormData)
+        if (!FormData) return
+        const transformed = {...FormData}
+        if (Array.isArray(transformed.Horaires_Travail) && transformed.Horaires_Travail[0] === "L") {
+            transformed.Horaires_Travail = transformed.Horaires_Travail.slice(1)
+        }
+        form.setFieldsValue(transformed)
     }, [data])
+
 
 
     const onFinish = async (values: any) => {
@@ -158,14 +164,14 @@ export default function FormGeneraux ({companyId, data, onSave}: {companyId:numb
                         rules={[
                         { required: true, message: "Veuillez renseigner un rythme de travail." },
                     ]}>
-                        <Radio.Group  buttonStyle="solid">
-                            <div className="flex flex-col">
-                                <Radio value="Horaires fixes">Sur une plage horaire fixe, quasiment toujours les mêmes horaires</Radio>
-                                <Radio value="Horaires flexibles">Sur des horaires de bureaux flexibles : entre 8 h et 20 h</Radio>
-                                <Radio value="Horaires décalés">Sur des plages horaires en décalé (ex : début à 5 h ou fin à 21 h)</Radio>
-                                <Radio value="3/8 ou 2/8">Travail en cycles (2/8, 3/8)</Radio>
+                        <Checkbox.Group className="w-full">
+                            <div className="flex flex-col gap-2">
+                                <Checkbox value="Horaires fixes">Sur une plage horaire fixe, quasiment toujours les mêmes horaires</Checkbox>
+                                <Checkbox value="Horaires flexibles">Sur des horaires de bureaux flexibles : entre 8 h et 20 h</Checkbox>
+                                <Checkbox value="Horaires décalés">Sur des plages horaires en décalé (ex : début à 5 h ou fin à 21 h)</Checkbox>
+                                <Checkbox value="3/8 ou 2/8">Travail en cycles (2/8, 3/8)</Checkbox>
                             </div>
-                        </Radio.Group>
+                        </Checkbox.Group>
                     </Form.Item>
                     <div className="flex justify-end gap-2">
                         <Button title="Annuler" bgColor={"white"} onPress={onCancel} />
