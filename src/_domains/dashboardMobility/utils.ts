@@ -1,7 +1,7 @@
-import BicycleIcon from '@Commons/svg/mobility-bicycle.svg';
-import BusIcon from '@Commons/svg/mobility-bus.svg';
-import CarIcon from '@Commons/svg/mobility-car.svg';
-import WalkIcon from '@Commons/svg/mobility-walk.svg';
+import BicycleIcon from '@Commons/svg/mobility-bicycle.svg'
+import BusIcon from '@Commons/svg/mobility-bus.svg'
+import CarIcon from '@Commons/svg/mobility-car.svg'
+import WalkIcon from '@Commons/svg/mobility-walk.svg'
 
 export const chartDefMobility: Record<
   string,
@@ -12,21 +12,21 @@ export const chartDefMobility: Record<
 > = {
   'A pieds': {
     color: '#8884d8',
-    svg: WalkIcon,
+    svg: WalkIcon
   },
   'Transport en commun': {
     color: '#82ca9d',
-    svg: BusIcon,
+    svg: BusIcon
   },
   Voiture: {
     color: '#d2a67f',
-    svg: CarIcon,
+    svg: CarIcon
   },
   Vélo: {
     color: '#c86a6a',
-    svg: BicycleIcon,
-  },
-};
+    svg: BicycleIcon
+  }
+}
 
 export const chartDefAverage: Record<string, string> = {
   '0': '#c86a6a',
@@ -34,5 +34,5 @@ export const chartDefAverage: Record<string, string> = {
   '2': '#c1ce4fff',
   '3': '#6ac88eff',
   '4': '#8884d8',
-  '5': '#3c7bdaff',
-};
+  '5': '#3c7bdaff'
+}

@@ -1,37 +1,37 @@
-import { Footer } from '@Components/footer';
-import { Header } from '@Components/header';
-import { AuthProvider } from '@Providers/auth';
-import { BreakpointProvider } from '@Providers/breakpoint';
-import { ModalProvider } from '@Providers/modal';
-import { ThemeProvider } from '@Providers/theme';
-import { Layout } from 'antd';
-import { Outlet, ScrollRestoration } from 'react-router-dom';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { Chart } from 'chart.js';
+import { Footer } from '@Components/footer'
+import { Header } from '@Components/header'
+import { AuthProvider } from '@Providers/auth'
+import { BreakpointProvider } from '@Providers/breakpoint'
+import { ModalProvider } from '@Providers/modal'
+import { ThemeProvider } from '@Providers/theme'
+import { Layout } from 'antd'
+import { Outlet, ScrollRestoration } from 'react-router-dom'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
+import { Chart } from 'chart.js'
 
-Chart.register(ChartDataLabels);
+Chart.register(ChartDataLabels)
 
 export default function App() {
   return (
-      <ThemeProvider>
-        <BreakpointProvider>
-          <ModalProvider>
-              <AppLayout />
-          </ModalProvider>
-        </BreakpointProvider>
-      </ThemeProvider>
-  );
+    <ThemeProvider>
+      <BreakpointProvider>
+        <ModalProvider>
+          <AppLayout />
+        </ModalProvider>
+      </BreakpointProvider>
+    </ThemeProvider>
+  )
 }
 
 function AppLayout() {
   return (
     <Layout className="app">
       <Header />
-        <Layout.Content className="content">
-          <Outlet  />
-          <ScrollRestoration />
-        </Layout.Content>
+      <Layout.Content className="content">
+        <Outlet  />
+        <ScrollRestoration />
+      </Layout.Content>
       <Footer />
     </Layout>
-  );
+  )
 }

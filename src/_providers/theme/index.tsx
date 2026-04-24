@@ -1,14 +1,14 @@
-import { ReactNode, createContext } from 'react';
+import { ReactNode, createContext } from 'react'
 
-import { ConfigProvider, ThemeConfig } from 'antd';
+import { ConfigProvider, ThemeConfig } from 'antd'
 
 export type ThemeContextType = {};
 
-export const ThemeContext = createContext<ThemeContextType | null>(null);
+export const ThemeContext = createContext<ThemeContextType | null>(null)
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const primaryColor = '#000';
-  const secondaryColor = '#4d4d4';
+  const primaryColor = '#000'
+  const secondaryColor = '#4d4d4'
 
   const themeConfig: ThemeConfig = {
     token: {
@@ -20,13 +20,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       colorLink: secondaryColor,
       colorBgLayout: 'var(--bg)',
 
-      fontFamily: 'Jost, sans-serif',
+      fontFamily: 'Jost, sans-serif'
     },
     components: {
       Form: {
         labelFontSize: 18,        // Taille de la police du label
         labelColor: '#333333',    // Couleur du label
-        labelHeight: 32,          // Hauteur de la ligne
+        labelHeight: 32          // Hauteur de la ligne
       },
       Typography: {
         margin: 0,
@@ -36,8 +36,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         paddingSM: 0,
         paddingMD: 0,
         paddingLG: 0,
-        paddingXL: 0,
-        
+        paddingXL: 0
+
       },
       Collapse: {
         padding: 16,
@@ -46,18 +46,18 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         paddingSM: 16,
         paddingMD: 16,
         paddingLG: 16,
-        paddingXL: 16,
+        paddingXL: 16
       },
       Select: {
         optionSelectedBg: 'transparent',
-        optionSelectedColor: secondaryColor,
-      },
-    },
-  };
+        optionSelectedColor: secondaryColor
+      }
+    }
+  }
 
   return (
     <ThemeContext.Provider value={{}}>
       <ConfigProvider theme={themeConfig}>{children}</ConfigProvider>
     </ThemeContext.Provider>
-  );
+  )
 }

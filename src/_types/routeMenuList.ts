@@ -1,4 +1,4 @@
-import { UserRole } from '@Domains/users/type';
+import { UserRole } from '@Domains/users/type'
 
 export type RouteMenuItem = {
   name: string;

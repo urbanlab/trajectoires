@@ -1,4 +1,4 @@
-import {create} from "zustand"
+import {create} from 'zustand'
 
 interface SurveyState {
     survey: any;
@@ -6,6 +6,6 @@ interface SurveyState {
 }
 
 export const useSurvey = create<SurveyState>((set, get:any) => ({
-    survey: null,
-    setSurvey:(data: any) => set ({survey: data})
+  survey: null,
+  setSurvey:(data: any) => set ({survey: data})
 }))

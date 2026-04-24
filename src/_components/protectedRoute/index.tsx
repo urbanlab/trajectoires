@@ -1,9 +1,9 @@
-import { UserRole } from '@Domains/users/type';
-import { useAuth } from '@Hooks/auth';
+import { UserRole } from '@Domains/users/type'
+import { useAuth } from '@Hooks/auth'
 
-import { Spin } from 'antd';
+import { Spin } from 'antd'
 
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom'
 
 export type ProtectedRouteProps = {
   children: JSX.Element;
@@ -11,14 +11,14 @@ export type ProtectedRouteProps = {
 };
 
 export function ProtectedRoute({ children, roles }: ProtectedRouteProps) {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading } = useAuth()
 
-  if (isLoading) return <Spin spinning={isLoading} fullscreen />;
+  if (isLoading) return <Spin spinning={isLoading} fullscreen />
 
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to="/login" replace />
 
   if (roles && !roles.includes(user.fields.Role))
-    return <Navigate to="/unauthorized" replace />;
+    return <Navigate to="/unauthorized" replace />
 
-  return children;
+  return children
 }

@@ -1,7 +1,7 @@
-import { loginUser } from '@Domains/users/api';
-import { UserData } from '@Domains/users/type';
+import { loginUser } from '@Domains/users/api'
+import { UserData } from '@Domains/users/type'
 
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react'
 
 type AuthContextType = {
   user: UserData | null;
@@ -10,39 +10,39 @@ type AuthContextType = {
   logout: () => void;
 };
 
-export const AuthContext = createContext<AuthContextType | null>(null);
+export const AuthContext = createContext<AuthContextType | null>(null)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<UserData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<UserData | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const saved = localStorage.getItem('user');
+    const saved = localStorage.getItem('user')
     if (saved) {
-      setUser(JSON.parse(saved));
+      setUser(JSON.parse(saved))
     }
-    setIsLoading(false);
-  }, []);
+    setIsLoading(false)
+  }, [])
 
   async function login(email: string, password: string): Promise<boolean> {
     try {
-      const logguedUser = await loginUser(email, password);
-      setUser(logguedUser);
-      localStorage.setItem('user', JSON.stringify(logguedUser));
-      return true;
+      const logguedUser = await loginUser(email, password)
+      setUser(logguedUser)
+      localStorage.setItem('user', JSON.stringify(logguedUser))
+      return true
     } catch {
-      return false;
+      return false
     }
   }
 
   function logout() {
-    setUser(null);
-    localStorage.removeItem('user');
+    setUser(null)
+    localStorage.removeItem('user')
   }
 
   return (
     <AuthContext.Provider value={{ user, isLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
-  );
+  )
 }

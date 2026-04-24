@@ -1,18 +1,18 @@
 import {useState} from 'react'
-import TrajectoiresLogo from '@Commons/img/trajectoires-logo.png';
-import { useAuth } from '@Hooks/auth';
-import Icon from '@mdi/react';
-import { mdiAccountCircleOutline, mdiInformationVariantCircleOutline, mdiPowerStandby} from '@mdi/js';
+import TrajectoiresLogo from '@Commons/img/trajectoires-logo.png'
+import { useAuth } from '@Hooks/auth'
+import Icon from '@mdi/react'
+import { mdiAccountCircleOutline, mdiInformationVariantCircleOutline, mdiPowerStandby} from '@mdi/js'
 
-import { Image,  Typography, theme } from 'antd';
+import { Image,  Typography, theme } from 'antd'
 import Modale from '@Components/modale'
 
-const { useToken } = theme;
+const { useToken } = theme
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const {token} = useToken()
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuth()
 
   const onClick = () => {
     setIsOpen(true)
@@ -22,12 +22,12 @@ export function Header() {
     <div className=" bg-white h-18 w-full shadow-lg flex justify-between p-4 fixed z-100 ">
       <Modale isOpen={isOpen} onClose={()=> setIsOpen(false)}/>
       <div className=" flex items-center">
-        <Image src={TrajectoiresLogo} preview={false} height="100%" className='' /> 
+        <Image src={TrajectoiresLogo} preview={false} height="100%" className="" />
       </div>
       {user && (
         <div className="flex py-4 gap-5  items-center">
           <div className="rounded-full lg:bg-(--dark-grey) bg-white px-3 py-1 flex gap-3 items-center">
-            <Typography.Text style={{fontSize:15}} className='lg:block hidden font-medium'>{user.fields.Prenom}{' '}{user.fields.Nom}{' '}<Typography.Text  style={{color: token.colorPrimary, fontSize:15 }}>-{' '}{user.fields.ref_company_Nom}</Typography.Text></Typography.Text>
+            <Typography.Text style={{fontSize:15}} className="lg:block hidden font-medium">{user.fields.Prenom}{' '}{user.fields.Nom}{' '}<Typography.Text  style={{color: token.colorPrimary, fontSize:15 }}>-{' '}{user.fields.ref_company_Nom}</Typography.Text></Typography.Text>
             <Icon path={mdiAccountCircleOutline} size={1}/>
           </div>
           <button onClick={onClick} className="cursor-pointer">
@@ -39,5 +39,5 @@ export function Header() {
         </div>
       )}
     </div>
-  );
+  )
 }

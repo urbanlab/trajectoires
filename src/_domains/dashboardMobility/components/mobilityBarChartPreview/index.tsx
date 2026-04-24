@@ -1,7 +1,7 @@
-import { DashboardMobilityData } from '@Domains/dashboardMobility/type';
-import { chartDefMobility } from '@Domains/dashboardMobility/utils';
+import { DashboardMobilityData } from '@Domains/dashboardMobility/type'
+import { chartDefMobility } from '@Domains/dashboardMobility/utils'
 
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 
 import {
   Bar,
@@ -11,10 +11,10 @@ import {
   LabelList,
   ResponsiveContainer,
   XAxis,
-  YAxis,
-} from 'recharts';
+  YAxis
+} from 'recharts'
 
-import styles from './styles.module.css';
+import styles from './styles.module.css'
 
 export type MobilityBarChartPreviewProps = {
   data: DashboardMobilityData[];
@@ -23,22 +23,22 @@ export type MobilityBarChartPreviewProps = {
 
 export function MobilityBarChartPreview({ data, className }: MobilityBarChartPreviewProps) {
   const chartData = useMemo(() => {
-    const total = data.length;
+    const total = data.length
 
     const counts = data.reduce<Record<string, number>>((acc, item) => {
-      acc[item.fields.Mode_de_deplacement] = (acc[item.fields.Mode_de_deplacement] ?? 0) + 1;
-      return acc;
-    }, {});
+      acc[item.fields.Mode_de_deplacement] = (acc[item.fields.Mode_de_deplacement] ?? 0) + 1
+      return acc
+    }, {})
 
     const top3 = Object.entries(counts)
       .sort((a, b) => b[1] - a[1])
-      .slice(0, 3);
+      .slice(0, 3)
 
     return top3.map(([mode, count]) => ({
       mode,
-      percentage: Number(((count / total) * 100).toFixed(2)),
-    }));
-  }, [data]);
+      percentage: Number(((count / total) * 100).toFixed(2))
+    }))
+  }, [data])
 
   return (
     <div className={`${styles.component} ${className}`}>
@@ -52,18 +52,18 @@ export function MobilityBarChartPreview({ data, className }: MobilityBarChartPre
             <LabelList
               dataKey="percentage"
               content={(props: any) => {
-                const { x, y, width, value, index } = props;
+                const { x, y, width, value, index } = props
 
-                if (!value || value === 0) return null;
+                if (!value || value === 0) return null
 
-                const entry = chartData[index];
-                const def = chartDefMobility[entry.mode];
+                const entry = chartData[index]
+                const def = chartDefMobility[entry.mode]
 
-                const centerX = x + width / 2;
+                const centerX = x + width / 2
 
-                const iconSize = 50;
-                const iconY = y - iconSize - 10;
-                const textY = y + 30;
+                const iconSize = 50
+                const iconY = y - iconSize - 10
+                const textY = y + 30
 
                 return (
                   <g>
@@ -86,7 +86,7 @@ export function MobilityBarChartPreview({ data, className }: MobilityBarChartPre
                       {`${value}%`}
                     </text>
                   </g>
-                );
+                )
               }}
             />
 
@@ -97,5 +97,5 @@ export function MobilityBarChartPreview({ data, className }: MobilityBarChartPre
         </BarChart>
       </ResponsiveContainer>
     </div>
-  );
+  )
 }

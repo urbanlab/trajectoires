@@ -1,8 +1,8 @@
-import { useAuth } from '@Hooks/auth';
-import { useState } from 'react';
-import { Form, Input, Typography, Image } from 'antd';
+import { useAuth } from '@Hooks/auth'
+import { useState } from 'react'
+import { Form, Input, Typography, Image } from 'antd'
 import Button from '@Components/Button'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 import Logo from '@Commons/img/trajectoires-logo.png'
 import Mobilites from '@Commons/img/logo-mobilites.png'
 import Metro from '@Commons/img/logo-metro.png'
@@ -10,26 +10,26 @@ import pkg from '@Package'
 
 
 export function PageLogin() {
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>('')
 
   async function handleSubmit(values: { email: string; password: string }) {
-    setError('');
+    setError('')
 
-    const ok = await login(values.email, values.password);
+    const ok = await login(values.email, values.password)
 
     if (!ok) {
-      setError('Email ou mot de passe incorrect');
-      return;
+      setError('Email ou mot de passe incorrect')
+      return
     }
 
-    navigate('/');
+    navigate('/')
   }
 
   return (
-    <div className='min-h-screen flex flex-col p-5'>
+    <div className="min-h-screen flex flex-col p-5">
       <div className="flex-1 items-center justify-center flex flex-col">
         <div className="flex flex-col gap-4 lg:w-100 md:w-120 ">
           <div className=" flex px-10 items-center justify-center">
@@ -39,23 +39,20 @@ export function PageLogin() {
             <Typography.Title level={3}>Connexion</Typography.Title>
             <Form onFinish={handleSubmit} layout="vertical">
               <Form.Item
-                label={"Identifiant"}
+                label={'Identifiant'}
                 name="email"
-                rules={[
-                  { required: true, message: "Veuillez saisir votre adresse email." },
-                  { type: 'email', message: "L'adresse email n'est pas valide." },
-                ]}
+                rules={[{ required: true, message: 'Veuillez saisir votre adresse email' }, { type: 'email', message: 'L\'adresse email n\'est pas valide' }]}
               >
-                <Input placeholder={"Adresse email"} />
+                <Input placeholder={'Adresse email'} />
               </Form.Item>
 
               <Form.Item
                 label="Mot de passe"
                 name="password"
-                rules={[{ required: true, message: "Veuillez saisir votre mot de passe." }]}
+                rules={[{ required: true, message: 'Veuillez saisir votre mot de passe' }]}
               >
                 <Input.Password
-                  placeholder={"Mot de passe"}
+                  placeholder={'Mot de passe'}
                   onPressEnter={() => {}}
                 />
               </Form.Item>
@@ -68,7 +65,7 @@ export function PageLogin() {
               <div className="flex justify-end  ">
                 <Button title="Connexion" type="button" bgColor="red" />
               </div>
-              <div className='mt-5 flex gap-3  justify-center'>
+              <div className="mt-5 flex gap-3  justify-center">
                 <span className="text-[1.1em] italic">Version {pkg.version}</span>
                 <span className ="rounded-full bg-(--light-orange) px-2 text-[1.1em] italic">Prototype</span>
               </div>
@@ -77,9 +74,9 @@ export function PageLogin() {
         </div>
       </div>
       <footer>
-        <div className='h-[60px]   sm:mt-0 flex flex-col sm:flex-row justify-end sm:items-center gap-15'>
-          <span className='font-medium text-[1.1em]'>Une expérimentation menée par </span>
-          <div className='flex gap-10 h-full'>
+        <div className="h-[60px]   sm:mt-0 flex flex-col sm:flex-row justify-end sm:items-center gap-15">
+          <span className="font-medium text-[1.1em]">Une expérimentation menée par </span>
+          <div className="flex gap-10 h-full">
             <a href="https://mobilites.grandlyon.com/espace-pros" target="_blank">
               <Image src={Mobilites} preview={false} height="100%" className="object-contain"></Image>
             </a>
@@ -90,5 +87,5 @@ export function PageLogin() {
         </div>
       </footer>
     </div>
-  );
+  )
 }

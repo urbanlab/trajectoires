@@ -1,7 +1,7 @@
-import { DashboardMobilityData } from '@Domains/dashboardMobility/type';
-import { chartDefMobility } from '@Domains/dashboardMobility/utils';
+import { DashboardMobilityData } from '@Domains/dashboardMobility/type'
+import { chartDefMobility } from '@Domains/dashboardMobility/utils'
 
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 
 import {
   Bar,
@@ -12,10 +12,10 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
-} from 'recharts';
+  YAxis
+} from 'recharts'
 
-import styles from './styles.module.css';
+import styles from './styles.module.css'
 
 export type MobilityBarChartProps = {
   data: DashboardMobilityData[];
@@ -31,32 +31,30 @@ export function MobilityBarChart({ data, className }: MobilityBarChartProps) {
           ? 'Moins de 10km'
           : d <= 20
             ? 'Moins de 20km'
-            : 'Plus de 20km';
+            : 'Plus de 20km'
 
     const mapped = data.map((item) => ({
       Mode: item.fields.Mode_de_deplacement,
-      DistanceRange: mapRange(item.fields.Distance),
-    }));
+      DistanceRange: mapRange(item.fields.Distance)
+    }))
 
-    const ranges = [...new Set(mapped.map((m) => m.DistanceRange))];
-    const modes = [...new Set(mapped.map((m) => m.Mode))].sort();
+    const ranges = [...new Set(mapped.map((m) => m.DistanceRange))]
+    const modes = [...new Set(mapped.map((m) => m.Mode))].sort()
 
     const pivot = ranges.map((range) => {
-      const row: Record<string, number | string> = { DistanceRange: range };
+      const row: Record<string, number | string> = { DistanceRange: range }
       modes.forEach((mode) => {
-        row[mode] = mapped.filter(
-          (m) => m.DistanceRange === range && m.Mode === mode,
-        ).length;
-      });
-      return row;
-    });
+        row[mode] = mapped.filter((m) => m.DistanceRange === range && m.Mode === mode).length
+      })
+      return row
+    })
 
     return {
       data: pivot,
       groupKeys: modes,
-      xKey: 'DistanceRange',
-    };
-  }, [data]);
+      xKey: 'DistanceRange'
+    }
+  }, [data])
 
   return (
     <ResponsiveContainer height={400} width={600}>
@@ -79,5 +77,5 @@ export function MobilityBarChart({ data, className }: MobilityBarChartProps) {
         ))}
       </BarChart>
     </ResponsiveContainer>
-  );
+  )
 }

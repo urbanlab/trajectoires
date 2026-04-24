@@ -1,6 +1,6 @@
 
 export const pageIntro = {
-  label: "Menu",
-  path: `menu`,
-};
+  label: 'Menu',
+  path: 'menu'
+}
 
