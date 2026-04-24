@@ -23,9 +23,11 @@ export default function ReportModal () {
     const arrayCarOwner = [r.fields?.Moyens_transport_unique_, r.fields?.Moyens_transport_multiples_ ].flat()
     const cleanedarray = arrayCarOwner.filter((item) => item?.toLowerCase().includes('voiture') || item?.toLowerCase().includes('covoiturage')  )
     const isCarOwner = cleanedarray.length > 0
-    const wish = r.fields?.Souhait_moyens_de_transport.filter((item: string) => item !== 'L' && item !== null && item !== undefined)
+    const wish = r.fields?.Souhait_moyens_de_transport?.filter((item: string) => item !== 'L' && item !== null && item !== undefined) ?? []
 
-    const formattedWish = wish.map((w: string) => CATEGORY_MAPPING_SOUHAIT[w])
+    const formattedWish = wish
+      .map((w: string) => CATEGORY_MAPPING_SOUHAIT[w])
+      .filter((w: string | undefined): w is string => w !== undefined && souhaitStat[w] !== undefined)
     formattedWish.forEach((w: string) => {
       souhaitStat[w].general = (souhaitStat[w].general|| 0) + 1
       if (isCarOwner) {
