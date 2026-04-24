@@ -28,13 +28,16 @@ export default function BarChart ({donnees, label, type}: {donnees: any[], label
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    layout: {
+      padding: { top: 35, left: 20, right: 20 }
+    },
     plugins: {
       datalabels: {
-        anchor: 'start' as const,
-        align: 'top' as const,
-        formatter: (val: string) => `${val} ${unite}`, // Ton unité
-        color: '#FFFFFF',
-        font: { weight: 'bold' as const }
+        anchor: 'end' as const,
+        align: 'end' as const,
+        formatter: (val: string) => `${val} ${unite}`,
+        color: '#000000',
+        font: { family: 'Jost' }
       },
       legend: {
         display: false
@@ -46,11 +49,15 @@ export default function BarChart ({donnees, label, type}: {donnees: any[], label
         border: { display: false }
       },
       y: {
-        display: false,
-        grid: { display: false }
+        display: true,
+        grid: { display: true },
+        ticks: {
+          color: '#000000',
+          font: { family: 'Jost', size: 12 }
+        },
+        border: { display: false }
       }
     }
-
   }
 
 

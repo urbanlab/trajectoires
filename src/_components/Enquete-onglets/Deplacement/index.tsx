@@ -141,11 +141,11 @@ export default function Deplacement () {
         <div className="flex gap-5">
           <div className=" flex flex-col gap-5 bg-(--light-grey) p-5 w-1/2">
             <Typography.Title level={4}>Temps</Typography.Title>
-            <div className="bg-white h-[200px] "><BarChart donnees={dataKm} label={labelSize} type="km" /></div>
+            <div className="bg-white h-[200px] "><BarChart donnees={dataMn} label={labelSize} type="min" /></div>
           </div>
           <div className=" flex flex-col gap-5 bg-(--light-grey) p-5 w-1/2">
             <Typography.Title level={4}>Distance</Typography.Title>
-            <div className="bg-white h-[200px]"><BarChart donnees={dataMn} label={labelSize} type="min"/></div>
+            <div className="bg-white h-[200px]"><BarChart donnees={dataKm} label={labelSize} type="km"/></div>
           </div>
         </div>
         <div className="flex flex-col gap-2 bg-(--light-grey) p-5 flex-1">
