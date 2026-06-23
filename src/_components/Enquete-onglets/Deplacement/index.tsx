@@ -92,11 +92,13 @@ export default function Deplacement () {
     })
     .filter(mode => mode !== undefined && mode !== null && mode !== '')
 
-  const simplifiedFav = FavoritesModes.map((mode) => CATEGORY_MAPPING[mode])
+  const simplifiedFav = FavoritesModes.map((mode) => CATEGORY_MAPPING[mode]).filter(Boolean)
   const total = simplifiedFav.length
   const count:Record<string, number> = {}
   simplifiedFav.forEach((mode) => count[mode] = (count[mode] || 0) +1)
-  const topMode = Object.keys(count).reduce((a, b) => count[a] > count[b] ? a : b)
+  const topMode = Object.keys(count).length > 0
+    ? Object.keys(count).reduce((a, b) => count[a] > count[b] ? a : b)
+    : ''
 
 
   const StatMode: Record<string, { totalMinutes: number, qty: number }> = {}
