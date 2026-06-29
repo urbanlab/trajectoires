@@ -5,14 +5,23 @@ ChartJS.register(
   ArcElement, Tooltip, Legend
 )
 
-export function PieChart({ donnees }: {donnees: number[]}) {
+const DEFAULT_COLORS = [
+  'rgba(153, 194, 77, 0.7)',
+  'rgba(241, 143, 1, 0.7)',
+  'rgba(74, 144, 226, 0.7)',
+  'rgba(208, 2, 27, 0.7)',
+  'rgba(126, 211, 33, 0.7)',
+]
+
+export function PieChart({ donnees, labels }: { donnees: number[], labels?: string[] }) {
+
+  const resolvedLabels = labels ?? ['oui', 'non']
 
   const data = {
-    labels: ['oui', 'non'],
+    labels: resolvedLabels,
     datasets: [{
       data: donnees,
-      backgroundColor: ['rgba(153, 194, 77, 0.7)', 'rgba(241, 143, 1, 0.7)']
-
+      backgroundColor: resolvedLabels.map((_, i) => DEFAULT_COLORS[i % DEFAULT_COLORS.length]),
     }]
   }
 
