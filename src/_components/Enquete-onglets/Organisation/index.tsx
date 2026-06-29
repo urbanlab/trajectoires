@@ -15,23 +15,30 @@ export default function Organisation () {
   const responses = useEnquete((s) => s.enquete_results)
   const qty = responses.length
 
+  // Tous les jours ou presque
+  // Ponctuellement
+  // Très rarement
+  // Jamais
+
   const pauseMidi: Record<string, number> = {
-    'Oui': 0,
-    'Non': 0
+    'Tous les jours ou presque': 0,
+    'Ponctuellement': 0,
+    'Très rarement': 0,
+    'Jamais': 0
   }
 
   responses.forEach((r: any) => {
     const value = r?.fields?.Pause_midi
-    if (value === true) {
-      pauseMidi['Oui'] += 1
-    } else if (value === false) {
-      pauseMidi['Non'] += 1
+    if (value in pauseMidi) {
+      pauseMidi[value] += 1
+    } else {
+      pauseMidi['Jamais'] += 1
     }
   })
 
-  const percent_yes = Math.round((pauseMidi['Oui'] / qty) * 100)
-  const percent_no = Math.round((pauseMidi['Non'] / qty) * 100)
-  const percentData = [percent_yes, percent_no]
+  const pauseMidiLabels = Object.keys(pauseMidi)
+  const percentData = pauseMidiLabels.map(label => Math.round((pauseMidi[label] / qty) * 100))
+
 
   const labelModes = [
     'Transports en commun',
@@ -61,9 +68,8 @@ export default function Organisation () {
   const departStats = calculateTimeStats(rawDepart)
 
 
-
   const MidiModes = [...responses
-    .filter((r: any) => r?.fields?.Pause_midi === true)
+    .filter((r: any) => r?.fields?.Pause_midi !== 'Jamais' && r?.fields?.Pause_midi)
     .map((r: any) => r.fields.Mode_deplacement_midi)
     .filter(mode => mode !== undefined && mode !== null && mode !== '')]
   const Simplified =  MidiModes.map((mode) => CATEGORY_MAPPING_MIDI[mode])
@@ -79,9 +85,6 @@ export default function Organisation () {
   const arraypercent = labelModes.map((mode) => {
     return percentageMode[mode] || 0
   })
-
-
-
 
 
   return (
@@ -124,14 +127,14 @@ export default function Organisation () {
       <div className="bg-(--light-grey) flex flex-col gap-5 p-5">
         <Typography.Title level={4}>Pause méridienne</Typography.Title>
         <div className="flex gap-10 flex-wrap">
-          <div className="flex flex-col gap-2 h-[200px] min-w-[150px]">
+          <div className="flex flex-col gap-2 h-[250px] min-w-[150px]">
             <Typography.Title level={5}>Déplacement lors de la pause méridienne</Typography.Title>
 
-            <PieChart donnees={percentData}/>
+            <PieChart donnees={percentData} labels={pauseMidiLabels}/>
           </div>
           <div className="flex flex-col flex-1 gap-2">
             <Typography.Title level={5}>Mode de déplacement privilégié lors de la pause méridienne</Typography.Title>
-            <div className=" gap-2 bg-white p-5 h-[200px] w-full ">
+            <div className=" gap-2 bg-white p-5 h-[250px] w-full ">
               <BarChart2 donnees={arraypercent} label={labelModes} type={'%'}/></div>
           </div>
         </div>
