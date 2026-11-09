@@ -11,8 +11,9 @@ function getRequiredEnv(name: keyof NonNullable<typeof window.__APP_CONFIG__>): 
   return value
 }
 
+// Runtime config (public/config.js generated at container start) takes precedence;
+// import.meta.env is only a fallback for local dev (`npm run dev` with .env).
+// Never read import.meta.env.VITE_AES_KEY directly elsewhere: in CI builds it is empty.
 export const APP_CONFIG = {
-  apiGristUrl: window.__APP_CONFIG__?.VITE_API_GRIST_URL ?? '',
-  apiGristToken: window.__APP_CONFIG__?.VITE_API_GRIST_TOKEN ?? '',
   aesKey: getRequiredEnv('VITE_AES_KEY')
 }

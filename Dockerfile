@@ -1,11 +1,7 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
-ARG VITE_API_GRIST_URL
-ARG VITE_API_GRIST_TOKEN
-ARG VITE_AES_KEY
-ENV VITE_API_GRIST_URL=${VITE_API_GRIST_URL}
-ENV VITE_API_GRIST_TOKEN=${VITE_API_GRIST_TOKEN}
-ENV VITE_AES_KEY=${VITE_AES_KEY}
+# No secrets at build time: VITE_AES_KEY, VITE_API_GRIST_URL and VITE_API_GRIST_TOKEN
+# are injected at container start (config.js + nginx template).
 # ----------------------------
 COPY package*.json ./
 RUN npm install

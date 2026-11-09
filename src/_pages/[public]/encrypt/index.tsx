@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { Form, Input, Typography } from 'antd'
 import Button from '@Components/Button'
 import { encryptPassword } from '@Providers/auth/crypto-utils'
+import { APP_CONFIG } from '@/config'
 
-const AES_KEY = import.meta.env.VITE_AES_KEY
+const AES_KEY = APP_CONFIG.aesKey
 
 export function EncryptPage() {
 
